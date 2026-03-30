@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowRight, MessageCircle } from "lucide-react";
+import { ArrowRight, CheckCircle2, MessageCircle } from "lucide-react";
 
 interface FormData {
   nome: string;
@@ -17,6 +17,15 @@ interface FormErrors {
   empresa?: string;
   mensagem?: string;
 }
+
+const FORM_EMPTY: FormData = {
+  nome: "",
+  email: "",
+  whatsapp: "",
+  empresa: "",
+  faturamento: "",
+  mensagem: "",
+};
 
 const BASE =
   "w-full rounded-2xl border px-4 py-3.5 text-sm text-slate-800 outline-none transition-all duration-200 placeholder:text-slate-400";
@@ -58,15 +67,9 @@ function Field({
 }
 
 export default function LeadFormSection() {
-  const [form, setForm] = useState<FormData>({
-    nome: "",
-    email: "",
-    whatsapp: "",
-    empresa: "",
-    faturamento: "",
-    mensagem: "",
-  });
+  const [form, setForm] = useState<FormData>(FORM_EMPTY);
   const [errors, setErrors] = useState<FormErrors>({});
+  const [success, setSuccess] = useState(false);
 
   const validate = (): boolean => {
     const e: FormErrors = {};
@@ -87,10 +90,12 @@ export default function LeadFormSection() {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+    const sanitized = name === "faturamento" ? value.replace(/\D/g, "") : value;
+    setForm((prev) => ({ ...prev, [name]: sanitized }));
     if (errors[name as keyof FormErrors]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
+    if (success) setSuccess(false);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -104,18 +109,27 @@ Gostaria de solicitar um diagnóstico estratégico.
 📊 *Dados da empresa:*
 
 👤 *Nome:* ${form.nome}
+
 📧 *Email:* ${form.email}
+
 📱 *WhatsApp:* ${form.whatsapp}
+
 🏢 *Empresa:* ${form.empresa}
-💰 *Faturamento:* ${form.faturamento.trim() || "Não informado"}
+
+💰 *Faturamento:* ${form.faturamento.trim() ? `R$ ${form.faturamento}` : "Não informado"}
 
 📝 *Mensagem:*
+
 ${form.mensagem}`;
 
     window.open(
       `https://wa.me/5582981401405?text=${encodeURIComponent(mensagemFormatada)}`,
       "_blank"
     );
+
+    setForm(FORM_EMPTY);
+    setErrors({});
+    setSuccess(true);
   };
 
   return (
@@ -143,14 +157,12 @@ ${form.mensagem}`;
 
         {/* Card */}
         <div className="relative overflow-hidden rounded-[36px] border border-[#22de7e]/15 bg-white p-8 shadow-[0_12px_60px_rgba(15,23,42,0.10),0_2px_8px_rgba(34,222,126,0.06)] sm:p-10">
-          {/* Accent glows */}
           <div className="pointer-events-none absolute right-0 top-0 h-56 w-56 rounded-full bg-[#22de7e]/6 blur-3xl" />
           <div className="pointer-events-none absolute bottom-0 left-0 h-40 w-40 rounded-full bg-[#0D3F8A]/4 blur-3xl" />
 
           <form onSubmit={handleSubmit} noValidate className="relative">
             <div className="grid gap-5 sm:grid-cols-2">
 
-              {/* Nome */}
               <Field label="Nome completo" required error={errors.nome}>
                 <input
                   type="text"
@@ -162,7 +174,6 @@ ${form.mensagem}`;
                 />
               </Field>
 
-              {/* Email */}
               <Field label="Email" required error={errors.email}>
                 <input
                   type="email"
@@ -174,7 +185,6 @@ ${form.mensagem}`;
                 />
               </Field>
 
-              {/* WhatsApp */}
               <Field label="WhatsApp" required error={errors.whatsapp}>
                 <input
                   type="tel"
@@ -186,7 +196,6 @@ ${form.mensagem}`;
                 />
               </Field>
 
-              {/* Empresa */}
               <Field label="Nome da empresa" required error={errors.empresa}>
                 <input
                   type="text"
@@ -198,21 +207,26 @@ ${form.mensagem}`;
                 />
               </Field>
 
-              {/* Faturamento (opcional, largura total) */}
+              {/* Faturamento — somente números */}
               <div className="sm:col-span-2">
                 <Field label="Faturamento mensal">
-                  <input
-                    type="text"
-                    name="faturamento"
-                    value={form.faturamento}
-                    onChange={handleChange}
-                    placeholder="Ex: R$ 50.000"
-                    className={`${BASE} ${VALID}`}
-                  />
+                  <div className="relative">
+                    <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm font-medium text-slate-400">
+                      R$
+                    </span>
+                    <input
+                      type="text"
+                      inputMode="numeric"
+                      name="faturamento"
+                      value={form.faturamento}
+                      onChange={handleChange}
+                      placeholder="0"
+                      className={`${BASE} pl-10 ${VALID}`}
+                    />
+                  </div>
                 </Field>
               </div>
 
-              {/* Mensagem (largura total) */}
               <div className="sm:col-span-2">
                 <Field label="Mensagem" required error={errors.mensagem}>
                   <textarea
@@ -227,10 +241,9 @@ ${form.mensagem}`;
               </div>
             </div>
 
-            {/* Divisor */}
             <div className="my-7 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
 
-            {/* Submit */}
+            {/* Submit + feedback */}
             <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
               <button
                 type="submit"
@@ -239,10 +252,18 @@ ${form.mensagem}`;
                 Quero meu diagnóstico
                 <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
               </button>
-              <p className="flex items-center gap-1.5 text-xs text-slate-400">
-                <MessageCircle className="h-3.5 w-3.5 text-[#22de7e]" />
-                Você será direcionado ao WhatsApp.
-              </p>
+
+              {success ? (
+                <div className="flex items-center gap-2 rounded-full border border-[#22de7e]/30 bg-[#22de7e]/8 px-4 py-2 text-sm font-semibold text-[#0fa85a] transition-all duration-300">
+                  <CheckCircle2 className="h-4 w-4 shrink-0" />
+                  Diagnóstico solicitado com sucesso!
+                </div>
+              ) : (
+                <p className="flex items-center gap-1.5 text-xs text-slate-400">
+                  <MessageCircle className="h-3.5 w-3.5 text-[#22de7e]" />
+                  Você será direcionado ao WhatsApp.
+                </p>
+              )}
             </div>
           </form>
         </div>
