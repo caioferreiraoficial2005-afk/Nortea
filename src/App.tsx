@@ -64,7 +64,7 @@ function LogoMark() {
     <img
       src="/images/logoversaofinalnortea.png"
       alt="Nortea Consultoria Estratégica"
-      className="h-20 w-auto"
+      className="h-16 w-auto"
     />
   );
 }
@@ -333,7 +333,7 @@ export default function NorteaReactSite() {
       <header className="sticky top-0 z-40 bg-white">
         <div className="h-[2px] bg-gradient-to-r from-transparent via-[#0D3F8A]/40 to-transparent" />
         <div className="border-b border-slate-200/70">
-          <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-6 lg:px-8">
+          <div className="mx-auto flex h-[88px] max-w-7xl items-center justify-between px-6 lg:px-8">
             <LogoMark />
             <nav className="hidden items-center gap-8 text-sm font-medium text-slate-600 lg:flex">
               <a href="#servicos" className="transition-colors hover:text-[#0D3F8A]">Serviços</a>
