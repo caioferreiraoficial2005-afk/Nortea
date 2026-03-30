@@ -753,9 +753,13 @@ export default function NorteaReactSite() {
         </section>
 
         {/* ── FUNDADORES ── */}
-        <section id="fundadores" className="bg-gradient-to-b from-[#F8FAFC] to-[#EEF4FF]">
-          <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+        <section id="fundadores" className="relative overflow-hidden bg-gradient-to-b from-[#061428] to-[#020c1f]">
+          <div className="pointer-events-none absolute inset-0 opacity-[0.035]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "28px 28px" }} />
+          <div className="pointer-events-none absolute left-0 top-1/3 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-[#16C36B]/8 blur-3xl" />
+          <div className="pointer-events-none absolute right-0 bottom-0 h-[400px] w-[500px] translate-x-1/4 rounded-full bg-[#0D3F8A]/20 blur-3xl" />
+          <div className="relative z-10 mx-auto max-w-7xl px-6 py-24 lg:px-8">
             <SectionTitle
+              dark
               eyebrow="Fundadores"
               title="Quem está por trás da Nortea"
               description="Uma estrutura complementar para unir visão financeira, direção estratégica e organização operacional com apoio de tecnologia."
@@ -790,7 +794,7 @@ export default function NorteaReactSite() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.6 }}
-                  className="group overflow-hidden rounded-[32px] border border-slate-200/70 bg-white shadow-[0_8px_40px_rgba(13,63,138,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#0D3F8A]/20 hover:shadow-[0_24px_64px_rgba(13,63,138,0.18)]"
+                  className="group overflow-hidden rounded-[32px] border border-white/10 bg-[#0a1830] shadow-[0_8px_40px_rgba(0,0,0,0.40)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#16C36B]/25 hover:shadow-[0_24px_64px_rgba(22,195,107,0.12)]"
                 >
                   <div className="overflow-hidden">
                     <img
@@ -802,9 +806,9 @@ export default function NorteaReactSite() {
                   </div>
                   <div className="p-8">
                     <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#16C36B]">Cofundador</p>
-                    <h3 className="mt-2 text-2xl font-bold text-[#0D3F8A]">{f.name}</h3>
+                    <h3 className="mt-2 text-2xl font-bold text-white">{f.name}</h3>
                     {f.bio.map((p, i) => (
-                      <p key={i} className={`${i === 0 ? "mt-5" : "mt-4"} leading-8 text-slate-500`}>{p}</p>
+                      <p key={i} className={`${i === 0 ? "mt-5" : "mt-4"} leading-8 text-white/55`}>{p}</p>
                     ))}
                   </div>
                 </motion.div>
@@ -829,7 +833,7 @@ export default function NorteaReactSite() {
         <LeadFormSection />
 
         {/* ── CTA ── */}
-        <section className="bg-gradient-to-b from-[#EEF4FF] to-[#F1F5FF] pb-24 pt-4">
+        <section className="bg-[#020c1f] pb-24 pt-4">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="relative overflow-hidden rounded-[40px] bg-gradient-to-br from-[#0D3F8A] via-[#0a3070] to-[#071f52] p-10 text-white shadow-[0_32px_100px_rgba(13,63,138,0.38)] sm:p-14">
               {/* Background depth */}

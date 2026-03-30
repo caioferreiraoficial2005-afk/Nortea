@@ -133,8 +133,14 @@ ${form.mensagem}`;
   };
 
   return (
-    <section id="diagnostico" className="bg-gradient-to-b from-[#F0FDF7] via-[#F8FAFB] to-white py-24">
-      <div className="mx-auto max-w-3xl px-6 lg:px-8">
+    <section id="diagnostico" className="relative overflow-hidden bg-gradient-to-b from-[#020c1f] to-[#061428] py-24">
+      {/* Dot grid */}
+      <div className="pointer-events-none absolute inset-0 opacity-[0.035]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "28px 28px" }} />
+      {/* Glows */}
+      <div className="pointer-events-none absolute right-0 top-0 h-[400px] w-[400px] rounded-full bg-[#16C36B]/8 blur-3xl" />
+      <div className="pointer-events-none absolute left-0 bottom-0 h-[300px] w-[400px] rounded-full bg-[#0D3F8A]/15 blur-3xl" />
+
+      <div className="relative z-10 mx-auto max-w-3xl px-6 lg:px-8">
 
         {/* Header */}
         <div className="mb-12 text-center">
@@ -145,18 +151,18 @@ ${form.mensagem}`;
             </p>
             <span className="h-px w-7 bg-[#22de7e]" />
           </div>
-          <h2 className="text-3xl font-bold tracking-tight text-[#0D3F8A] sm:text-4xl lg:text-[2.6rem] lg:leading-[1.15]">
+          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-[2.6rem] lg:leading-[1.15]">
             Solicite um diagnóstico{" "}
-            <span className="text-green">estratégico</span>
+            <span className="text-[#22de7e]">estratégico</span>
           </h2>
-          <p className="mt-4 text-base leading-7 text-slate-500 sm:text-lg">
+          <p className="mt-4 text-base leading-7 text-white/55 sm:text-lg">
             Descubra onde sua empresa está perdendo dinheiro e como crescer com{" "}
-            <span className="text-green">controle</span>.
+            <span className="text-[#22de7e] font-medium">controle</span>.
           </p>
         </div>
 
-        {/* Card */}
-        <div className="relative overflow-hidden rounded-[36px] border border-[#22de7e]/15 bg-white p-8 shadow-[0_12px_60px_rgba(15,23,42,0.10),0_2px_8px_rgba(34,222,126,0.06)] sm:p-10">
+        {/* Card — branco sobre escuro: máximo contraste para leitura do formulário */}
+        <div className="relative overflow-hidden rounded-[36px] border border-white/10 bg-white p-8 shadow-[0_24px_80px_rgba(0,0,0,0.5),0_2px_8px_rgba(34,222,126,0.08)] sm:p-10">
           <div className="pointer-events-none absolute right-0 top-0 h-56 w-56 rounded-full bg-[#22de7e]/6 blur-3xl" />
           <div className="pointer-events-none absolute bottom-0 left-0 h-40 w-40 rounded-full bg-[#0D3F8A]/4 blur-3xl" />
 
