@@ -62,9 +62,9 @@ function SectionTitle({ eyebrow, title, description }: { eyebrow: string; title:
 function LogoMark() {
   return (
     <img
-      src="/images/logoversaofinalnortea.png"
+      src="/images/versao1000x1000.png"
       alt="Nortea Consultoria Estratégica"
-      className="h-20 w-auto"
+      className="h-[96px] w-auto"
     />
   );
 }
@@ -332,7 +332,7 @@ export default function NorteaReactSite() {
       {/* ── HEADER ── */}
       <header className="sticky top-0 z-40 bg-white">
         <div className="border-b border-slate-100">
-          <div className="mx-auto flex h-[96px] max-w-7xl items-center justify-between px-6 lg:px-8">
+          <div className="mx-auto flex h-[108px] max-w-7xl items-center justify-between px-6 lg:px-8">
             <LogoMark />
             <nav className="hidden items-center gap-8 text-sm font-medium text-slate-600 lg:flex">
               <a href="#servicos" className="transition-colors hover:text-[#0D3F8A]">Serviços</a>
