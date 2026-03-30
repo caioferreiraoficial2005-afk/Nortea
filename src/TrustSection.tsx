@@ -52,6 +52,9 @@ export default function TrustSection() {
         }
       `}</style>
 
+      {/* Overlay idêntico ao Hero — mantém escuridão uniforme */}
+      <div className="pointer-events-none absolute inset-0 bg-[#02070e]/55" />
+
       {/* Glow sutil — complementa o fundo compartilhado */}
       <div className="pointer-events-none absolute left-1/2 top-0 h-[280px] w-[600px] -translate-x-1/2 rounded-full bg-[#0D3F8A]/15 blur-3xl" />
       <div className="pointer-events-none absolute right-0 bottom-1/3 h-[200px] w-[360px] rounded-full bg-[#16C36B]/6 blur-3xl" />
