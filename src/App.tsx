@@ -15,6 +15,7 @@ import {
   TrendingUp,
   Workflow,
 } from "lucide-react";
+import LeadFormSection from "./LeadFormSection";
 
 function useCountUp(end: number, duration = 1400, startWhen = true, prefix = "", suffix = "") {
   const [value, setValue] = useState(0);
@@ -45,7 +46,7 @@ function Kw({ children }: { children: React.ReactNode }) {
   );
 }
 
-function SectionTitle({ eyebrow, title, description }: { eyebrow: string; title: string; description?: string }) {
+function SectionTitle({ eyebrow, title, description }: { eyebrow: string; title: React.ReactNode; description?: string }) {
   return (
     <div className="max-w-3xl">
       <div className="mb-4 inline-flex items-center gap-2.5">
@@ -68,17 +69,21 @@ function LogoMark() {
   );
 }
 
-function MetricCard({ label, value, tone = "default" }: { label: string; value: string; tone?: "default" | "green" }) {
+function MetricCard({ label, value, tone = "default" }: { label: string; value: string; tone?: "default" | "green" | "blue" }) {
   return (
     <div
       className={`rounded-[28px] border p-5 transition-all duration-300 hover:-translate-y-1 ${
         tone === "green"
           ? "border-[#16C36B]/25 bg-gradient-to-br from-[#16C36B]/8 to-[#16C36B]/3 hover:shadow-[0_12px_36px_rgba(22,195,107,0.12)]"
+          : tone === "blue"
+          ? "border-[#0D3F8A]/20 bg-gradient-to-br from-[#0D3F8A]/6 to-[#0D3F8A]/2 hover:shadow-[0_12px_36px_rgba(13,63,138,0.10)]"
           : "border-slate-200/70 bg-white shadow-[0_4px_20px_rgba(15,23,42,0.06)] hover:shadow-[0_14px_40px_rgba(15,23,42,0.10)]"
       }`}
     >
       <p className="text-sm text-slate-500">{label}</p>
-      <p className="mt-2 text-2xl font-bold text-slate-900">{value}</p>
+      <p className={`mt-2 text-2xl font-bold ${
+        tone === "green" ? "text-[#16C36B]" : tone === "blue" ? "text-[#0D3F8A]" : "text-slate-900"
+      }`}>{value}</p>
     </div>
   );
 }
@@ -216,10 +221,10 @@ function DashboardDemo() {
       <div className="pointer-events-none absolute left-0 bottom-0 h-40 w-40 rounded-full bg-[#0D3F8A]/5 blur-3xl" />
       <div className="grid gap-5 xl:grid-cols-[1.2fr_0.8fr]">
         <div className="grid gap-4 sm:grid-cols-2">
-          <MetricCard label="Faturamento do mês" value={faturamento} />
-          <MetricCard label="Despesas operacionais" value={despesas} />
+          <MetricCard label="Faturamento do mês" value={faturamento} tone="green" />
+          <MetricCard label="Despesas operacionais" value={despesas} tone="blue" />
           <MetricCard label="Margem estimada" value={margem} tone="green" />
-          <MetricCard label="Leads acompanhados" value={leads} />
+          <MetricCard label="Leads acompanhados" value={leads} tone="blue" />
         </div>
 
         <div className="rounded-[28px] border border-slate-200/60 bg-gradient-to-br from-slate-50 to-[#EEF3FF]/50 p-5">
@@ -233,21 +238,21 @@ function DashboardDemo() {
 
           <div className="mt-6 space-y-4">
             {[
-              ["Fluxo de caixa", "Saudável", "86%"],
-              ["Processos críticos", "Controlados", "72%"],
-              ["Oportunidades", "Mapeadas", "64%"],
-            ].map(([label, text, width]) => (
+              ["Fluxo de caixa", "Saudável", "86%", "text-[#16C36B]", "from-[#16C36B] to-[#0fba60]"],
+              ["Processos críticos", "Controlados", "72%", "text-[#0D3F8A]", "from-[#0D3F8A] to-[#1a56cc]"],
+              ["Oportunidades", "Mapeadas", "64%", "text-[#9FA47C]", "from-[#9FA47C] to-[#0D3F8A]/60"],
+            ].map(([label, text, width, textColor, barColor]) => (
               <div key={label} className="rounded-2xl bg-white p-4 shadow-[0_2px_12px_rgba(15,23,42,0.05)]">
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-slate-500">{label}</span>
-                  <span className="font-semibold text-slate-800">{text}</span>
+                  <span className={`font-semibold ${textColor}`}>{text}</span>
                 </div>
                 <div className="mt-3 h-2 overflow-hidden rounded-full bg-slate-100">
                   <motion.div
                     initial={{ width: 0 }}
                     animate={inView ? { width } : {}}
                     transition={{ duration: 0.8 }}
-                    className="h-full rounded-full bg-gradient-to-r from-[#0D3F8A] to-[#1a56cc]"
+                    className={`h-full rounded-full bg-gradient-to-r ${barColor}`}
                   />
                 </div>
               </div>
@@ -325,7 +330,7 @@ export default function NorteaReactSite() {
     <div className="min-h-screen bg-white text-slate-900 antialiased">
 
       {/* ── HEADER ── */}
-      <header className="sticky top-0 z-40 bg-white/85 backdrop-blur-2xl">
+      <header className="sticky top-0 z-40 bg-white">
         <div className="h-[2px] bg-gradient-to-r from-transparent via-[#0D3F8A]/40 to-transparent" />
         <div className="border-b border-slate-200/70">
           <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-6 lg:px-8">
@@ -387,14 +392,7 @@ export default function NorteaReactSite() {
                 <span className="text-white/80">custa caro.</span>{" "}
                 <br className="hidden sm:block" />
                 <span className="text-white/75">A Nortea traz </span>
-                <span className="relative inline-block">
-                  <span className="relative z-10 text-[#22de7e]">direção.</span>
-                  {/* Animated arrow underline */}
-                  <span className="direction-underline absolute -bottom-1.5 left-0 flex w-full items-center">
-                    <span className="h-[3px] flex-1 rounded-full bg-gradient-to-r from-[#16C36B]/40 via-[#16C36B] to-[#22de7e]" />
-                    <span className="direction-arrow-tip ml-1 text-[#22de7e]" style={{ fontSize: "1.15rem", lineHeight: 1 }}>→</span>
-                  </span>
-                </span>
+                <span className="text-[#22de7e]">direção.</span>
               </h1>
 
               {/* Subtitle */}
@@ -445,26 +443,26 @@ export default function NorteaReactSite() {
           <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
             <SectionTitle
               eyebrow="Problema"
-              title="O problema não é falta de esforço. É falta de controle."
+              title={<>O problema não é falta de esforço. É falta de <span className="text-green">controle</span>.</>}
               description="Muitas empresas faturam, vendem e se movimentam todos os dias, mas continuam decidindo sem clareza, crescendo sem estrutura e perdendo dinheiro sem perceber."
             />
             <div className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
               {[
-                "Falta de controle financeiro",
-                "Decisões baseadas em achismo",
-                "Marketing sem direção estratégica",
-                "Operação desorganizada",
+                { text: "Falta de controle financeiro", cardCls: "border-[#9FA47C]/20 bg-[#F8FBF4]/50 hover:border-[#9FA47C]/30 hover:shadow-[0_16px_48px_rgba(159,164,124,0.10)]", iconCls: "text-[#9FA47C]" },
+                { text: "Decisões baseadas em achismo", cardCls: "border-[#0D3F8A]/10 bg-[#EEF3FF]/40 hover:border-[#0D3F8A]/20 hover:shadow-[0_16px_48px_rgba(13,63,138,0.10)]", iconCls: "text-[#0D3F8A]" },
+                { text: "Marketing sem direção estratégica", cardCls: "border-[#0D3F8A]/10 bg-[#EEF3FF]/40 hover:border-[#0D3F8A]/20 hover:shadow-[0_16px_48px_rgba(13,63,138,0.10)]", iconCls: "text-[#0D3F8A]" },
+                { text: "Operação desorganizada", cardCls: "border-[#0D3F8A]/10 bg-[#EEF3FF]/40 hover:border-[#0D3F8A]/20 hover:shadow-[0_16px_48px_rgba(13,63,138,0.10)]", iconCls: "text-[#0D3F8A]" },
               ].map((item, idx) => (
                 <motion.div
-                  key={item}
+                  key={item.text}
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{ duration: 0.5, delay: idx * 0.08 }}
-                  className="group rounded-[28px] border border-slate-200/70 bg-white p-6 shadow-[0_4px_24px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#16C36B]/25 hover:shadow-[0_16px_48px_rgba(13,63,138,0.10)]"
+                  className={`group rounded-[28px] border p-6 shadow-[0_4px_24px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-1.5 ${item.cardCls}`}
                 >
-                  <CheckCircle2 className="h-6 w-6 text-[#16C36B] transition-transform duration-300 group-hover:scale-110" />
-                  <p className="mt-4 font-semibold text-slate-800">{item}</p>
+                  <CheckCircle2 className={`h-6 w-6 transition-transform duration-300 group-hover:scale-110 ${item.iconCls}`} />
+                  <p className="mt-4 font-semibold text-slate-800">{item.text}</p>
                 </motion.div>
               ))}
             </div>
@@ -476,13 +474,14 @@ export default function NorteaReactSite() {
           <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
             <SectionTitle
               eyebrow="Solução"
-              title="A Nortea conecta estratégia, gestão e operação"
+              title={<>A Nortea conecta <span className="text-green">estratégia</span>, gestão e operação</>}
               description="Enquanto muitos atuam de forma isolada, a Nortea integra financeiro, marketing e automação para estruturar empresas com mais clareza, eficiência e direção."
             />
 
             <div className="mt-14 grid gap-6 lg:grid-cols-3">
               {pilares.map((item, idx) => {
                 const Icon = item.icon;
+                const isGreen = idx === 0;
                 return (
                   <motion.div
                     key={item.title}
@@ -490,12 +489,26 @@ export default function NorteaReactSite() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.25 }}
                     transition={{ duration: 0.6, delay: idx * 0.1 }}
-                    className="group relative rounded-[32px] border border-slate-200/70 bg-white p-8 shadow-[0_4px_28px_rgba(15,23,42,0.07)] transition-all duration-300 hover:-translate-y-2 hover:border-[#0D3F8A]/20 hover:shadow-[0_24px_64px_rgba(13,63,138,0.13)]"
+                    className={`group relative rounded-[32px] border p-8 shadow-[0_4px_28px_rgba(15,23,42,0.07)] transition-all duration-300 hover:-translate-y-2 ${
+                      isGreen
+                        ? "border-[#9FA47C]/20 bg-[#F8FBF4]/40 hover:border-[#9FA47C]/30 hover:shadow-[0_24px_64px_rgba(159,164,124,0.14)]"
+                        : "border-slate-200/70 bg-white hover:border-[#0D3F8A]/20 hover:shadow-[0_24px_64px_rgba(13,63,138,0.13)]"
+                    }`}
                   >
-                    {/* Subtle inner glow on hover */}
-                    <div className="pointer-events-none absolute inset-0 rounded-[32px] opacity-0 transition-opacity duration-300 group-hover:opacity-100" style={{ background: "radial-gradient(ellipse at top left, rgba(13,63,138,0.035) 0%, transparent 60%)" }} />
+                    <div
+                      className="pointer-events-none absolute inset-0 rounded-[32px] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                      style={{
+                        background: isGreen
+                          ? "radial-gradient(ellipse at top left, rgba(159,164,124,0.06) 0%, transparent 60%)"
+                          : "radial-gradient(ellipse at top left, rgba(13,63,138,0.035) 0%, transparent 60%)",
+                      }}
+                    />
                     <div className="relative">
-                      <div className="inline-flex rounded-2xl bg-gradient-to-br from-[#0D3F8A]/10 to-[#0D3F8A]/5 p-3.5 text-[#0D3F8A] shadow-[0_2px_8px_rgba(13,63,138,0.08)] transition-all duration-300 group-hover:shadow-[0_4px_18px_rgba(13,63,138,0.18)]">
+                      <div className={`inline-flex rounded-2xl p-3.5 transition-all duration-300 ${
+                        isGreen
+                          ? "bg-gradient-to-br from-[#16C36B]/12 to-[#9FA47C]/8 text-[#16C36B] shadow-[0_2px_8px_rgba(22,195,107,0.10)] group-hover:shadow-[0_4px_18px_rgba(22,195,107,0.22)]"
+                          : "bg-gradient-to-br from-[#0D3F8A]/10 to-[#0D3F8A]/5 text-[#0D3F8A] shadow-[0_2px_8px_rgba(13,63,138,0.08)] group-hover:shadow-[0_4px_18px_rgba(13,63,138,0.18)]"
+                      }`}>
                         <Icon className="h-6 w-6" />
                       </div>
                       <h3 className="mt-6 text-xl font-bold text-[#0D3F8A]">{item.title}</h3>
@@ -513,7 +526,7 @@ export default function NorteaReactSite() {
           <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
             <SectionTitle
               eyebrow="Dashboard demonstrativo"
-              title="Veja com clareza o que hoje passa despercebido"
+              title={<>Veja com <span className="text-green">clareza</span> o que hoje passa despercebido</>}
               description="Organizamos dados, indicadores e processos para transformar informações soltas em decisões mais seguras."
             />
 
@@ -522,19 +535,28 @@ export default function NorteaReactSite() {
             </div>
 
             <div className="mt-14 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-              {beneficios.map((item, idx) => (
-                <motion.div
-                  key={item}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.5, delay: idx * 0.08 }}
-                  className="group rounded-[28px] border border-slate-200/70 bg-white p-6 shadow-[0_4px_24px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_14px_40px_rgba(13,63,138,0.10)]"
-                >
-                  <div className="mb-3 h-1 w-8 rounded-full bg-gradient-to-r from-[#16C36B] to-[#0D3F8A]/40 transition-all duration-300 group-hover:w-14" />
-                  <p className="font-medium text-slate-800">{item}</p>
-                </motion.div>
-              ))}
+              {beneficios.map((item, idx) => {
+                const isGreen = idx === 0;
+                return (
+                  <motion.div
+                    key={item}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.5, delay: idx * 0.08 }}
+                    className={`group rounded-[28px] border p-6 shadow-[0_4px_24px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-1 ${
+                      isGreen
+                        ? "border-[#9FA47C]/20 bg-[#F8FBF4]/40 hover:border-[#9FA47C]/30 hover:shadow-[0_14px_40px_rgba(159,164,124,0.10)]"
+                        : "border-[#0D3F8A]/10 bg-[#EEF3FF]/30 hover:border-[#0D3F8A]/20 hover:shadow-[0_14px_40px_rgba(13,63,138,0.10)]"
+                    }`}
+                  >
+                    <div className={`mb-3 h-1 w-8 rounded-full bg-gradient-to-r transition-all duration-300 group-hover:w-14 ${
+                      isGreen ? "from-[#16C36B] to-[#9FA47C]" : "from-[#0D3F8A] to-[#0D3F8A]/40"
+                    }`} />
+                    <p className="font-medium text-slate-800">{item}</p>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -544,7 +566,7 @@ export default function NorteaReactSite() {
           <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
             <SectionTitle
               eyebrow="Processo"
-              title="Como a Nortea atua na prática"
+              title={<>Como a Nortea atua na <span className="text-green">prática</span></>}
               description="Nosso trabalho é organizar a empresa de forma estratégica, com etapas claras e evolução acompanhada."
             />
 
@@ -576,13 +598,14 @@ export default function NorteaReactSite() {
           <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
             <SectionTitle
               eyebrow="Exemplos de entrega"
-              title="Exemplos de estruturas que desenvolvemos"
+              title={<>Exemplos de estruturas que <span className="text-green">desenvolvemos</span></>}
               description="Apresentações visuais, controles e estruturas que ajudam a empresa a acompanhar números, operação e prioridades com mais clareza."
             />
 
             <div className="mt-14 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
               {entregas.map((item, idx) => {
                 const Icon = item.icon;
+                const isFinancial = idx < 2;
                 return (
                   <motion.div
                     key={item.title}
@@ -590,18 +613,31 @@ export default function NorteaReactSite() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.2 }}
                     transition={{ duration: 0.5, delay: idx * 0.08 }}
-                    className="group relative rounded-[32px] border border-slate-200/70 bg-white p-7 shadow-[0_4px_24px_rgba(15,23,42,0.07)] transition-all duration-300 hover:-translate-y-2 hover:border-[#0D3F8A]/20 hover:shadow-[0_24px_64px_rgba(13,63,138,0.13)]"
+                    className={`group relative rounded-[32px] border p-7 shadow-[0_4px_24px_rgba(15,23,42,0.07)] transition-all duration-300 hover:-translate-y-2 ${
+                      isFinancial
+                        ? "border-[#9FA47C]/15 bg-[#F8FBF4]/30 hover:border-[#9FA47C]/25 hover:shadow-[0_24px_64px_rgba(159,164,124,0.12)]"
+                        : "border-slate-200/70 bg-white hover:border-[#0D3F8A]/20 hover:shadow-[0_24px_64px_rgba(13,63,138,0.13)]"
+                    }`}
                   >
                     <div className="flex items-center justify-between">
-                      <div className="rounded-2xl bg-gradient-to-br from-[#0D3F8A]/10 to-[#0D3F8A]/5 p-3.5 text-[#0D3F8A] transition-all duration-300 group-hover:shadow-[0_4px_16px_rgba(13,63,138,0.16)]">
+                      <div className={`rounded-2xl p-3.5 transition-all duration-300 ${
+                        isFinancial
+                          ? "bg-gradient-to-br from-[#16C36B]/12 to-[#9FA47C]/8 text-[#16C36B] group-hover:shadow-[0_4px_16px_rgba(22,195,107,0.18)]"
+                          : "bg-gradient-to-br from-[#0D3F8A]/10 to-[#0D3F8A]/5 text-[#0D3F8A] group-hover:shadow-[0_4px_16px_rgba(13,63,138,0.16)]"
+                      }`}>
                         <Icon className="h-6 w-6" />
                       </div>
-                      <ChevronRight className="h-5 w-5 text-slate-200 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-[#16C36B]" />
+                      <ChevronRight className={`h-5 w-5 text-slate-200 transition-all duration-300 group-hover:translate-x-0.5 ${
+                        isFinancial ? "group-hover:text-[#9FA47C]" : "group-hover:text-[#16C36B]"
+                      }`} />
                     </div>
                     <h3 className="mt-6 text-lg font-bold text-slate-900">{item.title}</h3>
                     <p className="mt-2 text-sm leading-6 text-slate-500">Modelo visual demonstrativo para acompanhamento gerencial e tomada de decisão.</p>
-                    {/* Bottom accent on hover */}
-                    <div className="absolute bottom-0 left-7 right-7 h-[2px] rounded-full bg-gradient-to-r from-[#16C36B]/0 via-[#16C36B]/45 to-[#16C36B]/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                    <div className={`absolute bottom-0 left-7 right-7 h-[2px] rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${
+                      isFinancial
+                        ? "bg-gradient-to-r from-[#9FA47C]/0 via-[#9FA47C]/45 to-[#9FA47C]/0"
+                        : "bg-gradient-to-r from-[#16C36B]/0 via-[#16C36B]/45 to-[#16C36B]/0"
+                    }`} />
                   </motion.div>
                 );
               })}
@@ -668,6 +704,9 @@ export default function NorteaReactSite() {
             </div>
           </div>
         </section>
+
+        {/* ── LEAD FORM ── */}
+        <LeadFormSection />
 
         {/* ── CTA ── */}
         <section className="pb-24 pt-4">
