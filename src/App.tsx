@@ -77,13 +77,13 @@ function MetricCard({ label, value, tone = "default" }: { label: string; value: 
         tone === "green"
           ? "border-[#16C36B]/35 bg-gradient-to-br from-[#16C36B]/14 to-[#16C36B]/7 hover:shadow-[0_12px_36px_rgba(22,195,107,0.18)]"
           : tone === "blue"
-          ? "border-[#0D3F8A]/25 bg-gradient-to-br from-[#0D3F8A]/10 to-[#0D3F8A]/5 hover:shadow-[0_12px_36px_rgba(13,63,138,0.15)]"
+          ? "border-[#1a4fa0]/40 bg-gradient-to-br from-[#0D3F8A] to-[#071f52] shadow-[0_8px_28px_rgba(13,63,138,0.40)] hover:shadow-[0_14px_40px_rgba(13,63,138,0.55)]"
           : "border-slate-200 bg-white shadow-[0_4px_20px_rgba(15,23,42,0.08)] hover:shadow-[0_14px_40px_rgba(15,23,42,0.13)]"
       }`}
     >
-      <p className="text-sm text-slate-500">{label}</p>
+      <p className={`text-sm ${tone === "blue" ? "text-white/60" : "text-slate-500"}`}>{label}</p>
       <p className={`mt-2 text-2xl font-bold ${
-        tone === "green" ? "text-[#16C36B]" : tone === "blue" ? "text-[#0D3F8A]" : "text-slate-900"
+        tone === "green" ? "text-[#16C36B]" : tone === "blue" ? "text-white" : "text-slate-900"
       }`}>{value}</p>
     </div>
   );
@@ -470,19 +470,19 @@ export default function NorteaReactSite() {
               transition={{ duration: 0.5 }}
             >
               {[
-                { text: "Falta de controle financeiro", cardCls: "border-[#22de7e]/30 bg-[#F0FDF6] hover:border-[#22de7e]/45 hover:shadow-[0_16px_48px_rgba(34,222,126,0.15)]", iconCls: "bg-[#16C36B]/12 text-[#16C36B]" },
-                { text: "Decisões baseadas em achismo", cardCls: "border-[#0D3F8A]/15 bg-[#EEF3FF] hover:border-[#0D3F8A]/25 hover:shadow-[0_16px_48px_rgba(13,63,138,0.14)]", iconCls: "bg-[#0D3F8A]/10 text-[#0D3F8A]" },
-                { text: "Marketing sem direção estratégica", cardCls: "border-[#0D3F8A]/15 bg-[#EEF3FF] hover:border-[#0D3F8A]/25 hover:shadow-[0_16px_48px_rgba(13,63,138,0.14)]", iconCls: "bg-[#0D3F8A]/10 text-[#0D3F8A]" },
-                { text: "Operação desorganizada", cardCls: "border-[#0D3F8A]/15 bg-[#EEF3FF] hover:border-[#0D3F8A]/25 hover:shadow-[0_16px_48px_rgba(13,63,138,0.14)]", iconCls: "bg-[#0D3F8A]/10 text-[#0D3F8A]" },
+                { text: "Falta de controle financeiro", cardCls: "border-[#22de7e]/30 bg-[#F0FDF6] shadow-[0_6px_28px_rgba(15,23,42,0.08)] hover:border-[#22de7e]/45 hover:shadow-[0_16px_48px_rgba(34,222,126,0.15)]", iconCls: "bg-[#16C36B]/12 text-[#16C36B]", textCls: "text-slate-800" },
+                { text: "Decisões baseadas em achismo", cardCls: "border-[#1a4fa0]/40 bg-gradient-to-br from-[#0D3F8A] to-[#071f52] shadow-[0_8px_28px_rgba(13,63,138,0.40)] hover:shadow-[0_20px_48px_rgba(13,63,138,0.55)]", iconCls: "bg-white/15 text-white", textCls: "text-white" },
+                { text: "Marketing sem direção estratégica", cardCls: "border-[#1a4fa0]/40 bg-gradient-to-br from-[#0D3F8A] to-[#071f52] shadow-[0_8px_28px_rgba(13,63,138,0.40)] hover:shadow-[0_20px_48px_rgba(13,63,138,0.55)]", iconCls: "bg-white/15 text-white", textCls: "text-white" },
+                { text: "Operação desorganizada", cardCls: "border-[#1a4fa0]/40 bg-gradient-to-br from-[#0D3F8A] to-[#071f52] shadow-[0_8px_28px_rgba(13,63,138,0.40)] hover:shadow-[0_20px_48px_rgba(13,63,138,0.55)]", iconCls: "bg-white/15 text-white", textCls: "text-white" },
               ].map((item) => (
                 <div
                   key={item.text}
-                  className={`group rounded-[28px] border p-6 shadow-[0_6px_28px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1.5 ${item.cardCls}`}
+                  className={`group rounded-[28px] border p-6 transition-all duration-300 hover:-translate-y-1.5 ${item.cardCls}`}
                 >
                   <div className={`inline-flex rounded-2xl p-2.5 transition-all duration-300 group-hover:scale-110 ${item.iconCls}`}>
                     <CheckCircle2 className="h-5 w-5" />
                   </div>
-                  <p className="mt-4 font-semibold text-slate-800">{item.text}</p>
+                  <p className={`mt-4 font-semibold ${item.textCls}`}>{item.text}</p>
                 </div>
               ))}
             </motion.div>
@@ -517,10 +517,10 @@ export default function NorteaReactSite() {
                 return (
                   <div
                     key={item.title}
-                    className={`group relative rounded-[32px] border p-8 shadow-[0_6px_32px_rgba(15,23,42,0.09)] transition-all duration-300 hover:-translate-y-2 ${
+                    className={`group relative rounded-[32px] border p-8 transition-all duration-300 hover:-translate-y-2 ${
                       isGreen
-                        ? "border-[#22de7e]/30 bg-[#F0FDF6] hover:border-[#22de7e]/45 hover:shadow-[0_24px_64px_rgba(34,222,126,0.18)]"
-                        : "border-[#0D3F8A]/12 bg-[#F5F8FF] hover:border-[#0D3F8A]/22 hover:shadow-[0_24px_64px_rgba(13,63,138,0.16)]"
+                        ? "border-[#22de7e]/30 bg-[#F0FDF6] shadow-[0_6px_32px_rgba(15,23,42,0.09)] hover:border-[#22de7e]/45 hover:shadow-[0_24px_64px_rgba(34,222,126,0.18)]"
+                        : "border-[#1a4fa0]/40 bg-gradient-to-br from-[#0D3F8A] to-[#071f52] shadow-[0_8px_32px_rgba(13,63,138,0.40)] hover:shadow-[0_24px_64px_rgba(13,63,138,0.58)]"
                     }`}
                   >
                     <div
@@ -535,12 +535,12 @@ export default function NorteaReactSite() {
                       <div className={`inline-flex rounded-2xl p-3.5 transition-all duration-300 ${
                         isGreen
                           ? "bg-gradient-to-br from-[#16C36B]/12 to-[#22de7e]/8 text-[#16C36B] shadow-[0_2px_8px_rgba(22,195,107,0.10)] group-hover:shadow-[0_4px_18px_rgba(22,195,107,0.22)]"
-                          : "bg-gradient-to-br from-[#0D3F8A]/10 to-[#0D3F8A]/5 text-[#0D3F8A] shadow-[0_2px_8px_rgba(13,63,138,0.08)] group-hover:shadow-[0_4px_18px_rgba(13,63,138,0.18)]"
+                          : "bg-white/15 text-white shadow-[0_2px_8px_rgba(0,0,0,0.15)] group-hover:shadow-[0_4px_18px_rgba(0,0,0,0.25)]"
                       }`}>
                         <Icon className="h-6 w-6" />
                       </div>
-                      <h3 className="mt-6 text-xl font-bold text-[#0D3F8A]">{item.title}</h3>
-                      <p className="mt-3 leading-7 text-slate-500">{item.text}</p>
+                      <h3 className={`mt-6 text-xl font-bold ${isGreen ? "text-[#0D3F8A]" : "text-white"}`}>{item.title}</h3>
+                      <p className={`mt-3 leading-7 ${isGreen ? "text-slate-500" : "text-white/70"}`}>{item.text}</p>
                     </div>
                   </div>
                 );
@@ -586,16 +586,16 @@ export default function NorteaReactSite() {
                 return (
                   <div
                     key={item}
-                    className={`group rounded-[28px] border p-6 shadow-[0_6px_28px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1 ${
+                    className={`group rounded-[28px] border p-6 transition-all duration-300 hover:-translate-y-1 ${
                       isGreen
-                        ? "border-[#22de7e]/30 bg-[#F0FDF6] hover:border-[#22de7e]/45 hover:shadow-[0_14px_40px_rgba(34,222,126,0.14)]"
-                        : "border-[#0D3F8A]/15 bg-[#EEF3FF] hover:border-[#0D3F8A]/25 hover:shadow-[0_14px_40px_rgba(13,63,138,0.14)]"
+                        ? "border-[#22de7e]/30 bg-[#F0FDF6] shadow-[0_6px_28px_rgba(15,23,42,0.08)] hover:border-[#22de7e]/45 hover:shadow-[0_14px_40px_rgba(34,222,126,0.14)]"
+                        : "border-[#1a4fa0]/40 bg-gradient-to-br from-[#0D3F8A] to-[#071f52] shadow-[0_8px_28px_rgba(13,63,138,0.40)] hover:shadow-[0_14px_40px_rgba(13,63,138,0.55)]"
                     }`}
                   >
                     <div className={`mb-3 h-1 w-8 rounded-full bg-gradient-to-r transition-all duration-300 group-hover:w-14 ${
-                      isGreen ? "from-[#16C36B] to-[#22de7e]" : "from-[#0D3F8A] to-[#0D3F8A]/40"
+                      isGreen ? "from-[#16C36B] to-[#22de7e]" : "from-[#22de7e] to-white/30"
                     }`} />
-                    <p className="font-medium text-slate-800">{item}</p>
+                    <p className={`font-medium ${isGreen ? "text-slate-800" : "text-white"}`}>{item}</p>
                   </div>
                 );
               })}
@@ -636,19 +636,19 @@ export default function NorteaReactSite() {
                 return (
                 <div
                   key={etapa.step}
-                  className={`group rounded-[32px] border p-8 shadow-[0_6px_32px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1.5 ${
+                  className={`group rounded-[32px] border p-8 transition-all duration-300 hover:-translate-y-1.5 ${
                     isBlue
-                      ? "border-[#0D3F8A]/15 bg-[#EEF3FF] hover:border-[#0D3F8A]/25 hover:shadow-[0_20px_56px_rgba(13,63,138,0.15)]"
-                      : "border-slate-200 bg-white hover:border-[#16C36B]/20 hover:shadow-[0_20px_56px_rgba(13,63,138,0.12)]"
+                      ? "border-[#1a4fa0]/40 bg-gradient-to-br from-[#0D3F8A] to-[#071f52] shadow-[0_8px_32px_rgba(13,63,138,0.40)] hover:shadow-[0_20px_56px_rgba(13,63,138,0.55)]"
+                      : "border-slate-200 bg-white shadow-[0_6px_32px_rgba(15,23,42,0.08)] hover:border-[#16C36B]/20 hover:shadow-[0_20px_56px_rgba(13,63,138,0.12)]"
                   }`}
                 >
                   <div className="flex items-center gap-4">
                     <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#16C36B]/12 to-[#16C36B]/6 font-bold text-lg text-[#16C36B] shadow-[0_2px_12px_rgba(22,195,107,0.14)] transition-all duration-300 group-hover:shadow-[0_4px_22px_rgba(22,195,107,0.28)]">
                       {etapa.step}
                     </div>
-                    <h3 className="text-xl font-bold text-[#0D3F8A]">{etapa.title}</h3>
+                    <h3 className={`text-xl font-bold ${isBlue ? "text-white" : "text-[#0D3F8A]"}`}>{etapa.title}</h3>
                   </div>
-                  <p className="mt-5 leading-8 text-slate-500">{etapa.text}</p>
+                  <p className={`mt-5 leading-8 ${isBlue ? "text-white/70" : "text-slate-500"}`}>{etapa.text}</p>
                 </div>
                 );
               })}
@@ -690,26 +690,26 @@ export default function NorteaReactSite() {
                 return (
                   <div
                     key={item.title}
-                    className={`group relative rounded-[32px] border p-7 shadow-[0_6px_28px_rgba(15,23,42,0.09)] transition-all duration-300 hover:-translate-y-2 ${
+                    className={`group relative rounded-[32px] border p-7 transition-all duration-300 hover:-translate-y-2 ${
                       isFinancial
-                        ? "border-[#22de7e]/30 bg-[#F0FDF6] hover:border-[#22de7e]/45 hover:shadow-[0_24px_64px_rgba(34,222,126,0.17)]"
-                        : "border-[#0D3F8A]/12 bg-[#F5F8FF] hover:border-[#0D3F8A]/22 hover:shadow-[0_24px_64px_rgba(13,63,138,0.16)]"
+                        ? "border-[#22de7e]/30 bg-[#F0FDF6] shadow-[0_6px_28px_rgba(15,23,42,0.09)] hover:border-[#22de7e]/45 hover:shadow-[0_24px_64px_rgba(34,222,126,0.17)]"
+                        : "border-[#1a4fa0]/40 bg-gradient-to-br from-[#0D3F8A] to-[#071f52] shadow-[0_8px_28px_rgba(13,63,138,0.40)] hover:shadow-[0_24px_64px_rgba(13,63,138,0.58)]"
                     }`}
                   >
                     <div className="flex items-center justify-between">
                       <div className={`rounded-2xl p-3.5 transition-all duration-300 ${
                         isFinancial
                           ? "bg-gradient-to-br from-[#16C36B]/12 to-[#22de7e]/8 text-[#16C36B] group-hover:shadow-[0_4px_16px_rgba(22,195,107,0.18)]"
-                          : "bg-gradient-to-br from-[#0D3F8A]/10 to-[#0D3F8A]/5 text-[#0D3F8A] group-hover:shadow-[0_4px_16px_rgba(13,63,138,0.16)]"
+                          : "bg-white/15 text-white group-hover:shadow-[0_4px_16px_rgba(255,255,255,0.12)]"
                       }`}>
                         <Icon className="h-6 w-6" />
                       </div>
-                      <ChevronRight className={`h-5 w-5 text-slate-200 transition-all duration-300 group-hover:translate-x-0.5 ${
-                        isFinancial ? "group-hover:text-[#22de7e]" : "group-hover:text-[#16C36B]"
+                      <ChevronRight className={`h-5 w-5 transition-all duration-300 group-hover:translate-x-0.5 ${
+                        isFinancial ? "text-slate-200 group-hover:text-[#22de7e]" : "text-white/25 group-hover:text-white"
                       }`} />
                     </div>
-                    <h3 className="mt-6 text-lg font-bold text-slate-900">{item.title}</h3>
-                    <p className="mt-2 text-sm leading-6 text-slate-500">Modelo visual demonstrativo para acompanhamento gerencial e tomada de decisão.</p>
+                    <h3 className={`mt-6 text-lg font-bold ${isFinancial ? "text-slate-900" : "text-white"}`}>{item.title}</h3>
+                    <p className={`mt-2 text-sm leading-6 ${isFinancial ? "text-slate-500" : "text-white/65"}`}>Modelo visual demonstrativo para acompanhamento gerencial e tomada de decisão.</p>
                     <div className={`absolute bottom-0 left-7 right-7 h-[2px] rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${
                       isFinancial
                         ? "bg-gradient-to-r from-[#22de7e]/0 via-[#22de7e]/45 to-[#22de7e]/0"
