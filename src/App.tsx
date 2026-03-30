@@ -282,7 +282,7 @@ export default function NorteaReactSite() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const whatsappNumber = "5500000000000";
+  const whatsappNumber = "5582981401405";
   const whatsappMessage = encodeURIComponent("Olá, vim pelo site da Nortea e gostaria de solicitar um diagnóstico inicial da minha empresa.");
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
@@ -484,6 +484,18 @@ export default function NorteaReactSite() {
                 </div>
               ))}
             </motion.div>
+
+            <div className="mt-10">
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noreferrer"
+                className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-br from-[#16C36B] to-[#0fba5f] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_4px_20px_rgba(22,195,107,0.30)] transition-all hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(22,195,107,0.44)]"
+              >
+                Quero resolver isso
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </a>
+            </div>
           </div>
         </section>
 
@@ -532,6 +544,18 @@ export default function NorteaReactSite() {
                 );
               })}
             </motion.div>
+
+            <div className="mt-10">
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noreferrer"
+                className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-br from-[#16C36B] to-[#0fba5f] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_4px_20px_rgba(22,195,107,0.30)] transition-all hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(22,195,107,0.44)]"
+              >
+                Solicitar diagnóstico
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </a>
+            </div>
           </div>
         </section>
 
@@ -574,6 +598,18 @@ export default function NorteaReactSite() {
                 );
               })}
             </motion.div>
+
+            <div className="mt-10">
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noreferrer"
+                className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-br from-[#16C36B] to-[#0fba5f] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_4px_20px_rgba(22,195,107,0.30)] transition-all hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(22,195,107,0.44)]"
+              >
+                Quero esse controle
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </a>
+            </div>
           </div>
         </section>
 
@@ -608,6 +644,18 @@ export default function NorteaReactSite() {
                 </div>
               ))}
             </motion.div>
+
+            <div className="mt-10">
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noreferrer"
+                className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-br from-[#16C36B] to-[#0fba5f] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_4px_20px_rgba(22,195,107,0.30)] transition-all hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(22,195,107,0.44)]"
+              >
+                Iniciar meu diagnóstico
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </a>
+            </div>
           </div>
         </section>
 
@@ -662,6 +710,18 @@ export default function NorteaReactSite() {
                 );
               })}
             </motion.div>
+
+            <div className="mt-10">
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noreferrer"
+                className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-br from-[#16C36B] to-[#0fba5f] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_4px_20px_rgba(22,195,107,0.30)] transition-all hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(22,195,107,0.44)]"
+              >
+                Quero essas entregas
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </a>
+            </div>
           </div>
         </section>
 
@@ -722,6 +782,18 @@ export default function NorteaReactSite() {
                   </div>
                 </motion.div>
               ))}
+            </div>
+
+            <div className="mt-10">
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noreferrer"
+                className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-br from-[#16C36B] to-[#0fba5f] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_4px_20px_rgba(22,195,107,0.30)] transition-all hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(22,195,107,0.44)]"
+              >
+                Falar com a equipe
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </a>
             </div>
           </div>
         </section>
