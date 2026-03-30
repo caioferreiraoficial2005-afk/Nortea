@@ -62,7 +62,7 @@ function SectionTitle({ eyebrow, title, description }: { eyebrow: string; title:
 function LogoMark() {
   return (
     <img
-      src="/images/logo-cropped.png"
+      src="/images/logoversaofinalnortea.png"
       alt="Nortea Consultoria Estratégica"
       className="h-14 w-auto"
     />
