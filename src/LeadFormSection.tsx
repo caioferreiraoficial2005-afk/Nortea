@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MessageCircle } from "lucide-react";
 
 interface FormData {
   nome: string;
@@ -18,12 +18,12 @@ interface FormErrors {
   mensagem?: string;
 }
 
-const FIELD_CLASS_BASE =
-  "w-full rounded-2xl border px-4 py-3 text-sm text-slate-900 outline-none transition-all placeholder:text-slate-400 focus:ring-2";
-const FIELD_VALID =
-  "border-slate-200 bg-slate-50 hover:border-slate-300 focus:border-[#22de7e] focus:ring-[#22de7e]/20";
-const FIELD_ERROR =
-  "border-red-400 bg-red-50 focus:border-red-400 focus:ring-red-400/20";
+const BASE =
+  "w-full rounded-2xl border px-4 py-3.5 text-sm text-slate-800 outline-none transition-all duration-200 placeholder:text-slate-400";
+const VALID =
+  "border-slate-200 bg-white hover:border-slate-300 focus:border-[#22de7e] focus:ring-2 focus:ring-[#22de7e]/20 focus:shadow-[0_0_0_4px_rgba(34,222,126,0.08)]";
+const ERROR =
+  "border-red-400 bg-red-50/60 focus:border-red-400 focus:ring-2 focus:ring-red-400/20";
 
 function Field({
   label,
@@ -37,16 +37,22 @@ function Field({
   children: React.ReactNode;
 }) {
   return (
-    <div>
-      <label className="mb-1.5 block text-sm font-semibold text-slate-700">
+    <div className="flex flex-col gap-1.5">
+      <label className="text-sm font-semibold text-slate-700">
         {label}{" "}
-        {required && <span className="text-[#22de7e]">*</span>}
-        {!required && (
+        {required ? (
+          <span className="text-[#22de7e]">*</span>
+        ) : (
           <span className="font-normal text-slate-400">(opcional)</span>
         )}
       </label>
       {children}
-      {error && <p className="mt-1.5 text-xs text-red-500">{error}</p>}
+      {error && (
+        <p className="flex items-center gap-1 text-xs font-medium text-red-500">
+          <span className="inline-block h-1 w-1 rounded-full bg-red-400" />
+          {error}
+        </p>
+      )}
     </div>
   );
 }
@@ -91,29 +97,31 @@ export default function LeadFormSection() {
     e.preventDefault();
     if (!validate()) return;
 
-    const faturamentoLine = form.faturamento.trim()
-      ? `Faturamento: ${form.faturamento}.`
-      : "Faturamento: não informado.";
+    const mensagemFormatada = `Olá, meu nome é ${form.nome}.
 
-    const text = [
-      `Olá, meu nome é ${form.nome}.`,
-      `Meu email é ${form.email}.`,
-      `Meu WhatsApp é ${form.whatsapp}.`,
-      `Minha empresa: ${form.empresa}.`,
-      faturamentoLine,
-      `Mensagem: ${form.mensagem}.`,
-      `Gostaria de solicitar um diagnóstico estratégico.`,
-    ].join("\n");
+Gostaria de solicitar um diagnóstico estratégico.
+
+📊 *Dados da empresa:*
+
+👤 *Nome:* ${form.nome}
+📧 *Email:* ${form.email}
+📱 *WhatsApp:* ${form.whatsapp}
+🏢 *Empresa:* ${form.empresa}
+💰 *Faturamento:* ${form.faturamento.trim() || "Não informado"}
+
+📝 *Mensagem:*
+${form.mensagem}`;
 
     window.open(
-      `https://wa.me/5582981401405?text=${encodeURIComponent(text)}`,
+      `https://wa.me/5582981401405?text=${encodeURIComponent(mensagemFormatada)}`,
       "_blank"
     );
   };
 
   return (
-    <section id="diagnostico" className="bg-[#F9FAFB] py-24">
+    <section id="diagnostico" className="bg-gradient-to-b from-[#F0FDF7] via-[#F8FAFB] to-white py-24">
       <div className="mx-auto max-w-3xl px-6 lg:px-8">
+
         {/* Header */}
         <div className="mb-12 text-center">
           <div className="mb-4 inline-flex items-center gap-2.5">
@@ -127,20 +135,21 @@ export default function LeadFormSection() {
             Solicite um diagnóstico{" "}
             <span className="text-green">estratégico</span>
           </h2>
-          <p className="mt-5 text-base leading-8 text-slate-500 sm:text-lg">
+          <p className="mt-4 text-base leading-7 text-slate-500 sm:text-lg">
             Descubra onde sua empresa está perdendo dinheiro e como crescer com{" "}
             <span className="text-green">controle</span>.
           </p>
         </div>
 
         {/* Card */}
-        <div className="relative overflow-hidden rounded-[32px] border border-slate-200/70 bg-white p-8 shadow-[0_8px_40px_rgba(15,23,42,0.08)] sm:p-10">
-          {/* Subtle accent glows */}
-          <div className="pointer-events-none absolute right-0 top-0 h-48 w-48 rounded-full bg-[#22de7e]/8 blur-3xl" />
-          <div className="pointer-events-none absolute bottom-0 left-0 h-36 w-36 rounded-full bg-[#0D3F8A]/5 blur-3xl" />
+        <div className="relative overflow-hidden rounded-[36px] border border-[#22de7e]/15 bg-white p-8 shadow-[0_12px_60px_rgba(15,23,42,0.10),0_2px_8px_rgba(34,222,126,0.06)] sm:p-10">
+          {/* Accent glows */}
+          <div className="pointer-events-none absolute right-0 top-0 h-56 w-56 rounded-full bg-[#22de7e]/6 blur-3xl" />
+          <div className="pointer-events-none absolute bottom-0 left-0 h-40 w-40 rounded-full bg-[#0D3F8A]/4 blur-3xl" />
 
           <form onSubmit={handleSubmit} noValidate className="relative">
             <div className="grid gap-5 sm:grid-cols-2">
+
               {/* Nome */}
               <Field label="Nome completo" required error={errors.nome}>
                 <input
@@ -149,7 +158,7 @@ export default function LeadFormSection() {
                   value={form.nome}
                   onChange={handleChange}
                   placeholder="Seu nome completo"
-                  className={`${FIELD_CLASS_BASE} ${errors.nome ? FIELD_ERROR : FIELD_VALID}`}
+                  className={`${BASE} ${errors.nome ? ERROR : VALID}`}
                 />
               </Field>
 
@@ -161,7 +170,7 @@ export default function LeadFormSection() {
                   value={form.email}
                   onChange={handleChange}
                   placeholder="seu@email.com"
-                  className={`${FIELD_CLASS_BASE} ${errors.email ? FIELD_ERROR : FIELD_VALID}`}
+                  className={`${BASE} ${errors.email ? ERROR : VALID}`}
                 />
               </Field>
 
@@ -173,7 +182,7 @@ export default function LeadFormSection() {
                   value={form.whatsapp}
                   onChange={handleChange}
                   placeholder="(00) 00000-0000"
-                  className={`${FIELD_CLASS_BASE} ${errors.whatsapp ? FIELD_ERROR : FIELD_VALID}`}
+                  className={`${BASE} ${errors.whatsapp ? ERROR : VALID}`}
                 />
               </Field>
 
@@ -185,11 +194,11 @@ export default function LeadFormSection() {
                   value={form.empresa}
                   onChange={handleChange}
                   placeholder="Nome da sua empresa"
-                  className={`${FIELD_CLASS_BASE} ${errors.empresa ? FIELD_ERROR : FIELD_VALID}`}
+                  className={`${BASE} ${errors.empresa ? ERROR : VALID}`}
                 />
               </Field>
 
-              {/* Faturamento (optional, full width) */}
+              {/* Faturamento (opcional, largura total) */}
               <div className="sm:col-span-2">
                 <Field label="Faturamento mensal">
                   <input
@@ -198,12 +207,12 @@ export default function LeadFormSection() {
                     value={form.faturamento}
                     onChange={handleChange}
                     placeholder="Ex: R$ 50.000"
-                    className={`${FIELD_CLASS_BASE} ${FIELD_VALID}`}
+                    className={`${BASE} ${VALID}`}
                   />
                 </Field>
               </div>
 
-              {/* Mensagem (full width) */}
+              {/* Mensagem (largura total) */}
               <div className="sm:col-span-2">
                 <Field label="Mensagem" required error={errors.mensagem}>
                   <textarea
@@ -212,27 +221,32 @@ export default function LeadFormSection() {
                     onChange={handleChange}
                     rows={4}
                     placeholder="Conte brevemente sobre sua empresa e o que você está buscando..."
-                    className={`${FIELD_CLASS_BASE} resize-none ${errors.mensagem ? FIELD_ERROR : FIELD_VALID}`}
+                    className={`${BASE} resize-none ${errors.mensagem ? ERROR : VALID}`}
                   />
                 </Field>
               </div>
             </div>
 
+            {/* Divisor */}
+            <div className="my-7 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
+
             {/* Submit */}
-            <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+            <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
               <button
                 type="submit"
-                className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-[#22de7e] px-8 py-4 font-semibold text-white shadow-[0_4px_20px_rgba(34,222,126,0.30)] transition-all hover:bg-[#16b866] hover:scale-[1.02] hover:shadow-[0_8px_32px_rgba(34,222,126,0.44)]"
+                className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-gradient-to-br from-[#22de7e] to-[#16c36b] px-8 py-4 text-sm font-bold text-white shadow-[0_6px_24px_rgba(34,222,126,0.38)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_36px_rgba(34,222,126,0.52)] active:translate-y-0 active:shadow-[0_4px_16px_rgba(34,222,126,0.30)]"
               >
                 Quero meu diagnóstico
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
               </button>
-              <p className="text-xs text-slate-400">
+              <p className="flex items-center gap-1.5 text-xs text-slate-400">
+                <MessageCircle className="h-3.5 w-3.5 text-[#22de7e]" />
                 Você será direcionado ao WhatsApp.
               </p>
             </div>
           </form>
         </div>
+
       </div>
     </section>
   );
