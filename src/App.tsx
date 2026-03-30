@@ -64,6 +64,7 @@ function LogoMark() {
     <img
       src="/images/versao1000x1000.png"
       alt="Nortea Consultoria Estratégica"
+      decoding="async"
       className="h-[140px] w-auto"
     />
   );
@@ -97,13 +98,10 @@ function ExecutivePreview() {
       className="relative mx-auto w-full max-w-[580px]"
     >
       {/* Glow halos */}
-      <div className="pointer-events-none absolute -left-16 top-4 h-64 w-64 rounded-full bg-[#16C36B]/28 blur-[70px]" />
-      <div className="pointer-events-none absolute -right-16 bottom-4 h-72 w-72 rounded-full bg-[#0D3F8A]/35 blur-[70px]" />
-      <div className="pointer-events-none absolute left-1/3 top-1/2 h-48 w-48 -translate-y-1/2 rounded-full bg-[#16C36B]/15 blur-3xl" />
 
       {/* Outer premium frame */}
       <div className="relative rounded-[40px] bg-gradient-to-br from-white/90 via-slate-100/70 to-[#16C36B]/10 p-[1.5px] shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_40px_130px_rgba(0,0,0,0.55),0_10px_40px_rgba(22,195,107,0.14)]">
-        <div className="rounded-[39px] bg-white/95 p-4 backdrop-blur-sm">
+        <div className="rounded-[39px] bg-white/95 p-4">
           <div className="rounded-[33px] bg-gradient-to-br from-slate-50 to-[#EEF3FF]/70 p-5">
 
             {/* Header row */}
@@ -265,6 +263,25 @@ function DashboardDemo() {
 }
 
 export default function NorteaReactSite() {
+  const [headerVisible, setHeaderVisible] = useState(true);
+
+  useEffect(() => {
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const currentY = window.scrollY;
+      if (currentY < 10) {
+        setHeaderVisible(true);
+      } else if (currentY > lastY) {
+        setHeaderVisible(false);
+      } else {
+        setHeaderVisible(true);
+      }
+      lastY = currentY;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   const whatsappNumber = "5500000000000";
   const whatsappMessage = encodeURIComponent("Olá, vim pelo site da Nortea e gostaria de solicitar um diagnóstico inicial da minha empresa.");
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
@@ -330,7 +347,7 @@ export default function NorteaReactSite() {
     <div className="min-h-screen bg-white text-slate-900 antialiased">
 
       {/* ── HEADER ── */}
-      <header className="sticky top-0 z-40 bg-white">
+      <header className={`sticky top-0 z-40 bg-white transition-transform duration-300 ease-in-out will-change-transform ${headerVisible ? "translate-y-0" : "-translate-y-full"}`}>
         <div className="border-b border-slate-100">
           <div className="mx-auto flex h-[152px] max-w-7xl items-center justify-between px-6 lg:px-8">
             <LogoMark />
@@ -364,8 +381,8 @@ export default function NorteaReactSite() {
         >
           <div className="pointer-events-none absolute inset-0 bg-[#02070e]/55" />
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#02070e]/50 via-transparent to-transparent" />
-          <div className="pointer-events-none absolute right-0 top-1/2 h-[700px] w-[700px] -translate-y-1/2 rounded-full bg-[#0D3F8A]/25 blur-[100px]" />
-          <div className="pointer-events-none absolute right-[-80px] top-1/2 h-[440px] w-[440px] -translate-y-1/2 rounded-full bg-[#16C36B]/10 blur-[80px]" />
+          <div className="pointer-events-none absolute right-0 top-1/2 h-[700px] w-[700px] -translate-y-1/2 rounded-full bg-[#0D3F8A]/20 blur-3xl" />
+          <div className="pointer-events-none absolute right-[-80px] top-1/2 h-[440px] w-[440px] -translate-y-1/2 rounded-full bg-[#16C36B]/8 blur-2xl" />
 
           <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 py-24 lg:grid-cols-2 lg:px-8 lg:py-32">
 
@@ -445,26 +462,28 @@ export default function NorteaReactSite() {
               title={<>O problema não é falta de esforço. É falta de <span className="text-green">controle</span>.</>}
               description="Muitas empresas faturam, vendem e se movimentam todos os dias, mas continuam decidindo sem clareza, crescendo sem estrutura e perdendo dinheiro sem perceber."
             />
-            <div className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            <motion.div
+              className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-4"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5 }}
+            >
               {[
                 { text: "Falta de controle financeiro", cardCls: "border-[#22de7e]/20 bg-[#F8FBF4]/50 hover:border-[#22de7e]/30 hover:shadow-[0_16px_48px_rgba(34,222,126,0.10)]", iconCls: "text-[#22de7e]" },
                 { text: "Decisões baseadas em achismo", cardCls: "border-[#0D3F8A]/10 bg-[#EEF3FF]/40 hover:border-[#0D3F8A]/20 hover:shadow-[0_16px_48px_rgba(13,63,138,0.10)]", iconCls: "text-[#0D3F8A]" },
                 { text: "Marketing sem direção estratégica", cardCls: "border-[#0D3F8A]/10 bg-[#EEF3FF]/40 hover:border-[#0D3F8A]/20 hover:shadow-[0_16px_48px_rgba(13,63,138,0.10)]", iconCls: "text-[#0D3F8A]" },
                 { text: "Operação desorganizada", cardCls: "border-[#0D3F8A]/10 bg-[#EEF3FF]/40 hover:border-[#0D3F8A]/20 hover:shadow-[0_16px_48px_rgba(13,63,138,0.10)]", iconCls: "text-[#0D3F8A]" },
-              ].map((item, idx) => (
-                <motion.div
+              ].map((item) => (
+                <div
                   key={item.text}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.5, delay: idx * 0.08 }}
                   className={`group rounded-[28px] border p-6 shadow-[0_4px_24px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-1.5 ${item.cardCls}`}
                 >
                   <CheckCircle2 className={`h-6 w-6 transition-transform duration-300 group-hover:scale-110 ${item.iconCls}`} />
                   <p className="mt-4 font-semibold text-slate-800">{item.text}</p>
-                </motion.div>
+                </div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
 
@@ -477,17 +496,13 @@ export default function NorteaReactSite() {
               description="Enquanto muitos atuam de forma isolada, a Nortea integra financeiro, marketing e automação para estruturar empresas com mais clareza, eficiência e direção."
             />
 
-            <div className="mt-14 grid gap-6 lg:grid-cols-3">
+            <motion.div className="mt-14 grid gap-6 lg:grid-cols-3" initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.6 }}>
               {pilares.map((item, idx) => {
                 const Icon = item.icon;
                 const isGreen = idx === 0;
                 return (
-                  <motion.div
+                  <div
                     key={item.title}
-                    initial={{ opacity: 0, y: 28 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.25 }}
-                    transition={{ duration: 0.6, delay: idx * 0.1 }}
                     className={`group relative rounded-[32px] border p-8 shadow-[0_4px_28px_rgba(15,23,42,0.07)] transition-all duration-300 hover:-translate-y-2 ${
                       isGreen
                         ? "border-[#22de7e]/20 bg-[#F8FBF4]/40 hover:border-[#22de7e]/30 hover:shadow-[0_24px_64px_rgba(34,222,126,0.14)]"
@@ -513,10 +528,10 @@ export default function NorteaReactSite() {
                       <h3 className="mt-6 text-xl font-bold text-[#0D3F8A]">{item.title}</h3>
                       <p className="mt-3 leading-7 text-slate-500">{item.text}</p>
                     </div>
-                  </motion.div>
+                  </div>
                 );
               })}
-            </div>
+            </motion.div>
           </div>
         </section>
 
@@ -533,16 +548,18 @@ export default function NorteaReactSite() {
               <DashboardDemo />
             </div>
 
-            <div className="mt-14 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            <motion.div
+              className="mt-14 grid gap-4 md:grid-cols-2 xl:grid-cols-4"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5 }}
+            >
               {beneficios.map((item, idx) => {
                 const isGreen = idx === 0;
                 return (
-                  <motion.div
+                  <div
                     key={item}
-                    initial={{ opacity: 0, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.5, delay: idx * 0.08 }}
                     className={`group rounded-[28px] border p-6 shadow-[0_4px_24px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-1 ${
                       isGreen
                         ? "border-[#22de7e]/20 bg-[#F8FBF4]/40 hover:border-[#22de7e]/30 hover:shadow-[0_14px_40px_rgba(34,222,126,0.10)]"
@@ -553,10 +570,10 @@ export default function NorteaReactSite() {
                       isGreen ? "from-[#16C36B] to-[#22de7e]" : "from-[#0D3F8A] to-[#0D3F8A]/40"
                     }`} />
                     <p className="font-medium text-slate-800">{item}</p>
-                  </motion.div>
+                  </div>
                 );
               })}
-            </div>
+            </motion.div>
           </div>
         </section>
 
@@ -569,14 +586,16 @@ export default function NorteaReactSite() {
               description="Nosso trabalho é organizar a empresa de forma estratégica, com etapas claras e evolução acompanhada."
             />
 
-            <div className="mt-14 grid gap-6 lg:grid-cols-2">
-              {etapas.map((etapa, idx) => (
-                <motion.div
+            <motion.div
+              className="mt-14 grid gap-6 lg:grid-cols-2"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.55 }}
+            >
+              {etapas.map((etapa) => (
+                <div
                   key={etapa.step}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.25 }}
-                  transition={{ duration: 0.55, delay: idx * 0.1 }}
                   className="group rounded-[32px] border border-slate-200/70 bg-white p-8 shadow-[0_4px_28px_rgba(15,23,42,0.07)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#16C36B]/20 hover:shadow-[0_20px_56px_rgba(13,63,138,0.12)]"
                 >
                   <div className="flex items-center gap-4">
@@ -586,9 +605,9 @@ export default function NorteaReactSite() {
                     <h3 className="text-xl font-bold text-[#0D3F8A]">{etapa.title}</h3>
                   </div>
                   <p className="mt-5 leading-8 text-slate-500">{etapa.text}</p>
-                </motion.div>
+                </div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
 
@@ -601,17 +620,19 @@ export default function NorteaReactSite() {
               description="Apresentações visuais, controles e estruturas que ajudam a empresa a acompanhar números, operação e prioridades com mais clareza."
             />
 
-            <div className="mt-14 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            <motion.div
+              className="mt-14 grid gap-5 md:grid-cols-2 xl:grid-cols-3"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5 }}
+            >
               {entregas.map((item, idx) => {
                 const Icon = item.icon;
                 const isFinancial = idx < 2;
                 return (
-                  <motion.div
+                  <div
                     key={item.title}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.2 }}
-                    transition={{ duration: 0.5, delay: idx * 0.08 }}
                     className={`group relative rounded-[32px] border p-7 shadow-[0_4px_24px_rgba(15,23,42,0.07)] transition-all duration-300 hover:-translate-y-2 ${
                       isFinancial
                         ? "border-[#22de7e]/15 bg-[#F8FBF4]/30 hover:border-[#22de7e]/25 hover:shadow-[0_24px_64px_rgba(34,222,126,0.12)]"
@@ -637,10 +658,10 @@ export default function NorteaReactSite() {
                         ? "bg-gradient-to-r from-[#22de7e]/0 via-[#22de7e]/45 to-[#22de7e]/0"
                         : "bg-gradient-to-r from-[#16C36B]/0 via-[#16C36B]/45 to-[#16C36B]/0"
                     }`} />
-                  </motion.div>
+                  </div>
                 );
               })}
-            </div>
+            </motion.div>
           </div>
         </section>
 
@@ -688,6 +709,7 @@ export default function NorteaReactSite() {
                     <img
                       src={f.src}
                       alt={f.alt}
+                      loading="lazy"
                       className="w-full transition-transform duration-500 group-hover:scale-[1.02]"
                     />
                   </div>
