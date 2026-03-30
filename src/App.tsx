@@ -370,9 +370,9 @@ export default function NorteaReactSite() {
 
       <main>
 
-        {/* ══ DARK ZONE: Hero + Trust compartilham o mesmo fundo ══ */}
+        {/* ══ DARK ZONE: fundo único compartilhado ══ */}
         <div
-          className="relative"
+          className="relative overflow-hidden"
           style={{
             backgroundImage: "url('/images/hero-bg.svg')",
             backgroundSize: "cover",
@@ -380,15 +380,15 @@ export default function NorteaReactSite() {
             backgroundRepeat: "no-repeat",
           }}
         >
-          {/* Fade inferior — transição suave para a próxima seção */}
-          <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-[#EEF3FF] z-20" />
+          {/* ── Overlays globais — aplicados UMA VEZ para as duas seções ── */}
+          <div className="pointer-events-none absolute inset-0 bg-[#02070e]/55" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#02070e]/50 via-transparent to-transparent" />
+          {/* Glows globais */}
+          <div className="pointer-events-none absolute right-0 top-[30%] h-[700px] w-[700px] -translate-y-1/2 rounded-full bg-[#0D3F8A]/20 blur-3xl" />
+          <div className="pointer-events-none absolute right-[-80px] top-[30%] h-[440px] w-[440px] -translate-y-1/2 rounded-full bg-[#16C36B]/8 blur-2xl" />
 
         {/* ── HERO ── */}
         <section className="relative overflow-hidden">
-          <div className="pointer-events-none absolute inset-0 bg-[#02070e]/55" />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#02070e]/50 via-transparent to-transparent" />
-          <div className="pointer-events-none absolute right-0 top-1/2 h-[700px] w-[700px] -translate-y-1/2 rounded-full bg-[#0D3F8A]/20 blur-3xl" />
-          <div className="pointer-events-none absolute right-[-80px] top-1/2 h-[440px] w-[440px] -translate-y-1/2 rounded-full bg-[#16C36B]/8 blur-2xl" />
 
           <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 py-24 lg:grid-cols-2 lg:px-8 lg:py-32">
 

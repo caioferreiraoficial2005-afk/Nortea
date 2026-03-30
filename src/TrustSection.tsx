@@ -52,14 +52,7 @@ export default function TrustSection() {
         }
       `}</style>
 
-      {/* Overlay idêntico ao Hero — mantém escuridão uniforme */}
-      <div className="pointer-events-none absolute inset-0 bg-[#02070e]/55" />
-
-      {/* Glow sutil — complementa o fundo compartilhado */}
-      <div className="pointer-events-none absolute left-1/2 top-0 h-[280px] w-[600px] -translate-x-1/2 rounded-full bg-[#0D3F8A]/15 blur-3xl" />
-      <div className="pointer-events-none absolute right-0 bottom-1/3 h-[200px] w-[360px] rounded-full bg-[#16C36B]/6 blur-3xl" />
-
-      <div className="relative z-10 mx-auto max-w-7xl px-6 py-20 pb-32 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 py-20 pb-24 lg:px-8">
         {/* Eyebrow */}
         <div className="mb-12 flex flex-col items-center text-center gap-3">
           <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-md">
