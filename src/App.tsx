@@ -64,7 +64,7 @@ function LogoMark() {
     <img
       src="/images/logoversaofinalnortea.png"
       alt="Nortea Consultoria Estratégica"
-      className="h-14 w-auto"
+      className="h-20 w-auto"
     />
   );
 }
@@ -240,7 +240,7 @@ function DashboardDemo() {
             {[
               ["Fluxo de caixa", "Saudável", "86%", "text-[#16C36B]", "from-[#16C36B] to-[#0fba60]"],
               ["Processos críticos", "Controlados", "72%", "text-[#0D3F8A]", "from-[#0D3F8A] to-[#1a56cc]"],
-              ["Oportunidades", "Mapeadas", "64%", "text-[#9FA47C]", "from-[#9FA47C] to-[#0D3F8A]/60"],
+              ["Oportunidades", "Mapeadas", "64%", "text-[#22de7e]", "from-[#22de7e] to-[#0D3F8A]/60"],
             ].map(([label, text, width, textColor, barColor]) => (
               <div key={label} className="rounded-2xl bg-white p-4 shadow-[0_2px_12px_rgba(15,23,42,0.05)]">
                 <div className="flex items-center justify-between text-sm">
@@ -448,7 +448,7 @@ export default function NorteaReactSite() {
             />
             <div className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
               {[
-                { text: "Falta de controle financeiro", cardCls: "border-[#9FA47C]/20 bg-[#F8FBF4]/50 hover:border-[#9FA47C]/30 hover:shadow-[0_16px_48px_rgba(159,164,124,0.10)]", iconCls: "text-[#9FA47C]" },
+                { text: "Falta de controle financeiro", cardCls: "border-[#22de7e]/20 bg-[#F8FBF4]/50 hover:border-[#22de7e]/30 hover:shadow-[0_16px_48px_rgba(34,222,126,0.10)]", iconCls: "text-[#22de7e]" },
                 { text: "Decisões baseadas em achismo", cardCls: "border-[#0D3F8A]/10 bg-[#EEF3FF]/40 hover:border-[#0D3F8A]/20 hover:shadow-[0_16px_48px_rgba(13,63,138,0.10)]", iconCls: "text-[#0D3F8A]" },
                 { text: "Marketing sem direção estratégica", cardCls: "border-[#0D3F8A]/10 bg-[#EEF3FF]/40 hover:border-[#0D3F8A]/20 hover:shadow-[0_16px_48px_rgba(13,63,138,0.10)]", iconCls: "text-[#0D3F8A]" },
                 { text: "Operação desorganizada", cardCls: "border-[#0D3F8A]/10 bg-[#EEF3FF]/40 hover:border-[#0D3F8A]/20 hover:shadow-[0_16px_48px_rgba(13,63,138,0.10)]", iconCls: "text-[#0D3F8A]" },
@@ -491,7 +491,7 @@ export default function NorteaReactSite() {
                     transition={{ duration: 0.6, delay: idx * 0.1 }}
                     className={`group relative rounded-[32px] border p-8 shadow-[0_4px_28px_rgba(15,23,42,0.07)] transition-all duration-300 hover:-translate-y-2 ${
                       isGreen
-                        ? "border-[#9FA47C]/20 bg-[#F8FBF4]/40 hover:border-[#9FA47C]/30 hover:shadow-[0_24px_64px_rgba(159,164,124,0.14)]"
+                        ? "border-[#22de7e]/20 bg-[#F8FBF4]/40 hover:border-[#22de7e]/30 hover:shadow-[0_24px_64px_rgba(34,222,126,0.14)]"
                         : "border-slate-200/70 bg-white hover:border-[#0D3F8A]/20 hover:shadow-[0_24px_64px_rgba(13,63,138,0.13)]"
                     }`}
                   >
@@ -499,14 +499,14 @@ export default function NorteaReactSite() {
                       className="pointer-events-none absolute inset-0 rounded-[32px] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                       style={{
                         background: isGreen
-                          ? "radial-gradient(ellipse at top left, rgba(159,164,124,0.06) 0%, transparent 60%)"
+                          ? "radial-gradient(ellipse at top left, rgba(34,222,126,0.06) 0%, transparent 60%)"
                           : "radial-gradient(ellipse at top left, rgba(13,63,138,0.035) 0%, transparent 60%)",
                       }}
                     />
                     <div className="relative">
                       <div className={`inline-flex rounded-2xl p-3.5 transition-all duration-300 ${
                         isGreen
-                          ? "bg-gradient-to-br from-[#16C36B]/12 to-[#9FA47C]/8 text-[#16C36B] shadow-[0_2px_8px_rgba(22,195,107,0.10)] group-hover:shadow-[0_4px_18px_rgba(22,195,107,0.22)]"
+                          ? "bg-gradient-to-br from-[#16C36B]/12 to-[#22de7e]/8 text-[#16C36B] shadow-[0_2px_8px_rgba(22,195,107,0.10)] group-hover:shadow-[0_4px_18px_rgba(22,195,107,0.22)]"
                           : "bg-gradient-to-br from-[#0D3F8A]/10 to-[#0D3F8A]/5 text-[#0D3F8A] shadow-[0_2px_8px_rgba(13,63,138,0.08)] group-hover:shadow-[0_4px_18px_rgba(13,63,138,0.18)]"
                       }`}>
                         <Icon className="h-6 w-6" />
@@ -546,12 +546,12 @@ export default function NorteaReactSite() {
                     transition={{ duration: 0.5, delay: idx * 0.08 }}
                     className={`group rounded-[28px] border p-6 shadow-[0_4px_24px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-1 ${
                       isGreen
-                        ? "border-[#9FA47C]/20 bg-[#F8FBF4]/40 hover:border-[#9FA47C]/30 hover:shadow-[0_14px_40px_rgba(159,164,124,0.10)]"
+                        ? "border-[#22de7e]/20 bg-[#F8FBF4]/40 hover:border-[#22de7e]/30 hover:shadow-[0_14px_40px_rgba(34,222,126,0.10)]"
                         : "border-[#0D3F8A]/10 bg-[#EEF3FF]/30 hover:border-[#0D3F8A]/20 hover:shadow-[0_14px_40px_rgba(13,63,138,0.10)]"
                     }`}
                   >
                     <div className={`mb-3 h-1 w-8 rounded-full bg-gradient-to-r transition-all duration-300 group-hover:w-14 ${
-                      isGreen ? "from-[#16C36B] to-[#9FA47C]" : "from-[#0D3F8A] to-[#0D3F8A]/40"
+                      isGreen ? "from-[#16C36B] to-[#22de7e]" : "from-[#0D3F8A] to-[#0D3F8A]/40"
                     }`} />
                     <p className="font-medium text-slate-800">{item}</p>
                   </motion.div>
@@ -615,27 +615,27 @@ export default function NorteaReactSite() {
                     transition={{ duration: 0.5, delay: idx * 0.08 }}
                     className={`group relative rounded-[32px] border p-7 shadow-[0_4px_24px_rgba(15,23,42,0.07)] transition-all duration-300 hover:-translate-y-2 ${
                       isFinancial
-                        ? "border-[#9FA47C]/15 bg-[#F8FBF4]/30 hover:border-[#9FA47C]/25 hover:shadow-[0_24px_64px_rgba(159,164,124,0.12)]"
+                        ? "border-[#22de7e]/15 bg-[#F8FBF4]/30 hover:border-[#22de7e]/25 hover:shadow-[0_24px_64px_rgba(34,222,126,0.12)]"
                         : "border-slate-200/70 bg-white hover:border-[#0D3F8A]/20 hover:shadow-[0_24px_64px_rgba(13,63,138,0.13)]"
                     }`}
                   >
                     <div className="flex items-center justify-between">
                       <div className={`rounded-2xl p-3.5 transition-all duration-300 ${
                         isFinancial
-                          ? "bg-gradient-to-br from-[#16C36B]/12 to-[#9FA47C]/8 text-[#16C36B] group-hover:shadow-[0_4px_16px_rgba(22,195,107,0.18)]"
+                          ? "bg-gradient-to-br from-[#16C36B]/12 to-[#22de7e]/8 text-[#16C36B] group-hover:shadow-[0_4px_16px_rgba(22,195,107,0.18)]"
                           : "bg-gradient-to-br from-[#0D3F8A]/10 to-[#0D3F8A]/5 text-[#0D3F8A] group-hover:shadow-[0_4px_16px_rgba(13,63,138,0.16)]"
                       }`}>
                         <Icon className="h-6 w-6" />
                       </div>
                       <ChevronRight className={`h-5 w-5 text-slate-200 transition-all duration-300 group-hover:translate-x-0.5 ${
-                        isFinancial ? "group-hover:text-[#9FA47C]" : "group-hover:text-[#16C36B]"
+                        isFinancial ? "group-hover:text-[#22de7e]" : "group-hover:text-[#16C36B]"
                       }`} />
                     </div>
                     <h3 className="mt-6 text-lg font-bold text-slate-900">{item.title}</h3>
                     <p className="mt-2 text-sm leading-6 text-slate-500">Modelo visual demonstrativo para acompanhamento gerencial e tomada de decisão.</p>
                     <div className={`absolute bottom-0 left-7 right-7 h-[2px] rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${
                       isFinancial
-                        ? "bg-gradient-to-r from-[#9FA47C]/0 via-[#9FA47C]/45 to-[#9FA47C]/0"
+                        ? "bg-gradient-to-r from-[#22de7e]/0 via-[#22de7e]/45 to-[#22de7e]/0"
                         : "bg-gradient-to-r from-[#16C36B]/0 via-[#16C36B]/45 to-[#16C36B]/0"
                     }`} />
                   </motion.div>

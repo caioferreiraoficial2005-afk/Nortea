@@ -21,7 +21,7 @@ interface FormErrors {
 const FIELD_CLASS_BASE =
   "w-full rounded-2xl border px-4 py-3 text-sm text-slate-900 outline-none transition-all placeholder:text-slate-400 focus:ring-2";
 const FIELD_VALID =
-  "border-slate-200 bg-slate-50 hover:border-slate-300 focus:border-[#9FA47C] focus:ring-[#9FA47C]/20";
+  "border-slate-200 bg-slate-50 hover:border-slate-300 focus:border-[#22de7e] focus:ring-[#22de7e]/20";
 const FIELD_ERROR =
   "border-red-400 bg-red-50 focus:border-red-400 focus:ring-red-400/20";
 
@@ -40,7 +40,7 @@ function Field({
     <div>
       <label className="mb-1.5 block text-sm font-semibold text-slate-700">
         {label}{" "}
-        {required && <span className="text-[#9FA47C]">*</span>}
+        {required && <span className="text-[#22de7e]">*</span>}
         {!required && (
           <span className="font-normal text-slate-400">(opcional)</span>
         )}
@@ -117,11 +117,11 @@ export default function LeadFormSection() {
         {/* Header */}
         <div className="mb-12 text-center">
           <div className="mb-4 inline-flex items-center gap-2.5">
-            <span className="h-px w-7 bg-[#9FA47C]" />
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#9FA47C]">
+            <span className="h-px w-7 bg-[#22de7e]" />
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#22de7e]">
               Diagnóstico estratégico
             </p>
-            <span className="h-px w-7 bg-[#9FA47C]" />
+            <span className="h-px w-7 bg-[#22de7e]" />
           </div>
           <h2 className="text-3xl font-bold tracking-tight text-[#0D3F8A] sm:text-4xl lg:text-[2.6rem] lg:leading-[1.15]">
             Solicite um diagnóstico{" "}
@@ -136,7 +136,7 @@ export default function LeadFormSection() {
         {/* Card */}
         <div className="relative overflow-hidden rounded-[32px] border border-slate-200/70 bg-white p-8 shadow-[0_8px_40px_rgba(15,23,42,0.08)] sm:p-10">
           {/* Subtle accent glows */}
-          <div className="pointer-events-none absolute right-0 top-0 h-48 w-48 rounded-full bg-[#9FA47C]/8 blur-3xl" />
+          <div className="pointer-events-none absolute right-0 top-0 h-48 w-48 rounded-full bg-[#22de7e]/8 blur-3xl" />
           <div className="pointer-events-none absolute bottom-0 left-0 h-36 w-36 rounded-full bg-[#0D3F8A]/5 blur-3xl" />
 
           <form onSubmit={handleSubmit} noValidate className="relative">
@@ -222,7 +222,7 @@ export default function LeadFormSection() {
             <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
               <button
                 type="submit"
-                className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-[#9FA47C] px-8 py-4 font-semibold text-white shadow-[0_4px_20px_rgba(159,164,124,0.30)] transition-all hover:bg-[#8a8f6a] hover:scale-[1.02] hover:shadow-[0_8px_32px_rgba(159,164,124,0.44)]"
+                className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-[#22de7e] px-8 py-4 font-semibold text-white shadow-[0_4px_20px_rgba(34,222,126,0.30)] transition-all hover:bg-[#16b866] hover:scale-[1.02] hover:shadow-[0_8px_32px_rgba(34,222,126,0.44)]"
               >
                 Quero meu diagnóstico
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
