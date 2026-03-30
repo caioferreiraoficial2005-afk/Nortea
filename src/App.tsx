@@ -47,15 +47,15 @@ function Kw({ children }: { children: React.ReactNode }) {
   );
 }
 
-function SectionTitle({ eyebrow, title, description }: { eyebrow: string; title: React.ReactNode; description?: string }) {
+function SectionTitle({ eyebrow, title, description, dark = false }: { eyebrow: string; title: React.ReactNode; description?: string; dark?: boolean }) {
   return (
     <div className="max-w-3xl">
       <div className="mb-4 inline-flex items-center gap-2.5">
         <span className="h-px w-7 bg-[#16C36B]" />
         <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#16C36B]">{eyebrow}</p>
       </div>
-      <h2 className="text-3xl font-bold tracking-tight text-[#0D3F8A] sm:text-4xl lg:text-[2.6rem] lg:leading-[1.15]">{title}</h2>
-      {description ? <p className="mt-5 text-base leading-8 text-slate-500 sm:text-lg">{description}</p> : null}
+      <h2 className={`text-3xl font-bold tracking-tight sm:text-4xl lg:text-[2.6rem] lg:leading-[1.15] ${dark ? "text-white" : "text-[#0D3F8A]"}`}>{title}</h2>
+      {description ? <p className={`mt-5 text-base leading-8 sm:text-lg ${dark ? "text-white/60" : "text-slate-500"}`}>{description}</p> : null}
     </div>
   );
 }
@@ -466,7 +466,7 @@ export default function NorteaReactSite() {
         </div>{/* fim dark zone */}
 
         {/* ── PROBLEMA ── */}
-        <section className="border-y border-slate-200/60 bg-gradient-to-b from-[#EEF3FF] via-slate-50 to-white">
+        <section className="bg-gradient-to-b from-[#F8FAFC] to-[#EEF4FF]">
           <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
             <SectionTitle
               eyebrow="Problema"
@@ -513,7 +513,8 @@ export default function NorteaReactSite() {
         </section>
 
         {/* ── SERVIÇOS ── */}
-        <section id="servicos" className="bg-white">
+        <section id="servicos" className="relative bg-gradient-to-b from-[#EEF4FF] to-[#F8FAFC]">
+          <div className="pointer-events-none absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #0D3F8A 1px, transparent 0)", backgroundSize: "28px 28px" }} />
           <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
             <SectionTitle
               eyebrow="Solução"
@@ -573,7 +574,7 @@ export default function NorteaReactSite() {
         </section>
 
         {/* ── DASHBOARD ── */}
-        <section className="bg-gradient-to-b from-[#F5F8FF] via-slate-50 to-[#F5F8FF]">
+        <section className="bg-gradient-to-b from-[#F8FAFC] to-[#EDF2FF]">
           <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
             <SectionTitle
               eyebrow="Dashboard demonstrativo"
@@ -627,11 +628,17 @@ export default function NorteaReactSite() {
         </section>
 
         {/* ── PROCESSO ── */}
-        <section id="processo" className="bg-white">
-          <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+        <section id="processo" className="relative overflow-hidden bg-gradient-to-b from-[#020c1f] to-[#061428]">
+          {/* Dot grid texture */}
+          <div className="pointer-events-none absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "28px 28px" }} />
+          {/* Glow */}
+          <div className="pointer-events-none absolute left-1/4 top-0 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-[#0D3F8A]/20 blur-3xl" />
+          <div className="pointer-events-none absolute right-0 bottom-0 h-[300px] w-[400px] rounded-full bg-[#16C36B]/6 blur-3xl" />
+          <div className="relative z-10 mx-auto max-w-7xl px-6 py-24 lg:px-8">
             <SectionTitle
+              dark
               eyebrow="Processo"
-              title={<>Como a Nortea atua na <span className="text-green">prática</span></>}
+              title={<>Como a Nortea atua na <span className="text-[#22de7e]">prática</span></>}
               description="Nosso trabalho é organizar a empresa de forma estratégica, com etapas claras e evolução acompanhada."
             />
 
@@ -649,17 +656,17 @@ export default function NorteaReactSite() {
                   key={etapa.step}
                   className={`group rounded-[32px] border p-8 transition-all duration-300 hover:-translate-y-1.5 ${
                     isBlue
-                      ? "border-[#1a4fa0]/40 bg-gradient-to-br from-[#0D3F8A] to-[#071f52] shadow-[0_8px_32px_rgba(13,63,138,0.40)] hover:shadow-[0_20px_56px_rgba(13,63,138,0.55)]"
-                      : "border-slate-200 bg-white shadow-[0_6px_32px_rgba(15,23,42,0.08)] hover:border-[#16C36B]/20 hover:shadow-[0_20px_56px_rgba(13,63,138,0.12)]"
+                      ? "border-[#1a4fa0]/50 bg-gradient-to-br from-[#0D3F8A] to-[#071f52] shadow-[0_8px_32px_rgba(13,63,138,0.50)] hover:shadow-[0_20px_56px_rgba(13,63,138,0.65)]"
+                      : "border-white/10 bg-white/6 backdrop-blur-sm shadow-[0_6px_32px_rgba(0,0,0,0.25)] hover:border-white/20 hover:shadow-[0_20px_56px_rgba(22,195,107,0.08)]"
                   }`}
                 >
                   <div className="flex items-center gap-4">
-                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#16C36B]/12 to-[#16C36B]/6 font-bold text-lg text-[#16C36B] shadow-[0_2px_12px_rgba(22,195,107,0.14)] transition-all duration-300 group-hover:shadow-[0_4px_22px_rgba(22,195,107,0.28)]">
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#16C36B]/20 to-[#16C36B]/10 font-bold text-lg text-[#16C36B] shadow-[0_2px_12px_rgba(22,195,107,0.20)] transition-all duration-300 group-hover:shadow-[0_4px_22px_rgba(22,195,107,0.35)]">
                       {etapa.step}
                     </div>
-                    <h3 className={`text-xl font-bold ${isBlue ? "text-white" : "text-[#0D3F8A]"}`}>{etapa.title}</h3>
+                    <h3 className="text-xl font-bold text-white">{etapa.title}</h3>
                   </div>
-                  <p className={`mt-5 leading-8 ${isBlue ? "text-white/70" : "text-slate-500"}`}>{etapa.text}</p>
+                  <p className={`mt-5 leading-8 ${isBlue ? "text-white/70" : "text-white/60"}`}>{etapa.text}</p>
                 </div>
                 );
               })}
@@ -680,7 +687,7 @@ export default function NorteaReactSite() {
         </section>
 
         {/* ── ENTREGAS ── */}
-        <section className="bg-gradient-to-b from-[#EEF3FF] to-white">
+        <section className="bg-gradient-to-b from-[#F4F8FF] to-[#EDF2FF]">
           <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
             <SectionTitle
               eyebrow="Exemplos de entrega"
@@ -746,7 +753,7 @@ export default function NorteaReactSite() {
         </section>
 
         {/* ── FUNDADORES ── */}
-        <section id="fundadores" className="bg-white">
+        <section id="fundadores" className="bg-gradient-to-b from-[#F8FAFC] to-[#EEF4FF]">
           <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
             <SectionTitle
               eyebrow="Fundadores"
@@ -783,7 +790,7 @@ export default function NorteaReactSite() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.6 }}
-                  className="group overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-[0_8px_40px_rgba(15,23,42,0.10)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#0D3F8A]/15 hover:shadow-[0_24px_64px_rgba(13,63,138,0.16)]"
+                  className="group overflow-hidden rounded-[32px] border border-slate-200/70 bg-white shadow-[0_8px_40px_rgba(13,63,138,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#0D3F8A]/20 hover:shadow-[0_24px_64px_rgba(13,63,138,0.18)]"
                 >
                   <div className="overflow-hidden">
                     <img
@@ -822,7 +829,7 @@ export default function NorteaReactSite() {
         <LeadFormSection />
 
         {/* ── CTA ── */}
-        <section className="pb-24 pt-4">
+        <section className="bg-gradient-to-b from-[#EEF4FF] to-[#F1F5FF] pb-24 pt-4">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="relative overflow-hidden rounded-[40px] bg-gradient-to-br from-[#0D3F8A] via-[#0a3070] to-[#071f52] p-10 text-white shadow-[0_32px_100px_rgba(13,63,138,0.38)] sm:p-14">
               {/* Background depth */}
