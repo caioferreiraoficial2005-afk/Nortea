@@ -16,6 +16,7 @@ import {
   Workflow,
 } from "lucide-react";
 import LeadFormSection from "./LeadFormSection";
+import TrustSection from "./TrustSection";
 
 function useCountUp(end: number, duration = 1400, startWhen = true, prefix = "", suffix = "") {
   const [value, setValue] = useState(0);
@@ -453,6 +454,9 @@ export default function NorteaReactSite() {
             </div>
           </div>
         </section>
+
+        {/* ── TRUST / SEGMENTOS ── */}
+        <TrustSection />
 
         {/* ── PROBLEMA ── */}
         <section className="border-y border-slate-200/60 bg-gradient-to-b from-[#EEF3FF] via-slate-50 to-white">
