@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p \"c:/Users/caiof/Documents/Nortea/public/images/fundadores\")",
+      "Bash(cp \"c:/Users/caiof/Documents/Nortea/images/fundadores/caio/WhatsApp Image 2026-03-30 at 00.09.27.jpeg\" \"c:/Users/caiof/Documents/Nortea/public/images/fundadores/caio.jpeg\")",
+      "Bash(cp \"c:/Users/caiof/Documents/Nortea/images/fundadores/bernardo/WhatsApp Image 2026-03-29 at 22.59.26.jpeg\" \"c:/Users/caiof/Documents/Nortea/public/images/fundadores/bernardo.jpeg\")",
+      "Bash(python3 -c \"from PIL import Image; img = Image.open\\(''c:/Users/caiof/Documents/Nortea/images/logo/norteaversaosemfundo.png''\\); print\\(img.size\\)\")",
+      "Bash(node -e \"const fs = require\\(''fs''\\); console.log\\(''node ok''\\); const mods = [''sharp'',''jimp'',''@jimp/core'']; mods.forEach\\(m => { try { require\\(m\\); console.log\\(m + '' disponivel''\\); } catch\\(e\\) { console.log\\(m + '' nao instalado''\\); } }\\);\")",
+      "Bash(npm install:*)",
+      "Bash(node -e \":*)"
+    ]
+  }
+}
