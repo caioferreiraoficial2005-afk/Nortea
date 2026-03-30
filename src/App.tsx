@@ -75,10 +75,10 @@ function MetricCard({ label, value, tone = "default" }: { label: string; value: 
     <div
       className={`rounded-[28px] border p-5 transition-all duration-300 hover:-translate-y-1 ${
         tone === "green"
-          ? "border-[#16C36B]/25 bg-gradient-to-br from-[#16C36B]/8 to-[#16C36B]/3 hover:shadow-[0_12px_36px_rgba(22,195,107,0.12)]"
+          ? "border-[#16C36B]/35 bg-gradient-to-br from-[#16C36B]/14 to-[#16C36B]/7 hover:shadow-[0_12px_36px_rgba(22,195,107,0.18)]"
           : tone === "blue"
-          ? "border-[#0D3F8A]/20 bg-gradient-to-br from-[#0D3F8A]/6 to-[#0D3F8A]/2 hover:shadow-[0_12px_36px_rgba(13,63,138,0.10)]"
-          : "border-slate-200/70 bg-white shadow-[0_4px_20px_rgba(15,23,42,0.06)] hover:shadow-[0_14px_40px_rgba(15,23,42,0.10)]"
+          ? "border-[#0D3F8A]/25 bg-gradient-to-br from-[#0D3F8A]/10 to-[#0D3F8A]/5 hover:shadow-[0_12px_36px_rgba(13,63,138,0.15)]"
+          : "border-slate-200 bg-white shadow-[0_4px_20px_rgba(15,23,42,0.08)] hover:shadow-[0_14px_40px_rgba(15,23,42,0.13)]"
       }`}
     >
       <p className="text-sm text-slate-500">{label}</p>
@@ -213,7 +213,7 @@ function DashboardDemo() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.7 }}
-      className="relative overflow-hidden rounded-[36px] border border-slate-200/70 bg-white p-6 shadow-[0_20px_80px_rgba(15,23,42,0.08)]"
+      className="relative overflow-hidden rounded-[36px] border border-slate-200 bg-white p-6 shadow-[0_20px_80px_rgba(15,23,42,0.11)]"
     >
       <div className="pointer-events-none absolute right-0 top-0 h-56 w-56 rounded-full bg-[#16C36B]/8 blur-3xl" />
       <div className="pointer-events-none absolute left-0 bottom-0 h-40 w-40 rounded-full bg-[#0D3F8A]/5 blur-3xl" />
@@ -225,7 +225,7 @@ function DashboardDemo() {
           <MetricCard label="Leads acompanhados" value={leads} tone="blue" />
         </div>
 
-        <div className="rounded-[28px] border border-slate-200/60 bg-gradient-to-br from-slate-50 to-[#EEF3FF]/50 p-5">
+        <div className="rounded-[28px] border border-[#0D3F8A]/12 bg-gradient-to-br from-[#F5F8FF] to-[#EEF3FF] p-5">
           <div className="flex items-center justify-between gap-3">
             <div>
               <p className="text-sm text-slate-500">Resumo executivo</p>
@@ -470,16 +470,18 @@ export default function NorteaReactSite() {
               transition={{ duration: 0.5 }}
             >
               {[
-                { text: "Falta de controle financeiro", cardCls: "border-[#22de7e]/20 bg-[#F8FBF4]/50 hover:border-[#22de7e]/30 hover:shadow-[0_16px_48px_rgba(34,222,126,0.10)]", iconCls: "text-[#22de7e]" },
-                { text: "Decisões baseadas em achismo", cardCls: "border-[#0D3F8A]/10 bg-[#EEF3FF]/40 hover:border-[#0D3F8A]/20 hover:shadow-[0_16px_48px_rgba(13,63,138,0.10)]", iconCls: "text-[#0D3F8A]" },
-                { text: "Marketing sem direção estratégica", cardCls: "border-[#0D3F8A]/10 bg-[#EEF3FF]/40 hover:border-[#0D3F8A]/20 hover:shadow-[0_16px_48px_rgba(13,63,138,0.10)]", iconCls: "text-[#0D3F8A]" },
-                { text: "Operação desorganizada", cardCls: "border-[#0D3F8A]/10 bg-[#EEF3FF]/40 hover:border-[#0D3F8A]/20 hover:shadow-[0_16px_48px_rgba(13,63,138,0.10)]", iconCls: "text-[#0D3F8A]" },
+                { text: "Falta de controle financeiro", cardCls: "border-[#22de7e]/30 bg-[#F0FDF6] hover:border-[#22de7e]/45 hover:shadow-[0_16px_48px_rgba(34,222,126,0.15)]", iconCls: "bg-[#16C36B]/12 text-[#16C36B]" },
+                { text: "Decisões baseadas em achismo", cardCls: "border-[#0D3F8A]/15 bg-[#EEF3FF] hover:border-[#0D3F8A]/25 hover:shadow-[0_16px_48px_rgba(13,63,138,0.14)]", iconCls: "bg-[#0D3F8A]/10 text-[#0D3F8A]" },
+                { text: "Marketing sem direção estratégica", cardCls: "border-[#0D3F8A]/15 bg-[#EEF3FF] hover:border-[#0D3F8A]/25 hover:shadow-[0_16px_48px_rgba(13,63,138,0.14)]", iconCls: "bg-[#0D3F8A]/10 text-[#0D3F8A]" },
+                { text: "Operação desorganizada", cardCls: "border-[#0D3F8A]/15 bg-[#EEF3FF] hover:border-[#0D3F8A]/25 hover:shadow-[0_16px_48px_rgba(13,63,138,0.14)]", iconCls: "bg-[#0D3F8A]/10 text-[#0D3F8A]" },
               ].map((item) => (
                 <div
                   key={item.text}
-                  className={`group rounded-[28px] border p-6 shadow-[0_4px_24px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-1.5 ${item.cardCls}`}
+                  className={`group rounded-[28px] border p-6 shadow-[0_6px_28px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1.5 ${item.cardCls}`}
                 >
-                  <CheckCircle2 className={`h-6 w-6 transition-transform duration-300 group-hover:scale-110 ${item.iconCls}`} />
+                  <div className={`inline-flex rounded-2xl p-2.5 transition-all duration-300 group-hover:scale-110 ${item.iconCls}`}>
+                    <CheckCircle2 className="h-5 w-5" />
+                  </div>
                   <p className="mt-4 font-semibold text-slate-800">{item.text}</p>
                 </div>
               ))}
@@ -515,10 +517,10 @@ export default function NorteaReactSite() {
                 return (
                   <div
                     key={item.title}
-                    className={`group relative rounded-[32px] border p-8 shadow-[0_4px_28px_rgba(15,23,42,0.07)] transition-all duration-300 hover:-translate-y-2 ${
+                    className={`group relative rounded-[32px] border p-8 shadow-[0_6px_32px_rgba(15,23,42,0.09)] transition-all duration-300 hover:-translate-y-2 ${
                       isGreen
-                        ? "border-[#22de7e]/20 bg-[#F8FBF4]/40 hover:border-[#22de7e]/30 hover:shadow-[0_24px_64px_rgba(34,222,126,0.14)]"
-                        : "border-slate-200/70 bg-white hover:border-[#0D3F8A]/20 hover:shadow-[0_24px_64px_rgba(13,63,138,0.13)]"
+                        ? "border-[#22de7e]/30 bg-[#F0FDF6] hover:border-[#22de7e]/45 hover:shadow-[0_24px_64px_rgba(34,222,126,0.18)]"
+                        : "border-[#0D3F8A]/12 bg-[#F5F8FF] hover:border-[#0D3F8A]/22 hover:shadow-[0_24px_64px_rgba(13,63,138,0.16)]"
                     }`}
                   >
                     <div
@@ -580,14 +582,14 @@ export default function NorteaReactSite() {
               transition={{ duration: 0.5 }}
             >
               {beneficios.map((item, idx) => {
-                const isGreen = idx === 0;
+                const isGreen = idx % 2 === 0;
                 return (
                   <div
                     key={item}
-                    className={`group rounded-[28px] border p-6 shadow-[0_4px_24px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-1 ${
+                    className={`group rounded-[28px] border p-6 shadow-[0_6px_28px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1 ${
                       isGreen
-                        ? "border-[#22de7e]/20 bg-[#F8FBF4]/40 hover:border-[#22de7e]/30 hover:shadow-[0_14px_40px_rgba(34,222,126,0.10)]"
-                        : "border-[#0D3F8A]/10 bg-[#EEF3FF]/30 hover:border-[#0D3F8A]/20 hover:shadow-[0_14px_40px_rgba(13,63,138,0.10)]"
+                        ? "border-[#22de7e]/30 bg-[#F0FDF6] hover:border-[#22de7e]/45 hover:shadow-[0_14px_40px_rgba(34,222,126,0.14)]"
+                        : "border-[#0D3F8A]/15 bg-[#EEF3FF] hover:border-[#0D3F8A]/25 hover:shadow-[0_14px_40px_rgba(13,63,138,0.14)]"
                     }`}
                   >
                     <div className={`mb-3 h-1 w-8 rounded-full bg-gradient-to-r transition-all duration-300 group-hover:w-14 ${
@@ -629,10 +631,16 @@ export default function NorteaReactSite() {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.55 }}
             >
-              {etapas.map((etapa) => (
+              {etapas.map((etapa, idx) => {
+                const isBlue = idx % 2 === 1;
+                return (
                 <div
                   key={etapa.step}
-                  className="group rounded-[32px] border border-slate-200/70 bg-white p-8 shadow-[0_4px_28px_rgba(15,23,42,0.07)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#16C36B]/20 hover:shadow-[0_20px_56px_rgba(13,63,138,0.12)]"
+                  className={`group rounded-[32px] border p-8 shadow-[0_6px_32px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1.5 ${
+                    isBlue
+                      ? "border-[#0D3F8A]/15 bg-[#EEF3FF] hover:border-[#0D3F8A]/25 hover:shadow-[0_20px_56px_rgba(13,63,138,0.15)]"
+                      : "border-slate-200 bg-white hover:border-[#16C36B]/20 hover:shadow-[0_20px_56px_rgba(13,63,138,0.12)]"
+                  }`}
                 >
                   <div className="flex items-center gap-4">
                     <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#16C36B]/12 to-[#16C36B]/6 font-bold text-lg text-[#16C36B] shadow-[0_2px_12px_rgba(22,195,107,0.14)] transition-all duration-300 group-hover:shadow-[0_4px_22px_rgba(22,195,107,0.28)]">
@@ -642,7 +650,8 @@ export default function NorteaReactSite() {
                   </div>
                   <p className="mt-5 leading-8 text-slate-500">{etapa.text}</p>
                 </div>
-              ))}
+                );
+              })}
             </motion.div>
 
             <div className="mt-10">
@@ -681,10 +690,10 @@ export default function NorteaReactSite() {
                 return (
                   <div
                     key={item.title}
-                    className={`group relative rounded-[32px] border p-7 shadow-[0_4px_24px_rgba(15,23,42,0.07)] transition-all duration-300 hover:-translate-y-2 ${
+                    className={`group relative rounded-[32px] border p-7 shadow-[0_6px_28px_rgba(15,23,42,0.09)] transition-all duration-300 hover:-translate-y-2 ${
                       isFinancial
-                        ? "border-[#22de7e]/15 bg-[#F8FBF4]/30 hover:border-[#22de7e]/25 hover:shadow-[0_24px_64px_rgba(34,222,126,0.12)]"
-                        : "border-slate-200/70 bg-white hover:border-[#0D3F8A]/20 hover:shadow-[0_24px_64px_rgba(13,63,138,0.13)]"
+                        ? "border-[#22de7e]/30 bg-[#F0FDF6] hover:border-[#22de7e]/45 hover:shadow-[0_24px_64px_rgba(34,222,126,0.17)]"
+                        : "border-[#0D3F8A]/12 bg-[#F5F8FF] hover:border-[#0D3F8A]/22 hover:shadow-[0_24px_64px_rgba(13,63,138,0.16)]"
                     }`}
                   >
                     <div className="flex items-center justify-between">
@@ -763,7 +772,7 @@ export default function NorteaReactSite() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.6 }}
-                  className="group overflow-hidden rounded-[32px] border border-slate-200/70 bg-white shadow-[0_8px_40px_rgba(15,23,42,0.08)] transition-all duration-300 hover:shadow-[0_24px_64px_rgba(13,63,138,0.12)]"
+                  className="group overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-[0_8px_40px_rgba(15,23,42,0.10)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#0D3F8A]/15 hover:shadow-[0_24px_64px_rgba(13,63,138,0.16)]"
                 >
                   <div className="overflow-hidden">
                     <img
