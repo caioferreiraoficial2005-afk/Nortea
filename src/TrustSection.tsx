@@ -37,7 +37,7 @@ function StatItem({ value, label }: { value: string; label: string }) {
 
 export default function TrustSection() {
   return (
-    <section className="relative bg-[#03091a] overflow-hidden">
+    <section className="relative bg-transparent overflow-hidden">
       {/* Scoped animations */}
       <style>{`
         @keyframes nortea-marquee {
@@ -45,21 +45,24 @@ export default function TrustSection() {
           to { transform: translateX(-50%); }
         }
         .nortea-marquee {
-          animation: nortea-marquee 36s linear infinite;
+          animation: nortea-marquee 40s linear infinite;
+        }
+        .nortea-marquee-item {
+          transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
         }
       `}</style>
 
-      {/* Glow de fundo */}
-      <div className="pointer-events-none absolute left-1/2 top-0 h-[320px] w-[700px] -translate-x-1/2 rounded-full bg-[#0D3F8A]/20 blur-3xl" />
-      <div className="pointer-events-none absolute right-0 bottom-0 h-[240px] w-[400px] rounded-full bg-[#16C36B]/8 blur-3xl" />
+      {/* Glow sutil — complementa o fundo compartilhado */}
+      <div className="pointer-events-none absolute left-1/2 top-0 h-[280px] w-[600px] -translate-x-1/2 rounded-full bg-[#0D3F8A]/15 blur-3xl" />
+      <div className="pointer-events-none absolute right-0 bottom-1/3 h-[200px] w-[360px] rounded-full bg-[#16C36B]/6 blur-3xl" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 py-20 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 py-20 pb-32 lg:px-8">
         {/* Eyebrow */}
         <div className="mb-12 flex flex-col items-center text-center gap-3">
           <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-md">
             <Star className="h-3.5 w-3.5 text-[#16C36B] fill-[#16C36B]" />
             <span className="text-xs font-semibold uppercase tracking-widest text-white/70">
-              Empresas que a Nortea já estruturou
+              Segmentos que ajudamos a crescer
             </span>
           </div>
           <p className="text-white/40 text-sm max-w-md">
@@ -102,7 +105,7 @@ export default function TrustSection() {
 
                 {/* Mini stats */}
                 <div className="grid grid-cols-3 gap-4 text-center">
-                  <StatItem value="3+" label="Anos" />
+                  <StatItem value="1 ano" label="Atuação" />
                   <div className="w-px bg-white/10" />
                   <StatItem value="100%" label="Dedicação" />
                   <div className="w-px bg-white/10" />
@@ -148,7 +151,7 @@ export default function TrustSection() {
                     return (
                       <div
                         key={i}
-                        className="flex items-center gap-2.5 opacity-40 transition-all hover:opacity-100 hover:scale-105 cursor-default"
+                        className="nortea-marquee-item flex items-center gap-2.5 opacity-40 hover:opacity-100 hover:scale-105 cursor-default"
                       >
                         <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#0D3F8A]/40 ring-1 ring-[#0D3F8A]/60">
                           <Icon className="h-4 w-4 text-[#16C36B]" />
@@ -180,7 +183,7 @@ export default function TrustSection() {
                     return (
                       <div
                         key={i}
-                        className="flex items-center gap-2.5 opacity-30 transition-all hover:opacity-100 hover:scale-105 cursor-default"
+                        className="nortea-marquee-item flex items-center gap-2.5 opacity-30 hover:opacity-100 hover:scale-105 cursor-default"
                       >
                         <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#16C36B]/20 ring-1 ring-[#16C36B]/30">
                           <Icon className="h-4 w-4 text-[#16C36B]" />
