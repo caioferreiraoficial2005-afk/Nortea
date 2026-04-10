@@ -83,6 +83,14 @@ function MetricCard({ label, value, tone = "default" }: { label: string; value: 
 }
 
 function ExecutivePreview() {
+  const [started, setStarted] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setStarted(true), 900);
+    return () => clearTimeout(t);
+  }, []);
+  const faturamento = useCountUp(128450, 1400, started, "R$ ");
+  const meta = useCountUp(74, 1400, started);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 32, scale: 0.97 }}
@@ -105,8 +113,8 @@ function ExecutivePreview() {
               </div>
               <div className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/6 px-3 py-1.5 text-xs font-medium text-white/50 backdrop-blur-sm">
                 <span className="relative flex h-1.5 w-1.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#16C36B] opacity-60" />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#16C36B]" />
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white/60 opacity-60" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-white/70" />
                 </span>
                 Nortea Dashboard
               </div>
@@ -116,7 +124,7 @@ function ExecutivePreview() {
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
               <div className="rounded-3xl border border-white/8 bg-[#111113] p-5">
                 <p className="text-sm text-white/40">Faturamento projetado</p>
-                <p className="mt-2 text-3xl font-bold text-white">R$ 128.450</p>
+                <p className="mt-2 text-3xl font-bold text-white">{faturamento}</p>
                 <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-white/8">
                   <motion.div
                     initial={{ width: 0 }}
@@ -125,7 +133,7 @@ function ExecutivePreview() {
                     className="h-full rounded-full bg-white/50"
                   />
                 </div>
-                <p className="mt-2.5 text-xs text-white/30">74% da meta mensal atingida</p>
+                <p className="mt-2.5 text-xs text-white/30">{meta}% da meta mensal atingida</p>
               </div>
 
               <div className="rounded-3xl border border-white/8 bg-[#111113] p-5">
@@ -275,7 +283,7 @@ export default function NorteaReactSite() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const whatsappNumber = "5582981401405";
+  const whatsappNumber = "558288224653";
   const whatsappMessage = encodeURIComponent("Olá, vim pelo site da Nortea e gostaria de conversar sobre a estruturação da minha empresa.");
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
@@ -363,21 +371,11 @@ export default function NorteaReactSite() {
       <main>
 
         {/* ══ DARK ZONE: fundo único compartilhado ══ */}
-        <div
-          className="relative overflow-hidden"
-          style={{
-            backgroundImage: "url('/images/hero-bg.svg')",
-            backgroundSize: "cover",
-            backgroundPosition: "center top",
-            backgroundRepeat: "no-repeat",
-          }}
-        >
-          {/* ── Overlays globais — aplicados UMA VEZ para as duas seções ── */}
-          <div className="pointer-events-none absolute inset-0 bg-[#02070e]/55" />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#02070e]/50 via-transparent to-transparent" />
-          {/* Glows globais */}
-          <div className="pointer-events-none absolute right-0 top-[30%] h-[700px] w-[700px] -translate-y-1/2 rounded-full bg-[#0D3F8A]/20 blur-3xl" />
-          <div className="pointer-events-none absolute right-[-80px] top-[30%] h-[440px] w-[440px] -translate-y-1/2 rounded-full bg-[#16C36B]/8 blur-2xl" />
+        <div className="relative overflow-hidden bg-[#09090b]">
+          {/* Subtle dot grid texture */}
+          <div className="pointer-events-none absolute inset-0 opacity-[0.025]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "28px 28px" }} />
+          {/* Subtle neutral glow */}
+          <div className="pointer-events-none absolute right-0 top-[30%] h-[700px] w-[700px] -translate-y-1/2 rounded-full bg-white/4 blur-3xl" />
 
         {/* ── HERO ── */}
         <section className="relative overflow-hidden">
@@ -394,8 +392,8 @@ export default function NorteaReactSite() {
               {/* Badge */}
               <div className="mb-7 inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm text-white/85 backdrop-blur-md">
                 <span className="relative flex h-2 w-2 shrink-0">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#16C36B] opacity-70" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[#16C36B]" />
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white/60 opacity-70" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-white/70" />
                 </span>
                 <span className="font-medium">Estruturação empresarial com tecnologia e gestão</span>
               </div>
@@ -405,7 +403,7 @@ export default function NorteaReactSite() {
                 Empresas que vendem,{" "}
                 <span className="text-white/55">mas operam no improviso,</span>{" "}
                 <br className="hidden sm:block" />
-                <span className="text-[#16C36B]">não crescem</span>{" "}
+                <span className="text-white">não crescem</span>{" "}
                 <span className="text-white/55">com consistência.</span>
               </h1>
 
@@ -626,12 +624,12 @@ export default function NorteaReactSite() {
                   key={etapa.step}
                   className={`group rounded-[32px] border p-8 transition-all duration-300 hover:-translate-y-1.5 ${
                     isBlue
-                      ? "border-[#1a4fa0]/50 bg-gradient-to-br from-[#0D3F8A] to-[#071f52] shadow-[0_8px_32px_rgba(13,63,138,0.50)] hover:shadow-[0_20px_56px_rgba(13,63,138,0.65)]"
-                      : "border-white/10 bg-white/6 backdrop-blur-sm shadow-[0_6px_32px_rgba(0,0,0,0.25)] hover:border-white/20 hover:shadow-[0_20px_56px_rgba(22,195,107,0.08)]"
+                      ? "border-white/8 bg-[#111113] shadow-[0_8px_32px_rgba(0,0,0,0.35)] hover:border-white/16 hover:shadow-[0_20px_56px_rgba(0,0,0,0.50)]"
+                      : "border-white/10 bg-white/6 backdrop-blur-sm shadow-[0_6px_32px_rgba(0,0,0,0.25)] hover:border-white/20 hover:shadow-[0_20px_56px_rgba(0,0,0,0.40)]"
                   }`}
                 >
                   <div className="flex items-center gap-4">
-                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#16C36B]/20 to-[#16C36B]/10 font-bold text-lg text-[#16C36B] shadow-[0_2px_12px_rgba(22,195,107,0.20)] transition-all duration-300 group-hover:shadow-[0_4px_22px_rgba(22,195,107,0.35)]">
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/8 font-bold text-lg text-white shadow-[0_2px_12px_rgba(0,0,0,0.30)] transition-all duration-300 group-hover:shadow-[0_4px_22px_rgba(255,255,255,0.10)] ring-1 ring-white/10">
                       {etapa.step}
                     </div>
                     <h3 className="text-xl font-bold text-white">{etapa.title}</h3>
@@ -746,7 +744,7 @@ export default function NorteaReactSite() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.6 }}
-                  className="group overflow-hidden rounded-[32px] border border-white/10 bg-[#0a1830] shadow-[0_8px_40px_rgba(0,0,0,0.40)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#16C36B]/25 hover:shadow-[0_24px_64px_rgba(22,195,107,0.12)]"
+                  className="group overflow-hidden rounded-[32px] border border-white/10 bg-[#111113] shadow-[0_8px_40px_rgba(0,0,0,0.40)] transition-all duration-300 hover:-translate-y-1.5 hover:border-white/20 hover:shadow-[0_24px_64px_rgba(0,0,0,0.55)]"
                 >
                   <div className="overflow-hidden">
                     <img
@@ -757,7 +755,7 @@ export default function NorteaReactSite() {
                     />
                   </div>
                   <div className="p-8">
-                    <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#16C36B]">Cofundador</p>
+                    <p className="text-sm font-semibold uppercase tracking-[0.2em] text-white/45">Cofundador</p>
                     <h3 className="mt-2 text-2xl font-bold text-white">{f.name}</h3>
                     {f.bio.map((p, i) => (
                       <p key={i} className={`${i === 0 ? "mt-5" : "mt-4"} leading-8 text-white/55`}>{p}</p>

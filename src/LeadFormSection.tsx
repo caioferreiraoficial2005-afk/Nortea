@@ -30,7 +30,7 @@ const FORM_EMPTY: FormData = {
 const BASE =
   "w-full rounded-2xl border px-4 py-3.5 text-sm text-slate-800 outline-none transition-all duration-200 placeholder:text-slate-400";
 const VALID =
-  "border-slate-200 bg-white hover:border-slate-300 focus:border-[#22de7e] focus:ring-2 focus:ring-[#22de7e]/20 focus:shadow-[0_0_0_4px_rgba(34,222,126,0.08)]";
+  "border-slate-200 bg-white hover:border-slate-300 focus:border-slate-400 focus:ring-2 focus:ring-slate-300/30 focus:shadow-[0_0_0_4px_rgba(0,0,0,0.06)]";
 const ERROR =
   "border-red-400 bg-red-50/60 focus:border-red-400 focus:ring-2 focus:ring-red-400/20";
 
@@ -50,7 +50,7 @@ function Field({
       <label className="text-sm font-semibold text-slate-700">
         {label}{" "}
         {required ? (
-          <span className="text-[#22de7e]">*</span>
+          <span className="text-slate-500">*</span>
         ) : (
           <span className="font-normal text-slate-400">(opcional)</span>
         )}
@@ -133,12 +133,11 @@ ${form.mensagem}`;
   };
 
   return (
-    <section id="diagnostico" className="relative overflow-hidden bg-gradient-to-b from-[#020c1f] to-[#061428] py-24">
+    <section id="diagnostico" className="relative overflow-hidden bg-[#0d0d0f] py-24">
       {/* Dot grid */}
-      <div className="pointer-events-none absolute inset-0 opacity-[0.035]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "28px 28px" }} />
-      {/* Glows */}
-      <div className="pointer-events-none absolute right-0 top-0 h-[400px] w-[400px] rounded-full bg-[#16C36B]/8 blur-3xl" />
-      <div className="pointer-events-none absolute left-0 bottom-0 h-[300px] w-[400px] rounded-full bg-[#0D3F8A]/15 blur-3xl" />
+      <div className="pointer-events-none absolute inset-0 opacity-[0.025]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "28px 28px" }} />
+      {/* Subtle neutral glow */}
+      <div className="pointer-events-none absolute right-0 top-0 h-[400px] w-[400px] rounded-full bg-white/3 blur-3xl" />
 
       <div className="relative z-10 mx-auto max-w-3xl px-6 lg:px-8">
 
@@ -162,8 +161,7 @@ ${form.mensagem}`;
 
         {/* Card — branco sobre escuro: máximo contraste para leitura do formulário */}
         <div className="relative overflow-hidden rounded-[36px] border border-white/10 bg-white p-8 shadow-[0_24px_80px_rgba(0,0,0,0.5),0_2px_8px_rgba(34,222,126,0.08)] sm:p-10">
-          <div className="pointer-events-none absolute right-0 top-0 h-56 w-56 rounded-full bg-[#22de7e]/6 blur-3xl" />
-          <div className="pointer-events-none absolute bottom-0 left-0 h-40 w-40 rounded-full bg-[#0D3F8A]/4 blur-3xl" />
+          <div className="pointer-events-none absolute right-0 top-0 h-56 w-56 rounded-full bg-white/3 blur-3xl" />
 
           <form onSubmit={handleSubmit} noValidate className="relative">
             <div className="grid gap-5 sm:grid-cols-2">
