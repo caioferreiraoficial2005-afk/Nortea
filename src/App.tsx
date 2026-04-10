@@ -16,6 +16,7 @@ import {
   Workflow,
 } from "lucide-react";
 import TrustSection from "./TrustSection";
+import HeroBg from "./HeroBg";
 
 function useCountUp(end: number, duration = 1400, startWhen = true, prefix = "", suffix = "") {
   const [value, setValue] = useState(0);
@@ -370,18 +371,12 @@ export default function NorteaReactSite() {
       <main>
 
         {/* ══ DARK ZONE: fundo único compartilhado ══ */}
-        <div
-          className="relative overflow-hidden"
-          style={{
-            backgroundImage: "url('/images/hero/imagemdofundodohero.png')",
-            backgroundSize: "cover",
-            backgroundPosition: "center top",
-            backgroundRepeat: "no-repeat",
-          }}
-        >
-          {/* Overlays globais */}
-          <div className="pointer-events-none absolute inset-0 bg-[#02070e]/70" />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#02070e]/60 via-transparent to-transparent" />
+        <div className="relative overflow-hidden bg-[#02070e]">
+          {/* SVG hero background */}
+          <HeroBg />
+          {/* Overlay para escurecer e garantir legibilidade do texto */}
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#02070e]/85 via-[#02070e]/50 to-transparent" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#02070e]/60 via-transparent to-transparent" />
 
         {/* ── HERO ── */}
         <section className="relative overflow-hidden">
