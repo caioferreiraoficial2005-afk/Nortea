@@ -57,12 +57,12 @@ function SectionTitle({ eyebrow, title, description, light = false }: { eyebrow:
 function LogoMark() {
   return (
     <img
-      src="/images/logo/logo nova nortea.png"
+      src="/images/logo/versao retangulo.png"
       alt="Nortea"
       decoding="async"
       fetchPriority="high"
       loading="eager"
-      className="h-14 w-auto sm:h-16"
+      className="h-11 w-auto sm:h-14"
     />
   );
 }
