@@ -347,7 +347,7 @@ export default function NorteaReactSite() {
     <div className="min-h-screen bg-[#09090b] text-white antialiased">
 
       {/* ── HEADER ── */}
-      <header className={`sticky top-0 z-40 bg-[#09090b] transition-transform duration-300 ease-in-out will-change-transform ${headerVisible ? "translate-y-0" : "-translate-y-full"}`}>
+      <header className={`sticky top-0 z-40 bg-black transition-transform duration-300 ease-in-out will-change-transform ${headerVisible ? "translate-y-0" : "-translate-y-full"}`}>
         <div className="border-b border-white/8">
           <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 lg:px-8">
             <LogoMark />
@@ -394,14 +394,6 @@ export default function NorteaReactSite() {
               transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
               className="relative z-10"
             >
-              {/* Logo */}
-              <img
-                src="/images/logo nova nortea.png"
-                alt="Nortea"
-                decoding="async"
-                className="mb-8 h-14 w-auto"
-              />
-
               {/* Badge */}
               <div className="mb-7 inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm text-white/85 backdrop-blur-md">
                 <span className="relative flex h-2 w-2 shrink-0">
