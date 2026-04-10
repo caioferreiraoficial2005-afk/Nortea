@@ -45,13 +45,17 @@ export default function TrustSection() {
         }
         .nortea-marquee {
           animation: nortea-marquee 40s linear infinite;
+          will-change: transform;
         }
         .nortea-marquee-item {
-          transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+          transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .nortea-marquee { animation: none; }
         }
       `}</style>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 py-20 pb-24 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
         {/* Eyebrow */}
         <div className="mb-12 flex flex-col items-center text-center gap-3">
           <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-md">
@@ -69,7 +73,7 @@ export default function TrustSection() {
 
           {/* ── COLUNA ESQUERDA: Stats card ── */}
           <div className="lg:col-span-4">
-            <div className="relative overflow-hidden rounded-[28px] border border-white/10 bg-white/5 p-7 backdrop-blur-xl shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
+            <div className="relative overflow-hidden rounded-[28px] border border-white/10 bg-white/5 p-7 backdrop-blur-sm shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
               <div className="relative z-10">
                 {/* Métrica principal */}
                 <div className="flex items-center gap-4 mb-7">
@@ -124,7 +128,7 @@ export default function TrustSection() {
 
           {/* ── COLUNA DIREITA: Marquee card ── */}
           <div className="lg:col-span-8 flex flex-col justify-center">
-            <div className="relative overflow-hidden rounded-[28px] border border-white/10 bg-white/5 py-8 backdrop-blur-xl shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
+            <div className="relative overflow-hidden rounded-[28px] border border-white/10 bg-white/5 py-8 backdrop-blur-sm shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
               <h3 className="mb-6 px-8 text-sm font-medium text-white/35 uppercase tracking-widest">
                 Perfis de empresa que atendemos
               </h3>

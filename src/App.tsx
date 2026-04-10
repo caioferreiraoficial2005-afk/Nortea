@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
   BarChart3,
@@ -59,7 +59,9 @@ function LogoMark() {
       src="/images/logo nova nortea.png"
       alt="Nortea"
       decoding="async"
-      className="h-11 w-auto"
+      fetchPriority="high"
+      loading="eager"
+      className="h-9 w-auto sm:h-11"
     />
   );
 }
@@ -264,23 +266,30 @@ function DashboardDemo() {
 
 export default function NorteaReactSite() {
   const [headerVisible, setHeaderVisible] = useState(true);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
+
+  const onScroll = useCallback(() => {
+    const currentY = window.scrollY;
+    const lastY = (window as any)._lastScrollY ?? currentY;
+    if (currentY < 10) setHeaderVisible(true);
+    else if (currentY > lastY) setHeaderVisible(false);
+    else setHeaderVisible(true);
+    (window as any)._lastScrollY = currentY;
+  }, []);
 
   useEffect(() => {
-    let lastY = window.scrollY;
-    const onScroll = () => {
-      const currentY = window.scrollY;
-      if (currentY < 10) {
-        setHeaderVisible(true);
-      } else if (currentY > lastY) {
-        setHeaderVisible(false);
-      } else {
-        setHeaderVisible(true);
+    (window as any)._lastScrollY = window.scrollY;
+    let ticking = false;
+    const handler = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => { onScroll(); ticking = false; });
+        ticking = true;
       }
-      lastY = currentY;
     };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    window.addEventListener("scroll", handler, { passive: true });
+    return () => window.removeEventListener("scroll", handler);
+  }, [onScroll]);
 
   const whatsappNumber = "558288224653";
   const whatsappMessage = encodeURIComponent("Olá, vim pelo site da Nortea e gostaria de conversar sobre a estruturação da minha empresa.");
@@ -349,22 +358,59 @@ export default function NorteaReactSite() {
       {/* ── HEADER ── */}
       <header className={`sticky top-0 z-40 bg-black transition-transform duration-300 ease-in-out will-change-transform ${headerVisible ? "translate-y-0" : "-translate-y-full"}`}>
         <div className="border-b border-white/8">
-          <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 lg:px-8">
+          <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:h-16 sm:px-6 lg:px-8">
             <LogoMark />
             <nav className="hidden items-center gap-8 text-sm font-medium text-white/55 lg:flex">
               <a href="#servicos" className="transition-colors hover:text-white">Serviços</a>
               <a href="#processo" className="transition-colors hover:text-white">Processo</a>
               <a href="#fundadores" className="transition-colors hover:text-white">Fundadores</a>
             </nav>
-            <a
-              href={whatsappLink}
-              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-5 py-[10px] text-sm font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/14 hover:border-white/30"
-            >
-              <MessageCircle className="h-4 w-4" />
-              Falar com a Nortea
-            </a>
+            <div className="flex items-center gap-3">
+              <a
+                href={whatsappLink}
+                className="hidden items-center gap-2 rounded-full border border-white/15 bg-white/8 px-5 py-[10px] text-sm font-semibold text-white transition-all hover:bg-white/14 hover:border-white/30 sm:inline-flex"
+              >
+                <MessageCircle className="h-4 w-4" />
+                Falar com a Nortea
+              </a>
+              {/* Hamburger — mobile only */}
+              <button
+                onClick={() => setMobileMenuOpen((o) => !o)}
+                className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white lg:hidden"
+                aria-label="Menu"
+              >
+                <span className={`block h-px w-5 bg-white transition-all duration-200 ${mobileMenuOpen ? "translate-y-[3px] rotate-45" : "-translate-y-[3px]"}`} />
+                <span className={`absolute block h-px w-5 bg-white transition-all duration-200 ${mobileMenuOpen ? "opacity-0" : "opacity-100"}`} />
+                <span className={`block h-px w-5 bg-white transition-all duration-200 ${mobileMenuOpen ? "-translate-y-[3px] -rotate-45" : "translate-y-[3px]"}`} />
+              </button>
+            </div>
           </div>
         </div>
+        {/* Mobile nav drawer */}
+        {mobileMenuOpen && (
+          <div className="border-b border-white/8 bg-black px-4 pb-4 lg:hidden">
+            <nav className="flex flex-col gap-1 pt-2">
+              {[["#servicos", "Serviços"], ["#processo", "Processo"], ["#fundadores", "Fundadores"]].map(([href, label]) => (
+                <a
+                  key={href}
+                  href={href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="rounded-xl px-4 py-3 text-sm font-medium text-white/60 transition-colors hover:bg-white/5 hover:text-white"
+                >
+                  {label}
+                </a>
+              ))}
+              <a
+                href={whatsappLink}
+                onClick={() => setMobileMenuOpen(false)}
+                className="mt-2 flex items-center justify-center gap-2 rounded-xl bg-white/8 px-4 py-3 text-sm font-semibold text-white"
+              >
+                <MessageCircle className="h-4 w-4" />
+                Falar com a Nortea
+              </a>
+            </nav>
+          </div>
+        )}
       </header>
 
       <main>
@@ -376,6 +422,9 @@ export default function NorteaReactSite() {
             src="/images/hero.png"
             alt=""
             aria-hidden="true"
+            fetchPriority="high"
+            loading="eager"
+            decoding="async"
             className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-60"
           />
           {/* Overlay para escurecer e garantir legibilidade do texto */}
@@ -385,13 +434,13 @@ export default function NorteaReactSite() {
         {/* ── HERO ── */}
         <section className="relative overflow-hidden">
 
-          <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 py-24 lg:grid-cols-2 lg:px-8 lg:py-32">
+          <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 sm:px-6 sm:py-20 lg:grid-cols-2 lg:gap-14 lg:px-8 lg:py-32">
 
             {/* LEFT — text block */}
             <motion.div
-              initial={{ opacity: 0, x: -24 }}
+              initial={shouldReduceMotion ? false : { opacity: 0, x: -24 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
               className="relative z-10"
             >
               {/* Badge */}
@@ -488,7 +537,7 @@ export default function NorteaReactSite() {
 
         {/* ── PROBLEMA ── */}
         <section className="bg-[#f5f5f5]">
-          <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
             <SectionTitle
               light
               eyebrow="Reconhece isso?"
@@ -496,11 +545,11 @@ export default function NorteaReactSite() {
               description="Muitas empresas vendem e trabalham duro — mas continuam perdendo clientes no WhatsApp, sem controle financeiro, crescendo no improviso."
             />
             <motion.div
-              className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-4"
-              initial={{ opacity: 0, y: 16 }}
+              className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4"
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.4 }}
             >
               {[
                 { text: "Clientes perdidos no WhatsApp por falta de processo" },
@@ -537,14 +586,14 @@ export default function NorteaReactSite() {
         {/* ── SERVIÇOS ── */}
         <section id="servicos" className="relative bg-[#0d0d0f]">
           <div className="pointer-events-none absolute inset-0 opacity-[0.025]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "28px 28px" }} />
-          <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
             <SectionTitle
               eyebrow="Como atuamos"
               title={<>3 pilares para estruturar<br className="hidden sm:block" /> sua empresa de vez</>}
               description="A Nortea não age de forma isolada. Integramos estrutura digital, automação operacional e gestão financeira para transformar empresas que operam no improviso em negócios organizados."
             />
 
-            <motion.div className="mt-14 grid gap-6 lg:grid-cols-3" initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.6 }}>
+            <motion.div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.15 }} transition={{ duration: 0.5 }}>
               {pilares.map((item, idx) => {
                 const Icon = item.icon;
                 const isFirst = idx === 0;
@@ -585,7 +634,7 @@ export default function NorteaReactSite() {
 
         {/* ── FINANCEIRO ── */}
         <section className="bg-[#f5f5f5]">
-          <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
             <SectionTitle
               light
               eyebrow="Gestão financeira"
@@ -598,11 +647,11 @@ export default function NorteaReactSite() {
             </div>
 
             <motion.div
-              className="mt-14 grid gap-4 md:grid-cols-2 xl:grid-cols-4"
-              initial={{ opacity: 0, y: 16 }}
+              className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4"
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.4 }}
             >
               {beneficios.map((item) => (
                 <div
@@ -631,9 +680,8 @@ export default function NorteaReactSite() {
 
         {/* ── PROCESSO ── */}
         <section id="processo" className="relative overflow-hidden bg-[#0d0d0f]">
-          {/* Dot grid texture */}
           <div className="pointer-events-none absolute inset-0 opacity-[0.025]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "28px 28px" }} />
-          <div className="relative z-10 mx-auto max-w-7xl px-6 py-24 lg:px-8">
+          <div className="relative z-10 mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
             <SectionTitle
               eyebrow="Processo"
               title="Como a Nortea estrutura sua empresa"
@@ -641,11 +689,11 @@ export default function NorteaReactSite() {
             />
 
             <motion.div
-              className="mt-14 grid gap-6 lg:grid-cols-2"
-              initial={{ opacity: 0, y: 20 }}
+              className="mt-10 grid gap-5 lg:grid-cols-2"
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.55 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.45 }}
             >
               {etapas.map((etapa, idx) => {
                 const isBlue = idx % 2 === 1;
@@ -686,7 +734,7 @@ export default function NorteaReactSite() {
 
         {/* ── ENTREGAS ── */}
         <section className="bg-white">
-          <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
             <SectionTitle
               light
               eyebrow="O que entregamos"
@@ -695,11 +743,11 @@ export default function NorteaReactSite() {
             />
 
             <motion.div
-              className="mt-14 grid gap-5 md:grid-cols-2 xl:grid-cols-3"
-              initial={{ opacity: 0, y: 20 }}
+              className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-3"
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.4 }}
             >
               {entregas.map((item) => {
                 const Icon = item.icon;
@@ -738,7 +786,7 @@ export default function NorteaReactSite() {
         {/* ── FUNDADORES ── */}
         <section id="fundadores" className="relative overflow-hidden bg-[#0d0d0f]">
           <div className="pointer-events-none absolute inset-0 opacity-[0.02]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "28px 28px" }} />
-          <div className="relative z-10 mx-auto max-w-7xl px-6 py-24 lg:px-8">
+          <div className="relative z-10 mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
             <SectionTitle
               eyebrow="Fundadores"
               title="Quem está por trás da Nortea"
@@ -770,10 +818,10 @@ export default function NorteaReactSite() {
               ].map((f) => (
                 <motion.div
                   key={f.name}
-                  initial={{ opacity: 0, y: 24 }}
+                  initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{ duration: 0.5 }}
                   className="group overflow-hidden rounded-[32px] border border-white/10 bg-[#111113] shadow-[0_8px_40px_rgba(0,0,0,0.40)] transition-all duration-300 hover:-translate-y-1.5 hover:border-white/20 hover:shadow-[0_24px_64px_rgba(0,0,0,0.55)]"
                 >
                   <div className="overflow-hidden">
@@ -810,8 +858,8 @@ export default function NorteaReactSite() {
         </section>
 
         {/* ── CTA FINAL ── */}
-        <section className="bg-[#09090b] py-24">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <section className="bg-[#09090b] py-14 sm:py-20 lg:py-24">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="relative overflow-hidden rounded-[40px] border border-white/10 bg-[#111113] px-10 py-16 text-center shadow-[0_32px_100px_rgba(0,0,0,0.55)] sm:px-16">
               <div className="pointer-events-none absolute inset-0 opacity-[0.025]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "32px 32px" }} />
               <div className="relative">
