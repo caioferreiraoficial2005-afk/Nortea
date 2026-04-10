@@ -1,64 +1,80 @@
 export default function HeroBg() {
-  // Chart line points — rising trend with volatility (normalized 0–1)
-  const points = [
-    [0.0, 0.82],
-    [0.04, 0.78],
-    [0.08, 0.80],
-    [0.12, 0.74],
-    [0.16, 0.70],
-    [0.20, 0.72],
-    [0.24, 0.65],
-    [0.28, 0.60],
-    [0.32, 0.63],
-    [0.36, 0.55],
-    [0.40, 0.50],
-    [0.44, 0.53],
-    [0.48, 0.44],
-    [0.52, 0.40],
-    [0.56, 0.43],
-    [0.60, 0.35],
-    [0.64, 0.30],
-    [0.68, 0.33],
-    [0.72, 0.25],
-    [0.76, 0.20],
-    [0.80, 0.22],
-    [0.84, 0.16],
-    [0.88, 0.12],
-    [0.92, 0.15],
-    [0.96, 0.10],
-    [1.0,  0.06],
+  const W = 1400;
+  const H = 800;
+
+  // ── Linha de gráfico principal (tendência de crescimento) ──
+  const chartPoints: [number, number][] = [
+    [0.0,  0.88],
+    [0.05, 0.84],
+    [0.10, 0.86],
+    [0.15, 0.79],
+    [0.20, 0.75],
+    [0.25, 0.77],
+    [0.30, 0.69],
+    [0.35, 0.65],
+    [0.40, 0.67],
+    [0.45, 0.58],
+    [0.50, 0.53],
+    [0.55, 0.56],
+    [0.60, 0.47],
+    [0.65, 0.42],
+    [0.70, 0.44],
+    [0.75, 0.35],
+    [0.80, 0.30],
+    [0.85, 0.32],
+    [0.90, 0.23],
+    [0.95, 0.18],
+    [1.00, 0.14],
   ];
 
-  const W = 1200;
-  const H = 700;
+  // Linha secundária (mais suave, ligeiramente abaixo)
+  const chart2Points: [number, number][] = chartPoints.map(([x, y]) => [x, Math.min(y + 0.10, 0.98)]);
 
-  const toSvg = ([x, y]: number[]) =>
-    `${x * W},${y * H}`;
+  const px = (x: number) => x * W;
+  const py = (y: number) => y * H;
 
-  const linePath = "M " + points.map(toSvg).join(" L ");
+  const toPath = (pts: [number, number][]) =>
+    "M " + pts.map(([x, y]) => `${px(x)},${py(y)}`).join(" L ");
 
-  // Area fill path (closed below)
+  const linePath  = toPath(chartPoints);
+  const line2Path = toPath(chart2Points);
+
+  // Área fill abaixo da linha principal
   const areaPath =
     linePath +
-    ` L ${W},${H} L 0,${H} Z`;
+    ` L ${px(1)},${py(1)} L ${px(0)},${py(1)} Z`;
 
-  // Bar chart columns in the background
-  const bars = [0.05, 0.12, 0.19, 0.26, 0.33, 0.40, 0.47, 0.54, 0.61, 0.68, 0.75, 0.82, 0.89, 0.96];
-  const barHeights = [0.35, 0.50, 0.42, 0.60, 0.48, 0.65, 0.55, 0.70, 0.58, 0.75, 0.62, 0.80, 0.68, 0.88];
+  // ── Barras verticais (volume / candles) ──
+  const bars = Array.from({ length: 18 }, (_, i) => {
+    const x = 0.04 + i * 0.054;
+    const seed = (i * 137 + 31) % 100;
+    const h = 0.15 + (seed / 100) * 0.38;
+    return { x, h, w: 0.022 };
+  });
 
-  // Scatter particles
-  const particles = Array.from({ length: 40 }, (_, i) => ({
-    cx: (((i * 137.5) % 100) / 100) * W,
-    cy: (((i * 97.3) % 100) / 100) * H,
-    r: 1 + ((i * 53) % 3),
-    opacity: 0.15 + ((i * 31) % 40) / 100,
-    delay: ((i * 0.17) % 2).toFixed(2),
-    dur: (1.5 + ((i * 0.23) % 1.5)).toFixed(2),
-  }));
+  // ── Grid ──
+  const vLines = [0.15, 0.30, 0.45, 0.60, 0.75, 0.90];
+  const hLines = [0.25, 0.50, 0.75];
 
-  // Vertical grid lines
-  const gridLines = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9];
-  const gridLinesH = [0.2, 0.4, 0.6, 0.8];
+  // ── Partículas ──
+  const particles = Array.from({ length: 50 }, (_, i) => {
+    const seed1 = (i * 137.508) % 1;
+    const seed2 = (i * 97.333) % 1;
+    return {
+      cx: seed1 * W,
+      cy: seed2 * H,
+      r: 0.8 + ((i * 53) % 3) * 0.4,
+      opacity: 0.06 + ((i * 29) % 20) / 100,
+      dur: `${2 + ((i * 23) % 30) / 10}s`,
+      delay: `${((i * 17) % 20) / 10}s`,
+    };
+  });
+
+  // ── Linhas diagonais de detalhe (textura) ──
+  const diagLines = Array.from({ length: 8 }, (_, i) => {
+    const base = 0.08 + i * 0.12;
+    return { x1: base, y1: 0, x2: base + 0.25, y2: 1 };
+  });
 
   return (
     <svg
@@ -69,84 +85,106 @@ export default function HeroBg() {
       aria-hidden="true"
     >
       <defs>
-        {/* Main line glow */}
-        <filter id="glow-line" x="-20%" y="-20%" width="140%" height="140%">
-          <feGaussianBlur stdDeviation="4" result="blur1" />
-          <feGaussianBlur stdDeviation="10" result="blur2" />
+        {/* Glow para linha principal */}
+        <filter id="hbg-glow-main" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="6" result="b1" />
+          <feGaussianBlur stdDeviation="16" result="b2" />
           <feMerge>
-            <feMergeNode in="blur2" />
-            <feMergeNode in="blur1" />
+            <feMergeNode in="b2" />
+            <feMergeNode in="b1" />
             <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
 
-        {/* Secondary softer glow */}
-        <filter id="glow-soft" x="-30%" y="-30%" width="160%" height="160%">
-          <feGaussianBlur stdDeviation="18" result="blur" />
+        {/* Glow suave para barras */}
+        <filter id="hbg-glow-bar" x="-20%" y="-10%" width="140%" height="120%">
+          <feGaussianBlur stdDeviation="4" result="b" />
           <feMerge>
-            <feMergeNode in="blur" />
+            <feMergeNode in="b" />
             <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
 
-        {/* Bar glow */}
-        <filter id="glow-bar">
-          <feGaussianBlur stdDeviation="3" result="blur" />
+        {/* Glow para partículas */}
+        <filter id="hbg-glow-dot">
+          <feGaussianBlur stdDeviation="2" result="b" />
           <feMerge>
-            <feMergeNode in="blur" />
+            <feMergeNode in="b" />
             <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
 
-        {/* Gradient for area fill */}
-        <linearGradient id="area-fill" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#ffffff" stopOpacity="0.07" />
-          <stop offset="60%" stopColor="#ffffff" stopOpacity="0.02" />
+        {/* Gradiente área fill */}
+        <linearGradient id="hbg-area" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stopColor="#ffffff" stopOpacity="0.055" />
+          <stop offset="50%"  stopColor="#ffffff" stopOpacity="0.018" />
           <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
         </linearGradient>
 
-        {/* Gradient for bar fill */}
-        <linearGradient id="bar-fill" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#ff3a3a" stopOpacity="0.55" />
-          <stop offset="100%" stopColor="#ff3a3a" stopOpacity="0.05" />
+        {/* Gradiente barras */}
+        <linearGradient id="hbg-bar" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stopColor="#ffffff" stopOpacity="0.22" />
+          <stop offset="100%" stopColor="#ffffff" stopOpacity="0.02" />
         </linearGradient>
 
-        {/* Overall scene fade-in */}
-        <clipPath id="scene-clip">
-          <rect width={W} height={H} />
-        </clipPath>
+        {/* Vignette lateral esquerda — mantém texto legível */}
+        <linearGradient id="hbg-vignette" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"   stopColor="#02070e" stopOpacity="1" />
+          <stop offset="45%"  stopColor="#02070e" stopOpacity="0.6" />
+          <stop offset="70%"  stopColor="#02070e" stopOpacity="0.1" />
+          <stop offset="100%" stopColor="#02070e" stopOpacity="0" />
+        </linearGradient>
+
+        {/* Vignette vertical (topo e base) */}
+        <linearGradient id="hbg-vignette-v" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stopColor="#02070e" stopOpacity="0.5" />
+          <stop offset="20%"  stopColor="#02070e" stopOpacity="0" />
+          <stop offset="80%"  stopColor="#02070e" stopOpacity="0" />
+          <stop offset="100%" stopColor="#02070e" stopOpacity="0.7" />
+        </linearGradient>
       </defs>
 
-      {/* ── Background grid ── */}
-      <g opacity="0.06" stroke="#ffffff" strokeWidth="0.5">
-        {gridLines.map((x) => (
-          <line key={x} x1={x * W} y1={0} x2={x * W} y2={H} />
+      {/* ── 1. Grid de fundo ── */}
+      <g stroke="#ffffff" strokeWidth="0.5" opacity="0.04">
+        {vLines.map((x) => (
+          <line key={`v${x}`} x1={px(x)} y1={0} x2={px(x)} y2={H} />
         ))}
-        {gridLinesH.map((y) => (
-          <line key={y} x1={0} y1={y * H} x2={W} y2={y * H} />
+        {hLines.map((y) => (
+          <line key={`h${y}`} x1={0} y1={py(y)} x2={W} y2={py(y)} />
         ))}
       </g>
 
-      {/* ── Bar chart (background layer) ── */}
-      <g filter="url(#glow-bar)">
-        {bars.map((x, i) => {
-          const bh = barHeights[i] * H * 0.55;
-          const bw = W * 0.03;
+      {/* ── 2. Linhas diagonais de textura (muito sutis) ── */}
+      <g stroke="#ffffff" strokeWidth="0.4" opacity="0.025">
+        {diagLines.map((l, i) => (
+          <line
+            key={i}
+            x1={px(l.x1)} y1={py(l.y1)}
+            x2={px(l.x2)} y2={py(l.y2)}
+          />
+        ))}
+      </g>
+
+      {/* ── 3. Barras de volume ── */}
+      <g filter="url(#hbg-glow-bar)">
+        {bars.map((b, i) => {
+          const barH = b.h * H * 0.60;
+          const barW = b.w * W;
           return (
             <rect
               key={i}
-              x={x * W - bw / 2}
-              y={H - bh}
-              width={bw}
-              height={bh}
-              fill="url(#bar-fill)"
+              x={px(b.x) - barW / 2}
+              y={H - barH}
+              width={barW}
+              height={barH}
+              fill="url(#hbg-bar)"
               rx="2"
             >
               <animate
                 attributeName="opacity"
-                values="0.4;0.7;0.4"
-                dur={`${2 + (i % 3) * 0.5}s`}
-                begin={`${(i * 0.15).toFixed(2)}s`}
+                values="0.5;0.9;0.5"
+                dur={`${2.5 + (i % 4) * 0.4}s`}
+                begin={`${(i * 0.12).toFixed(2)}s`}
                 repeatCount="indefinite"
               />
             </rect>
@@ -154,90 +192,126 @@ export default function HeroBg() {
         })}
       </g>
 
-      {/* ── Area fill under the line ── */}
-      <path d={areaPath} fill="url(#area-fill)" clipPath="url(#scene-clip)" />
+      {/* ── 4. Área fill abaixo da linha principal ── */}
+      <path d={areaPath} fill="url(#hbg-area)" />
 
-      {/* ── Secondary line (white, soft) ── */}
+      {/* ── 5. Linha secundária (ghost / trailing) ── */}
+      <path
+        d={line2Path}
+        fill="none"
+        stroke="#ffffff"
+        strokeWidth="1"
+        strokeOpacity="0.08"
+        strokeDasharray="6 8"
+      />
+
+      {/* ── 6. Linha principal — glow externo ── */}
       <path
         d={linePath}
         fill="none"
         stroke="#ffffff"
-        strokeWidth="1"
-        strokeOpacity="0.18"
-        filter="url(#glow-soft)"
-        clipPath="url(#scene-clip)"
+        strokeWidth="8"
+        strokeOpacity="0.07"
+        filter="url(#hbg-glow-main)"
       />
 
-      {/* ── Main neon line (red/orange) ── */}
+      {/* ── 7. Linha principal — corpo ── */}
       <path
         d={linePath}
         fill="none"
-        stroke="#ff4444"
-        strokeWidth="2.5"
-        filter="url(#glow-line)"
-        clipPath="url(#scene-clip)"
+        stroke="#ffffff"
+        strokeWidth="1.8"
+        strokeOpacity="0.55"
       >
         <animate
           attributeName="stroke-opacity"
-          values="0.85;1;0.85"
-          dur="3s"
+          values="0.45;0.70;0.45"
+          dur="4s"
           repeatCount="indefinite"
         />
       </path>
 
-      {/* ── Bright core line (crisp center) ── */}
+      {/* ── 8. Linha principal — reflexo brilhante fino ── */}
       <path
         d={linePath}
         fill="none"
-        stroke="#ff8888"
-        strokeWidth="1"
-        strokeOpacity="0.7"
-        clipPath="url(#scene-clip)"
+        stroke="#ffffff"
+        strokeWidth="0.7"
+        strokeOpacity="0.9"
       />
 
-      {/* ── Data point dots on line ── */}
-      {points
-        .filter((_, i) => i % 3 === 0)
+      {/* ── 9. Pontos de dados na linha ── */}
+      {chartPoints
+        .filter((_, i) => i % 4 === 0)
         .map(([x, y], i) => (
-          <circle
-            key={i}
-            cx={x * W}
-            cy={y * H}
-            r="3"
-            fill="#ff4444"
-            opacity="0.9"
-            filter="url(#glow-line)"
-          >
-            <animate
-              attributeName="r"
-              values="2.5;4;2.5"
-              dur={`${1.8 + i * 0.2}s`}
-              repeatCount="indefinite"
+          <g key={i}>
+            {/* Halo */}
+            <circle
+              cx={px(x)} cy={py(y)}
+              r="7"
+              fill="none"
+              stroke="#ffffff"
+              strokeWidth="0.5"
+              opacity="0.15"
+            >
+              <animate
+                attributeName="r"
+                values="5;10;5"
+                dur={`${2 + i * 0.3}s`}
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="opacity"
+                values="0.15;0.05;0.15"
+                dur={`${2 + i * 0.3}s`}
+                repeatCount="indefinite"
+              />
+            </circle>
+            {/* Ponto central */}
+            <circle
+              cx={px(x)} cy={py(y)}
+              r="2.5"
+              fill="#ffffff"
+              opacity="0.75"
+              filter="url(#hbg-glow-main)"
             />
-          </circle>
+          </g>
         ))}
 
-      {/* ── Tip glow (most recent / highest point) ── */}
-      <circle cx={W} cy={0.06 * H} r="12" fill="#ff3a3a" opacity="0.15" filter="url(#glow-soft)" />
-      <circle cx={W} cy={0.06 * H} r="5" fill="#ff6666" opacity="0.8" filter="url(#glow-line)">
-        <animate attributeName="r" values="4;7;4" dur="2s" repeatCount="indefinite" />
-      </circle>
+      {/* ── 10. Ponto de chegada (canto direito) ── */}
+      <g>
+        <circle cx={px(1)} cy={py(0.14)} r="18" fill="#ffffff" opacity="0.04" filter="url(#hbg-glow-main)">
+          <animate attributeName="r" values="14;24;14" dur="3s" repeatCount="indefinite" />
+        </circle>
+        <circle cx={px(1)} cy={py(0.14)} r="5" fill="#ffffff" opacity="0.6" filter="url(#hbg-glow-main)">
+          <animate attributeName="r" values="4;7;4" dur="3s" repeatCount="indefinite" />
+        </circle>
+      </g>
 
-      {/* ── Scattered particles ── */}
+      {/* ── 11. Partículas ── */}
       {particles.map((p, i) => (
-        <circle key={i} cx={p.cx} cy={p.cy} r={p.r} fill="#ff4444" opacity={p.opacity}>
+        <circle
+          key={i}
+          cx={p.cx}
+          cy={p.cy}
+          r={p.r}
+          fill="#ffffff"
+          opacity={p.opacity}
+          filter="url(#hbg-glow-dot)"
+        >
           <animate
             attributeName="opacity"
-            values={`${p.opacity};${Math.min(p.opacity * 2.5, 0.6)};${p.opacity}`}
-            dur={`${p.dur}s`}
-            begin={`${p.delay}s`}
+            values={`${p.opacity};${Math.min(p.opacity * 3, 0.35)};${p.opacity}`}
+            dur={p.dur}
+            begin={p.delay}
             repeatCount="indefinite"
           />
         </circle>
       ))}
 
-      {/* ── Right-side vertical glow bar ── */}
-      <rect x={W * 0.78} y={0} width={W * 0.22} height={H} fill="url(#area-fill)" opacity="0.4" />
+      {/* ── 12. Vignettes — garantem contraste do texto ── */}
+      <rect x={0} y={0} width={W} height={H} fill="url(#hbg-vignette)" />
+      <rect x={0} y={0} width={W} height={H} fill="url(#hbg-vignette-v)" />
     </svg>
   );
 }
