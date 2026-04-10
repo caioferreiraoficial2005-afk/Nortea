@@ -10,7 +10,9 @@
       "Bash(node -e \":*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(netstat -ano)",
+      "Bash(findstr \":5173\")"
     ]
   }
 }

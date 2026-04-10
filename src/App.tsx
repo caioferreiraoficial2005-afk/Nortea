@@ -16,7 +16,6 @@ import {
   Workflow,
 } from "lucide-react";
 import TrustSection from "./TrustSection";
-import HeroBg from "./HeroBg";
 
 function useCountUp(end: number, duration = 1400, startWhen = true, prefix = "", suffix = "") {
   const [value, setValue] = useState(0);
@@ -57,7 +56,7 @@ function SectionTitle({ eyebrow, title, description, light = false }: { eyebrow:
 function LogoMark() {
   return (
     <img
-      src="/images/logo/logo nova nortea.png"
+      src="/images/logo nova nortea.png"
       alt="Nortea"
       decoding="async"
       className="h-11 w-auto"
@@ -372,11 +371,16 @@ export default function NorteaReactSite() {
 
         {/* ══ DARK ZONE: fundo único compartilhado ══ */}
         <div className="relative overflow-hidden bg-[#02070e]">
-          {/* SVG hero background */}
-          <HeroBg />
+          {/* Hero background image */}
+          <img
+            src="/images/hero.png"
+            alt=""
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-60"
+          />
           {/* Overlay para escurecer e garantir legibilidade do texto */}
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#02070e]/85 via-[#02070e]/50 to-transparent" />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#02070e]/60 via-transparent to-transparent" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#02070e]/80 via-[#02070e]/40 to-transparent" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#02070e]/50 via-transparent to-transparent" />
 
         {/* ── HERO ── */}
         <section className="relative overflow-hidden">
@@ -390,6 +394,14 @@ export default function NorteaReactSite() {
               transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
               className="relative z-10"
             >
+              {/* Logo */}
+              <img
+                src="/images/logo nova nortea.png"
+                alt="Nortea"
+                decoding="async"
+                className="mb-8 h-14 w-auto"
+              />
+
               {/* Badge */}
               <div className="mb-7 inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm text-white/85 backdrop-blur-md">
                 <span className="relative flex h-2 w-2 shrink-0">
