@@ -160,7 +160,7 @@ ${form.mensagem}`;
         </div>
 
         {/* Card — branco sobre escuro: máximo contraste para leitura do formulário */}
-        <div className="relative overflow-hidden rounded-[36px] border border-white/10 bg-white p-8 shadow-[0_24px_80px_rgba(0,0,0,0.5),0_2px_8px_rgba(34,222,126,0.08)] sm:p-10">
+        <div className="relative overflow-hidden rounded-[36px] border border-white/10 bg-white p-8 shadow-[0_24px_80px_rgba(0,0,0,0.5),0_2px_8px_rgba(5,122,65,0.08)] sm:p-10">
           <div className="pointer-events-none absolute right-0 top-0 h-56 w-56 rounded-full bg-white/3 blur-3xl" />
 
           <form onSubmit={handleSubmit} noValidate className="relative">
@@ -258,7 +258,7 @@ ${form.mensagem}`;
 
               {success ? (
                 <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-700 transition-all duration-300">
-                  <CheckCircle2 className="h-4 w-4 shrink-0 text-[#16C36B]" />
+                  <CheckCircle2 className="h-4 w-4 shrink-0 text-[#057a41]" />
                   Mensagem enviada com sucesso!
                 </div>
               ) : (

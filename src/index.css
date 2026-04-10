@@ -1,7 +1,24 @@
 @import "tailwindcss";
 
-/* Strategic keyword highlight — olive green on light backgrounds */
+/* ── Nortea Design System ──────────────────────────── */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Verde estratégico — assinatura tecnológica da marca */
 .text-green {
-  color: #22de7e;
+  color: #057a41;
   font-weight: 600;
+}
+
+/* Glow verde sutil para elementos em destaque */
+.glow-green {
+  box-shadow: 0 0 24px rgba(5, 122, 65, 0.35);
+}
+
+/* Transição global refinada */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

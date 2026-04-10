@@ -1,8 +1,9 @@
 export default function HeroBg() {
   const W = 1400;
   const H = 800;
+  const GREEN = "#057a41";
 
-  // ── Linha de gráfico principal (tendência de crescimento) ──
+  // ── Linha de gráfico principal — seta de crescimento (eco da logo)
   const chartPoints: [number, number][] = [
     [0.0,  0.88],
     [0.05, 0.84],
@@ -27,7 +28,7 @@ export default function HeroBg() {
     [1.00, 0.14],
   ];
 
-  // Linha secundária (mais suave, ligeiramente abaixo)
+  // Linha secundária (trailing / ghost — mais suave, abaixo)
   const chart2Points: [number, number][] = chartPoints.map(([x, y]) => [x, Math.min(y + 0.10, 0.98)]);
 
   const px = (x: number) => x * W;
@@ -39,24 +40,22 @@ export default function HeroBg() {
   const linePath  = toPath(chartPoints);
   const line2Path = toPath(chart2Points);
 
-  // Área fill abaixo da linha principal
-  const areaPath =
-    linePath +
-    ` L ${px(1)},${py(1)} L ${px(0)},${py(1)} Z`;
+  // Área fill sob a linha principal
+  const areaPath = linePath + ` L ${px(1)},${py(1)} L ${px(0)},${py(1)} Z`;
 
-  // ── Barras verticais (volume / candles) ──
+  // ── Barras verticais — as últimas 3 em destaque verde
   const bars = Array.from({ length: 18 }, (_, i) => {
     const x = 0.04 + i * 0.054;
     const seed = (i * 137 + 31) % 100;
     const h = 0.15 + (seed / 100) * 0.38;
-    return { x, h, w: 0.022 };
+    return { x, h, w: 0.022, highlight: i >= 15 };
   });
 
-  // ── Grid ──
+  // ── Grid
   const vLines = [0.15, 0.30, 0.45, 0.60, 0.75, 0.90];
   const hLines = [0.25, 0.50, 0.75];
 
-  // ── Partículas ──
+  // ── Partículas — algumas em verde
   const particles = Array.from({ length: 50 }, (_, i) => {
     const seed1 = (i * 137.508) % 1;
     const seed2 = (i * 97.333) % 1;
@@ -67,10 +66,11 @@ export default function HeroBg() {
       opacity: 0.06 + ((i * 29) % 20) / 100,
       dur: `${2 + ((i * 23) % 30) / 10}s`,
       delay: `${((i * 17) % 20) / 10}s`,
+      green: i % 7 === 0,
     };
   });
 
-  // ── Linhas diagonais de detalhe (textura) ──
+  // ── Linhas diagonais de textura
   const diagLines = Array.from({ length: 8 }, (_, i) => {
     const base = 0.08 + i * 0.12;
     return { x1: base, y1: 0, x2: base + 0.25, y2: 1 };
@@ -85,10 +85,10 @@ export default function HeroBg() {
       aria-hidden="true"
     >
       <defs>
-        {/* Glow para linha principal */}
+        {/* Glow principal — linha de crescimento */}
         <filter id="hbg-glow-main" x="-30%" y="-30%" width="160%" height="160%">
           <feGaussianBlur stdDeviation="6" result="b1" />
-          <feGaussianBlur stdDeviation="16" result="b2" />
+          <feGaussianBlur stdDeviation="18" result="b2" />
           <feMerge>
             <feMergeNode in="b2" />
             <feMergeNode in="b1" />
@@ -96,7 +96,7 @@ export default function HeroBg() {
           </feMerge>
         </filter>
 
-        {/* Glow suave para barras */}
+        {/* Glow barras */}
         <filter id="hbg-glow-bar" x="-20%" y="-10%" width="140%" height="120%">
           <feGaussianBlur stdDeviation="4" result="b" />
           <feMerge>
@@ -105,7 +105,7 @@ export default function HeroBg() {
           </feMerge>
         </filter>
 
-        {/* Glow para partículas */}
+        {/* Glow partículas */}
         <filter id="hbg-glow-dot">
           <feGaussianBlur stdDeviation="2" result="b" />
           <feMerge>
@@ -114,20 +114,26 @@ export default function HeroBg() {
           </feMerge>
         </filter>
 
-        {/* Gradiente área fill */}
+        {/* Área fill — verde visível sob a linha */}
         <linearGradient id="hbg-area" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"   stopColor="#ffffff" stopOpacity="0.055" />
-          <stop offset="50%"  stopColor="#ffffff" stopOpacity="0.018" />
-          <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+          <stop offset="0%"   stopColor={GREEN} stopOpacity="0.30" />
+          <stop offset="50%"  stopColor={GREEN} stopOpacity="0.10" />
+          <stop offset="100%" stopColor={GREEN} stopOpacity="0" />
         </linearGradient>
 
-        {/* Gradiente barras */}
+        {/* Barras normais */}
         <linearGradient id="hbg-bar" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"   stopColor="#ffffff" stopOpacity="0.22" />
+          <stop offset="0%"   stopColor="#ffffff" stopOpacity="0.16" />
           <stop offset="100%" stopColor="#ffffff" stopOpacity="0.02" />
         </linearGradient>
 
-        {/* Vignette lateral esquerda — mantém texto legível */}
+        {/* Barras em destaque (últimas 3) — verde forte */}
+        <linearGradient id="hbg-bar-green" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stopColor={GREEN} stopOpacity="0.90" />
+          <stop offset="100%" stopColor={GREEN} stopOpacity="0.15" />
+        </linearGradient>
+
+        {/* Vignette lateral esquerda — protege o texto */}
         <linearGradient id="hbg-vignette" x1="0" y1="0" x2="1" y2="0">
           <stop offset="0%"   stopColor="#02070e" stopOpacity="1" />
           <stop offset="45%"  stopColor="#02070e" stopOpacity="0.6" />
@@ -154,8 +160,8 @@ export default function HeroBg() {
         ))}
       </g>
 
-      {/* ── 2. Linhas diagonais de textura (muito sutis) ── */}
-      <g stroke="#ffffff" strokeWidth="0.4" opacity="0.025">
+      {/* ── 2. Linhas diagonais de textura ── */}
+      <g stroke="#ffffff" strokeWidth="0.4" opacity="0.02">
         {diagLines.map((l, i) => (
           <line
             key={i}
@@ -177,7 +183,7 @@ export default function HeroBg() {
               y={H - barH}
               width={barW}
               height={barH}
-              fill="url(#hbg-bar)"
+              fill={b.highlight ? "url(#hbg-bar-green)" : "url(#hbg-bar)"}
               rx="2"
             >
               <animate
@@ -192,7 +198,7 @@ export default function HeroBg() {
         })}
       </g>
 
-      {/* ── 4. Área fill abaixo da linha principal ── */}
+      {/* ── 4. Área fill sob a linha principal ── */}
       <path d={areaPath} fill="url(#hbg-area)" />
 
       {/* ── 5. Linha secundária (ghost / trailing) ── */}
@@ -200,44 +206,44 @@ export default function HeroBg() {
         d={line2Path}
         fill="none"
         stroke="#ffffff"
-        strokeWidth="1"
-        strokeOpacity="0.08"
-        strokeDasharray="6 8"
+        strokeWidth="0.8"
+        strokeOpacity="0.04"
+        strokeDasharray="5 11"
       />
 
-      {/* ── 6. Linha principal — glow externo ── */}
+      {/* ── 6. Linha principal — glow externo verde ── */}
       <path
         d={linePath}
         fill="none"
-        stroke="#ffffff"
-        strokeWidth="8"
-        strokeOpacity="0.07"
+        stroke={GREEN}
+        strokeWidth="14"
+        strokeOpacity="0.35"
         filter="url(#hbg-glow-main)"
       />
 
-      {/* ── 7. Linha principal — corpo ── */}
+      {/* ── 7. Linha principal — corpo verde ── */}
       <path
         d={linePath}
         fill="none"
-        stroke="#ffffff"
-        strokeWidth="1.8"
-        strokeOpacity="0.55"
+        stroke={GREEN}
+        strokeWidth="2.2"
+        strokeOpacity="0.95"
       >
         <animate
           attributeName="stroke-opacity"
-          values="0.45;0.70;0.45"
+          values="0.85;1;0.85"
           dur="4s"
           repeatCount="indefinite"
         />
       </path>
 
-      {/* ── 8. Linha principal — reflexo brilhante fino ── */}
+      {/* ── 8. Linha principal — fio brilhante fino ── */}
       <path
         d={linePath}
         fill="none"
-        stroke="#ffffff"
-        strokeWidth="0.7"
-        strokeOpacity="0.9"
+        stroke={GREEN}
+        strokeWidth="0.8"
+        strokeOpacity="1"
       />
 
       {/* ── 9. Pontos de dados na linha ── */}
@@ -245,14 +251,14 @@ export default function HeroBg() {
         .filter((_, i) => i % 4 === 0)
         .map(([x, y], i) => (
           <g key={i}>
-            {/* Halo */}
+            {/* Halo pulsante */}
             <circle
               cx={px(x)} cy={py(y)}
               r="7"
               fill="none"
-              stroke="#ffffff"
+              stroke={GREEN}
               strokeWidth="0.5"
-              opacity="0.15"
+              opacity="0.20"
             >
               <animate
                 attributeName="r"
@@ -262,7 +268,7 @@ export default function HeroBg() {
               />
               <animate
                 attributeName="opacity"
-                values="0.15;0.05;0.15"
+                values="0.20;0.06;0.20"
                 dur={`${2 + i * 0.3}s`}
                 repeatCount="indefinite"
               />
@@ -270,32 +276,32 @@ export default function HeroBg() {
             {/* Ponto central */}
             <circle
               cx={px(x)} cy={py(y)}
-              r="2.5"
-              fill="#ffffff"
-              opacity="0.75"
+              r="3"
+              fill={GREEN}
+              opacity="1"
               filter="url(#hbg-glow-main)"
             />
           </g>
         ))}
 
-      {/* ── 10. Ponto de chegada (canto direito) ── */}
+      {/* ── 10. Ponto de chegada — destaque verde forte ── */}
       <g>
-        <circle cx={px(1)} cy={py(0.14)} r="18" fill="#ffffff" opacity="0.04" filter="url(#hbg-glow-main)">
-          <animate attributeName="r" values="14;24;14" dur="3s" repeatCount="indefinite" />
+        <circle cx={px(1)} cy={py(0.14)} r="22" fill={GREEN} opacity="0.07" filter="url(#hbg-glow-main)">
+          <animate attributeName="r" values="16;30;16" dur="3s" repeatCount="indefinite" />
         </circle>
-        <circle cx={px(1)} cy={py(0.14)} r="5" fill="#ffffff" opacity="0.6" filter="url(#hbg-glow-main)">
-          <animate attributeName="r" values="4;7;4" dur="3s" repeatCount="indefinite" />
+        <circle cx={px(1)} cy={py(0.14)} r="6" fill={GREEN} opacity="1" filter="url(#hbg-glow-main)">
+          <animate attributeName="r" values="4;8;4" dur="3s" repeatCount="indefinite" />
         </circle>
       </g>
 
-      {/* ── 11. Partículas ── */}
+      {/* ── 11. Partículas — algumas em verde ── */}
       {particles.map((p, i) => (
         <circle
           key={i}
           cx={p.cx}
           cy={p.cy}
           r={p.r}
-          fill="#ffffff"
+          fill={p.green ? GREEN : "#ffffff"}
           opacity={p.opacity}
           filter="url(#hbg-glow-dot)"
         >
