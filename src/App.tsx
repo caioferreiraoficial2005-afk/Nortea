@@ -62,7 +62,7 @@ function LogoMark() {
       decoding="async"
       fetchPriority="high"
       loading="eager"
-      className="h-11 w-auto sm:h-14"
+      className="h-8 w-auto max-w-[120px] object-contain sm:h-14 sm:max-w-none"
     />
   );
 }
