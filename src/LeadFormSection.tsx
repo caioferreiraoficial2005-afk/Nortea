@@ -104,7 +104,7 @@ export default function LeadFormSection() {
 
     const mensagemFormatada = `Olá, meu nome é ${form.nome}.
 
-Gostaria de solicitar um diagnóstico estratégico.
+Gostaria de conversar sobre a estruturação da minha empresa.
 
 📊 *Dados da empresa:*
 
@@ -145,19 +145,18 @@ ${form.mensagem}`;
         {/* Header */}
         <div className="mb-12 text-center">
           <div className="mb-4 inline-flex items-center gap-2.5">
-            <span className="h-px w-7 bg-[#22de7e]" />
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#22de7e]">
-              Diagnóstico estratégico
+            <span className="h-px w-7 bg-white/30" />
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-white/40">
+              Primeiro passo
             </p>
-            <span className="h-px w-7 bg-[#22de7e]" />
+            <span className="h-px w-7 bg-white/30" />
           </div>
           <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-[2.6rem] lg:leading-[1.15]">
-            Solicite um diagnóstico{" "}
-            <span className="text-[#22de7e]">estratégico</span>
+            Fale com a{" "}
+            <span className="text-white/60">Nortea</span>
           </h2>
-          <p className="mt-4 text-base leading-7 text-white/55 sm:text-lg">
-            Descubra onde sua empresa está perdendo dinheiro e como crescer com{" "}
-            <span className="text-[#22de7e] font-medium">controle</span>.
+          <p className="mt-4 text-base leading-7 text-white/50 sm:text-lg">
+            Preencha abaixo e entenda como estruturar sua empresa com clareza, controle e consistência.
           </p>
         </div>
 
@@ -240,7 +239,7 @@ ${form.mensagem}`;
                     value={form.mensagem}
                     onChange={handleChange}
                     rows={4}
-                    placeholder="Conte brevemente sobre sua empresa e o que você está buscando..."
+                    placeholder="Conte brevemente sobre sua empresa: como funciona hoje, principais desafios e o que você está buscando..."
                     className={`${BASE} resize-none ${errors.mensagem ? ERROR : VALID}`}
                   />
                 </Field>
@@ -253,20 +252,20 @@ ${form.mensagem}`;
             <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
               <button
                 type="submit"
-                className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-gradient-to-br from-[#22de7e] to-[#16c36b] px-8 py-4 text-sm font-bold text-white shadow-[0_6px_24px_rgba(34,222,126,0.38)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_36px_rgba(34,222,126,0.52)] active:translate-y-0 active:shadow-[0_4px_16px_rgba(34,222,126,0.30)]"
+                className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-[#09090b] px-8 py-4 text-sm font-bold text-white shadow-[0_6px_24px_rgba(0,0,0,0.35)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_36px_rgba(0,0,0,0.45)] active:translate-y-0"
               >
-                Quero meu diagnóstico
+                Quero estruturar minha empresa
                 <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
               </button>
 
               {success ? (
-                <div className="flex items-center gap-2 rounded-full border border-[#22de7e]/30 bg-[#22de7e]/8 px-4 py-2 text-sm font-semibold text-[#0fa85a] transition-all duration-300">
-                  <CheckCircle2 className="h-4 w-4 shrink-0" />
-                  Diagnóstico solicitado com sucesso!
+                <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-700 transition-all duration-300">
+                  <CheckCircle2 className="h-4 w-4 shrink-0 text-[#16C36B]" />
+                  Mensagem enviada com sucesso!
                 </div>
               ) : (
                 <p className="flex items-center gap-1.5 text-xs text-slate-400">
-                  <MessageCircle className="h-3.5 w-3.5 text-[#22de7e]" />
+                  <MessageCircle className="h-3.5 w-3.5 text-slate-400" />
                   Você será direcionado ao WhatsApp.
                 </p>
               )}
