@@ -370,11 +370,18 @@ export default function NorteaReactSite() {
       <main>
 
         {/* ══ DARK ZONE: fundo único compartilhado ══ */}
-        <div className="relative overflow-hidden bg-[#09090b]">
-          {/* Subtle dot grid texture */}
-          <div className="pointer-events-none absolute inset-0 opacity-[0.025]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "28px 28px" }} />
-          {/* Subtle neutral glow */}
-          <div className="pointer-events-none absolute right-0 top-[30%] h-[700px] w-[700px] -translate-y-1/2 rounded-full bg-white/4 blur-3xl" />
+        <div
+          className="relative overflow-hidden"
+          style={{
+            backgroundImage: "url('/images/hero/imagemdofundodohero.png')",
+            backgroundSize: "cover",
+            backgroundPosition: "center top",
+            backgroundRepeat: "no-repeat",
+          }}
+        >
+          {/* Overlays globais */}
+          <div className="pointer-events-none absolute inset-0 bg-[#02070e]/70" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#02070e]/60 via-transparent to-transparent" />
 
         {/* ── HERO ── */}
         <section className="relative overflow-hidden">
