@@ -123,7 +123,7 @@ Gostaria de conversar sobre a estruturação da minha empresa.
 ${form.mensagem}`;
 
     window.open(
-      `https://wa.me/5582981401405?text=${encodeURIComponent(mensagemFormatada)}`,
+      `https://wa.me/558288224653?text=${encodeURIComponent(mensagemFormatada)}`,
       "_blank"
     );
 
