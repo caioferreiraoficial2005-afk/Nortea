@@ -56,7 +56,7 @@ function SectionTitle({ eyebrow, title, description, light = false }: { eyebrow:
 function LogoMark() {
   return (
     <img
-      src="/images/logo nova nortea.png"
+      src="/images/logos/logo nortea, sem o fundo.png"
       alt="Nortea"
       decoding="async"
       fetchPriority="high"
@@ -85,10 +85,13 @@ function MetricCard({ label, value, tone = "default" }: { label: string; value: 
 
 function ExecutivePreview() {
   const [started, setStarted] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
+  // No mobile, atrasa menos para não bloquear o render principal
+  const delay = shouldReduceMotion ? 0 : 900;
   useEffect(() => {
-    const t = setTimeout(() => setStarted(true), 900);
+    const t = setTimeout(() => setStarted(true), delay);
     return () => clearTimeout(t);
-  }, []);
+  }, [delay]);
   const faturamento = useCountUp(128450, 1400, started, "R$ ");
   const meta = useCountUp(74, 1400, started);
 
@@ -417,16 +420,28 @@ export default function NorteaReactSite() {
 
         {/* ══ DARK ZONE: fundo único compartilhado ══ */}
         <div className="relative overflow-hidden bg-[#02070e]">
-          {/* Hero background image */}
-          <img
-            src="/images/hero.png"
-            alt=""
-            aria-hidden="true"
-            fetchPriority="high"
-            loading="eager"
-            decoding="async"
-            className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-60"
-          />
+          {/* Hero background image — WebP com fallback PNG */}
+          <picture>
+            <source
+              srcSet="/images/hero-mobile.webp"
+              type="image/webp"
+              media="(max-width: 768px)"
+            />
+            <source
+              srcSet="/images/hero.webp"
+              type="image/webp"
+              media="(min-width: 769px)"
+            />
+            <img
+              src="/images/hero.png"
+              alt=""
+              aria-hidden="true"
+              fetchPriority="high"
+              loading="eager"
+              decoding="async"
+              className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-60"
+            />
+          </picture>
           {/* Overlay para escurecer e garantir legibilidade do texto */}
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#02070e]/80 via-[#02070e]/40 to-transparent" />
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#02070e]/50 via-transparent to-transparent" />
@@ -829,6 +844,7 @@ export default function NorteaReactSite() {
                       src={f.src}
                       alt={f.alt}
                       loading="lazy"
+                      decoding="async"
                       className="w-full transition-transform duration-500 group-hover:scale-[1.02]"
                     />
                   </div>
