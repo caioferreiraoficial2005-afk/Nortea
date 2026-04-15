@@ -58,9 +58,9 @@ export default function TrustSection() {
       <div className="relative z-10 mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
         {/* Eyebrow */}
         <div className="mb-12 flex flex-col items-center text-center gap-3">
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-md">
-            <span className="h-1.5 w-1.5 rounded-full bg-white/40" />
-            <span className="text-xs font-semibold uppercase tracking-widest text-white/60">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#057a41]/50 bg-[#057a41]/18 px-4 py-1.5 backdrop-blur-md">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#057a41]" />
+            <span className="text-xs font-semibold uppercase tracking-widest text-[#057a41]">
               Para quem a Nortea foi feita
             </span>
           </div>
@@ -77,11 +77,11 @@ export default function TrustSection() {
               <div className="relative z-10">
                 {/* Métrica principal */}
                 <div className="flex items-center gap-4 mb-7">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/15">
-                    <TrendingUp className="h-6 w-6 text-white/70" />
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#057a41]/12 ring-1 ring-[#057a41]/25">
+                    <TrendingUp className="h-6 w-6 text-[#057a41]" />
                   </div>
                   <div>
-                    <div className="text-3xl font-bold tracking-tight text-white">60+</div>
+                    <div className="text-3xl font-bold tracking-tight text-[#057a41]">60+</div>
                     <div className="text-sm text-white/40">Empresas estruturadas</div>
                   </div>
                 </div>
@@ -93,7 +93,7 @@ export default function TrustSection() {
                     <span className="text-white font-semibold">94%</span>
                   </div>
                   <div className="h-2 w-full overflow-hidden rounded-full bg-white/10">
-                    <div className="h-full w-[94%] rounded-full bg-white/40" />
+                    <div className="h-full w-[94%] rounded-full bg-gradient-to-r from-[#057a41] to-[#046035]" />
                   </div>
                 </div>
 
@@ -110,15 +110,15 @@ export default function TrustSection() {
 
                 {/* Tags */}
                 <div className="mt-7 flex flex-wrap gap-2">
-                  <div className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-medium tracking-wide text-white/50">
+                  <div className="inline-flex items-center gap-1.5 rounded-full border border-[#057a41]/50 bg-[#057a41]/22 px-3 py-1 text-[10px] font-medium tracking-wide text-[#057a41]">
                     <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white/60 opacity-75" />
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-white/70" />
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#057a41] opacity-75" />
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-[#057a41]" />
                     </span>
                     ATIVO
                   </div>
                   <div className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-medium tracking-wide text-white/50">
-                    <CheckCircle2 className="w-3 h-3 text-white/50" />
+                    <CheckCircle2 className="w-3 h-3 text-[#057a41]/70" />
                     CONVERSA INICIAL GRATUITA
                   </div>
                 </div>

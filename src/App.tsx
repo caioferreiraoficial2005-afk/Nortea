@@ -16,6 +16,7 @@ import {
   Workflow,
 } from "lucide-react";
 import TrustSection from "./TrustSection";
+import HeroBg from "./HeroBg";
 
 function useCountUp(end: number, duration = 1400, startWhen = true, prefix = "", suffix = "") {
   const [value, setValue] = useState(0);
@@ -44,11 +45,11 @@ function SectionTitle({ eyebrow, title, description, light = false }: { eyebrow:
   return (
     <div className="max-w-3xl">
       <div className="mb-4 inline-flex items-center gap-2.5">
-        <span className={`h-px w-7 ${light ? "bg-neutral-400" : "bg-white/30"}`} />
-        <p className={`text-sm font-semibold uppercase tracking-[0.22em] ${light ? "text-neutral-500" : "text-white/40"}`}>{eyebrow}</p>
+        <span className={`h-px w-7 ${light ? "bg-neutral-400" : "bg-[#057a41]/50"}`} />
+        <p className={`text-sm font-semibold uppercase tracking-[0.22em] ${light ? "text-neutral-500" : "text-[#057a41]/70"}`}>{eyebrow}</p>
       </div>
       <h2 className={`text-3xl font-bold tracking-tight ${light ? "text-neutral-900" : "text-white"} sm:text-4xl lg:text-[2.6rem] lg:leading-[1.15]`}>{title}</h2>
-      {description ? <p className={`mt-5 text-base leading-8 ${light ? "text-neutral-600" : "text-white/50"} sm:text-lg`}>{description}</p> : null}
+      {description ? <p className={`mt-5 max-w-2xl text-base leading-relaxed ${light ? "text-neutral-600" : "text-white/65"} sm:text-lg`}>{description}</p> : null}
     </div>
   );
 }
@@ -56,12 +57,12 @@ function SectionTitle({ eyebrow, title, description, light = false }: { eyebrow:
 function LogoMark() {
   return (
     <img
-      src="/images/logos/logo nortea, sem o fundo.png"
+      src="/images/logo/versao retangulo.png"
       alt="Nortea"
       decoding="async"
       fetchPriority="high"
       loading="eager"
-      className="h-9 w-auto sm:h-11"
+      className="h-8 w-auto max-w-[120px] object-contain sm:h-14 sm:max-w-none"
     />
   );
 }
@@ -71,7 +72,7 @@ function MetricCard({ label, value, tone = "default" }: { label: string; value: 
     <div
       className={`rounded-[28px] border p-5 transition-all duration-300 hover:-translate-y-1 ${
         tone === "green"
-          ? "border-white/12 bg-white/8 hover:shadow-[0_12px_36px_rgba(0,0,0,0.30)]"
+          ? "border-[#057a41]/40 bg-[#057a41]/14 hover:shadow-[0_12px_36px_rgba(5,122,65,0.28)]"
           : tone === "blue"
           ? "border-white/8 bg-[#1a1a1d] shadow-[0_8px_28px_rgba(0,0,0,0.30)] hover:shadow-[0_14px_40px_rgba(0,0,0,0.40)]"
           : "border-white/8 bg-[#1a1a1d] shadow-[0_4px_20px_rgba(0,0,0,0.25)] hover:shadow-[0_14px_40px_rgba(0,0,0,0.35)]"
@@ -115,10 +116,10 @@ function ExecutivePreview() {
                 <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/40">Visão estratégica</p>
                 <h3 className="mt-1.5 text-[1.4rem] font-bold text-white">Controle com clareza</h3>
               </div>
-              <div className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/6 px-3 py-1.5 text-xs font-medium text-white/50 backdrop-blur-sm">
+              <div className="flex items-center gap-1.5 rounded-full border border-[#057a41]/55 bg-[#057a41]/22 px-3 py-1.5 text-xs font-medium text-[#057a41] backdrop-blur-sm">
                 <span className="relative flex h-1.5 w-1.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white/60 opacity-60" />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-white/70" />
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#057a41] opacity-60" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#057a41]" />
                 </span>
                 Nortea Dashboard
               </div>
@@ -134,7 +135,7 @@ function ExecutivePreview() {
                     initial={{ width: 0 }}
                     animate={{ width: "74%" }}
                     transition={{ duration: 1.4, delay: 0.9, ease: "easeOut" }}
-                    className="h-full rounded-full bg-white/50"
+                    className="h-full rounded-full bg-gradient-to-r from-[#057a41] to-[#046035]"
                   />
                 </div>
                 <p className="mt-2.5 text-xs text-white/30">{meta}% da meta mensal atingida</p>
@@ -175,7 +176,7 @@ function ExecutivePreview() {
                       initial={{ height: 0, opacity: 0.3 }}
                       animate={{ height: `${h}%`, opacity: 1 }}
                       transition={{ duration: 0.8, delay: 0.7 + i * 0.07, ease: "easeOut" }}
-                      className={`w-full rounded-t-xl ${i >= 5 ? "bg-white/60" : "bg-white/12"}`}
+                      className={`w-full rounded-t-xl ${i >= 5 ? "bg-[#057a41]/75" : "bg-white/12"}`}
                     />
                   ))}
                 </div>
@@ -220,7 +221,7 @@ function DashboardDemo() {
       transition={{ duration: 0.7 }}
       className="relative overflow-hidden rounded-[36px] border border-white/10 bg-[#111113] p-6 shadow-[0_20px_80px_rgba(0,0,0,0.45)]"
     >
-      <div className="pointer-events-none absolute right-0 top-0 h-56 w-56 rounded-full bg-white/4 blur-3xl" />
+      <div className="pointer-events-none absolute right-0 top-0 h-56 w-56 rounded-full bg-[#057a41]/14 blur-3xl" />
       <div className="pointer-events-none absolute left-0 bottom-0 h-40 w-40 rounded-full bg-white/3 blur-3xl" />
       <div className="grid gap-5 xl:grid-cols-[1.2fr_0.8fr]">
         <div className="grid gap-4 sm:grid-cols-2">
@@ -241,7 +242,7 @@ function DashboardDemo() {
 
           <div className="mt-6 space-y-4">
             {[
-              ["Fluxo de caixa", "Saudável", "86%", "text-white", "from-white/60 to-white/30"],
+              ["Fluxo de caixa", "Saudável", "86%", "text-[#057a41]", "from-[#057a41]/75 to-[#057a41]/30"],
               ["Processos críticos", "Controlados", "72%", "text-white/70", "from-white/40 to-white/20"],
               ["Oportunidades", "Mapeadas", "64%", "text-white/60", "from-white/30 to-white/10"],
             ].map(([label, text, width, textColor, barColor]) => (
@@ -361,17 +362,17 @@ export default function NorteaReactSite() {
       {/* ── HEADER ── */}
       <header className={`sticky top-0 z-40 bg-black transition-transform duration-300 ease-in-out will-change-transform ${headerVisible ? "translate-y-0" : "-translate-y-full"}`}>
         <div className="border-b border-white/8">
-          <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:h-16 sm:px-6 lg:px-8">
+          <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-6 lg:px-8">
             <LogoMark />
             <nav className="hidden items-center gap-8 text-sm font-medium text-white/55 lg:flex">
-              <a href="#servicos" className="transition-colors hover:text-white">Serviços</a>
-              <a href="#processo" className="transition-colors hover:text-white">Processo</a>
-              <a href="#fundadores" className="transition-colors hover:text-white">Fundadores</a>
+              <a href="#servicos" className="transition-colors hover:text-[#057a41]">Serviços</a>
+              <a href="#processo" className="transition-colors hover:text-[#057a41]">Processo</a>
+              <a href="#fundadores" className="transition-colors hover:text-[#057a41]">Fundadores</a>
             </nav>
             <div className="flex items-center gap-3">
               <a
                 href={whatsappLink}
-                className="hidden items-center gap-2 rounded-full border border-white/15 bg-white/8 px-5 py-[10px] text-sm font-semibold text-white transition-all hover:bg-white/14 hover:border-white/30 sm:inline-flex"
+                className="hidden items-center gap-2 rounded-full border border-white/15 bg-white/8 px-5 py-[10px] text-sm font-semibold text-white transition-all hover:bg-[#057a41]/22 hover:border-[#057a41]/55 hover:text-[#057a41] sm:inline-flex"
               >
                 <MessageCircle className="h-4 w-4" />
                 Falar com a Nortea
@@ -379,12 +380,14 @@ export default function NorteaReactSite() {
               {/* Hamburger — mobile only */}
               <button
                 onClick={() => setMobileMenuOpen((o) => !o)}
-                className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white lg:hidden"
+                className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white lg:hidden"
                 aria-label="Menu"
               >
-                <span className={`block h-px w-5 bg-white transition-all duration-200 ${mobileMenuOpen ? "translate-y-[3px] rotate-45" : "-translate-y-[3px]"}`} />
-                <span className={`absolute block h-px w-5 bg-white transition-all duration-200 ${mobileMenuOpen ? "opacity-0" : "opacity-100"}`} />
-                <span className={`block h-px w-5 bg-white transition-all duration-200 ${mobileMenuOpen ? "-translate-y-[3px] -rotate-45" : "translate-y-[3px]"}`} />
+                <div className="flex h-[13px] w-5 flex-col items-center justify-between">
+                  <span className={`block h-px w-5 origin-center bg-white transition-all duration-200 ${mobileMenuOpen ? "translate-y-[6px] rotate-45" : ""}`} />
+                  <span className={`block h-px w-5 bg-white transition-all duration-200 ${mobileMenuOpen ? "scale-x-0 opacity-0" : ""}`} />
+                  <span className={`block h-px w-5 origin-center bg-white transition-all duration-200 ${mobileMenuOpen ? "-translate-y-[6px] -rotate-45" : ""}`} />
+                </div>
               </button>
             </div>
           </div>
@@ -420,36 +423,16 @@ export default function NorteaReactSite() {
 
         {/* ══ DARK ZONE: fundo único compartilhado ══ */}
         <div className="relative overflow-hidden bg-[#02070e]">
-          {/* Hero background image — WebP com fallback PNG */}
-          <picture>
-            <source
-              srcSet="/images/hero-mobile.webp"
-              type="image/webp"
-              media="(max-width: 768px)"
-            />
-            <source
-              srcSet="/images/hero.webp"
-              type="image/webp"
-              media="(min-width: 769px)"
-            />
-            <img
-              src="/images/hero.png"
-              alt=""
-              aria-hidden="true"
-              fetchPriority="high"
-              loading="eager"
-              decoding="async"
-              className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-60"
-            />
-          </picture>
-          {/* Overlay para escurecer e garantir legibilidade do texto */}
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#02070e]/80 via-[#02070e]/40 to-transparent" />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#02070e]/50 via-transparent to-transparent" />
+          {/* Hero background — arte SVG inspirada na logo */}
+          <HeroBg />
+          {/* Overlay: protege o texto à esquerda, deixa arte respirar à direita */}
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#02070e]/92 via-[#02070e]/50 to-[#02070e]/15" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#02070e]/65 via-transparent to-[#02070e]/18" />
 
         {/* ── HERO ── */}
         <section className="relative overflow-hidden">
 
-          <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 sm:px-6 sm:py-20 lg:grid-cols-2 lg:gap-14 lg:px-8 lg:py-32">
+          <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 sm:py-24 lg:grid-cols-2 lg:gap-14 lg:px-8 lg:py-32">
 
             {/* LEFT — text block */}
             <motion.div
@@ -459,17 +442,17 @@ export default function NorteaReactSite() {
               className="relative z-10"
             >
               {/* Badge */}
-              <div className="mb-7 inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm text-white/85 backdrop-blur-md">
+              <div className="mb-7 inline-flex items-center gap-2.5 rounded-full border border-[#057a41]/50 bg-[#057a41]/20 px-4 py-2 text-sm text-white/85 backdrop-blur-md">
                 <span className="relative flex h-2 w-2 shrink-0">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white/60 opacity-70" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-white/70" />
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#057a41] opacity-70" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[#057a41]" />
                 </span>
                 <span className="font-medium">Estruturação empresarial com tecnologia e gestão</span>
               </div>
 
               {/* H1 */}
               <h1 className="max-w-[580px] text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-[3.4rem]">
-                Empresas que vendem,{" "}
+                Empresas que <span className="text-[#057a41]">vendem,</span>{" "}
                 <span className="text-white/55">mas operam no improviso,</span>{" "}
                 <br className="hidden sm:block" />
                 <span className="text-white">não crescem</span>{" "}
@@ -491,24 +474,24 @@ export default function NorteaReactSite() {
               <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
                 <a
                   href={whatsappLink}
-                  className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-white px-7 py-4 font-semibold text-[#09090b] shadow-[0_8px_36px_rgba(255,255,255,0.15)] transition-all hover:scale-[1.03] hover:shadow-[0_12px_48px_rgba(255,255,255,0.22)]"
+                  className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-[#057a41] px-7 py-4 font-semibold text-white shadow-[0_8px_36px_rgba(5,122,65,0.30)] transition-all hover:scale-[1.03] hover:bg-[#068a4b] hover:shadow-[0_12px_48px_rgba(5,122,65,0.42)]"
                 >
                   Falar com a Nortea
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </a>
                 <a
                   href="#servicos"
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/25 bg-white/8 px-7 py-4 font-semibold text-white/80 backdrop-blur-sm transition-all hover:border-white/45 hover:bg-white/12 hover:text-white"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/25 bg-white/8 px-7 py-4 font-semibold text-white/80 backdrop-blur-sm transition-all hover:border-[#057a41]/40 hover:bg-white/12 hover:text-white"
                 >
                   Ver como atuamos
                 </a>
               </div>
 
               {/* Trust row */}
-              <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-white/40">
+              <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-white/55">
                 {["Atendimento organizado", "Estrutura digital", "Controle financeiro"].map((t) => (
                   <span key={t} className="flex items-center gap-1.5">
-                    <span className="h-1.5 w-1.5 rounded-full bg-white/40" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#057a41]" />
                     {t}
                   </span>
                 ))}
@@ -526,7 +509,7 @@ export default function NorteaReactSite() {
               >
                 <div className="rounded-2xl border border-white/12 bg-[#141416]/95 px-4 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.55)] backdrop-blur-sm">
                   <p className="text-[10px] font-semibold uppercase tracking-wider text-white/35">Empresas atendidas</p>
-                  <p className="mt-0.5 text-xl font-bold text-white">60+</p>
+                  <p className="mt-0.5 text-xl font-bold text-[#057a41]">60+</p>
                 </div>
               </motion.div>
               <motion.div
@@ -537,7 +520,7 @@ export default function NorteaReactSite() {
               >
                 <div className="rounded-2xl border border-white/12 bg-[#141416]/95 px-4 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.55)] backdrop-blur-sm">
                   <p className="text-[10px] font-semibold uppercase tracking-wider text-white/35">Satisfação</p>
-                  <p className="mt-0.5 text-xl font-bold text-white">94%</p>
+                  <p className="mt-0.5 text-xl font-bold text-[#057a41]">94%</p>
                 </div>
               </motion.div>
               <ExecutivePreview />
@@ -552,7 +535,7 @@ export default function NorteaReactSite() {
 
         {/* ── PROBLEMA ── */}
         <section className="bg-[#f5f5f5]">
-          <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+          <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
             <SectionTitle
               light
               eyebrow="Reconhece isso?"
@@ -577,23 +560,32 @@ export default function NorteaReactSite() {
                   className="group rounded-[28px] border border-neutral-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-neutral-300 hover:shadow-[0_16px_48px_rgba(0,0,0,0.07)]"
                 >
                   <div className="inline-flex rounded-2xl bg-neutral-100 p-2.5">
-                    <CheckCircle2 className="h-5 w-5 text-neutral-400" />
+                    <CheckCircle2 className="h-5 w-5 text-[#057a41]" />
                   </div>
                   <p className="mt-4 font-semibold text-neutral-800">{item.text}</p>
                 </div>
               ))}
             </motion.div>
 
-            <div className="mt-10">
-              <a
-                href={whatsappLink}
-                target="_blank"
-                rel="noreferrer"
-                className="group inline-flex items-center gap-2 rounded-full bg-neutral-900 px-6 py-3.5 text-sm font-semibold text-white shadow-[0_4px_16px_rgba(0,0,0,0.18)] transition-all hover:-translate-y-0.5 hover:bg-neutral-800"
-              >
-                Quero estruturar minha empresa
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </a>
+            {/* Callout verde — A solução */}
+            <div className="mt-6 overflow-hidden rounded-[28px] bg-[#057a41] px-8 py-8 sm:px-10">
+              <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/60">A solução</p>
+                  <h3 className="mt-2 max-w-lg text-xl font-bold leading-snug text-white sm:text-2xl">
+                    A Nortea estrutura exatamente esses pontos — do atendimento ao financeiro.
+                  </h3>
+                </div>
+                <a
+                  href={whatsappLink}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-bold text-[#057a41] transition-all hover:scale-[1.03] hover:shadow-[0_8px_28px_rgba(0,0,0,0.18)]"
+                >
+                  Quero entender como
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                </a>
+              </div>
             </div>
           </div>
         </section>
@@ -601,7 +593,7 @@ export default function NorteaReactSite() {
         {/* ── SERVIÇOS ── */}
         <section id="servicos" className="relative bg-[#0d0d0f]">
           <div className="pointer-events-none absolute inset-0 opacity-[0.025]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "28px 28px" }} />
-          <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+          <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
             <SectionTitle
               eyebrow="Como atuamos"
               title={<>3 pilares para estruturar<br className="hidden sm:block" /> sua empresa de vez</>}
@@ -622,11 +614,15 @@ export default function NorteaReactSite() {
                     }`}
                   >
                     <div className="relative">
-                      <div className="inline-flex rounded-2xl bg-white/10 p-3.5 text-white transition-all duration-300 group-hover:bg-white/15">
+                      <div className={`inline-flex rounded-2xl p-3.5 transition-all duration-300 ${
+                        isFirst
+                          ? "bg-[#057a41]/30 text-[#057a41] group-hover:bg-[#057a41]/45"
+                          : "bg-[#057a41]/18 text-[#057a41] group-hover:bg-[#057a41]/35"
+                      }`}>
                         <Icon className="h-6 w-6" />
                       </div>
                       <h3 className="mt-6 text-xl font-bold text-white">{item.title}</h3>
-                      <p className="mt-3 leading-7 text-white/55">{item.text}</p>
+                      <p className="mt-3 leading-7 text-white/65">{item.text}</p>
                     </div>
                   </div>
                 );
@@ -638,7 +634,7 @@ export default function NorteaReactSite() {
                 href={whatsappLink}
                 target="_blank"
                 rel="noreferrer"
-                className="group inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-6 py-3.5 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-white/14 hover:border-white/30"
+                className="group inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-6 py-3.5 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-[#057a41]/22 hover:border-[#057a41]/55 hover:text-[#057a41]"
               >
                 Conversar com um especialista
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -649,7 +645,7 @@ export default function NorteaReactSite() {
 
         {/* ── FINANCEIRO ── */}
         <section className="bg-[#f5f5f5]">
-          <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+          <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
             <SectionTitle
               light
               eyebrow="Gestão financeira"
@@ -661,8 +657,30 @@ export default function NorteaReactSite() {
               <DashboardDemo />
             </div>
 
+            {/* Bloco verde — Decisão com dados */}
+            <div className="mt-10 overflow-hidden rounded-[28px] bg-[#057a41] px-8 py-8 sm:px-10">
+              <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex flex-col gap-1">
+                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/60">Por que isso importa</p>
+                  <h3 className="mt-1 text-xl font-bold text-white sm:text-2xl">Menos achismo. Mais resultado.</h3>
+                  <p className="mt-1 max-w-md text-sm leading-6 text-white/75">Empresas que conhecem seus números crescem com consistência — não por sorte.</p>
+                </div>
+                <div className="flex gap-6 shrink-0">
+                  <div className="text-center">
+                    <p className="text-3xl font-bold text-white">94%</p>
+                    <p className="mt-0.5 text-xs font-medium text-white/65">Satisfação</p>
+                  </div>
+                  <div className="w-px bg-white/20" />
+                  <div className="text-center">
+                    <p className="text-3xl font-bold text-white">60+</p>
+                    <p className="mt-0.5 text-xs font-medium text-white/65">Empresas</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <motion.div
-              className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4"
+              className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4"
               initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.15 }}
@@ -671,9 +689,9 @@ export default function NorteaReactSite() {
               {beneficios.map((item) => (
                 <div
                   key={item}
-                  className="group rounded-[28px] border border-neutral-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-neutral-300 hover:shadow-[0_14px_40px_rgba(0,0,0,0.06)]"
+                  className="group rounded-[28px] border border-neutral-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#057a41]/30 hover:shadow-[0_14px_40px_rgba(0,0,0,0.06)]"
                 >
-                  <div className="mb-3 h-1 w-8 rounded-full bg-neutral-300 transition-all duration-300 group-hover:w-14 group-hover:bg-neutral-500" />
+                  <div className="mb-3 h-1 w-8 rounded-full bg-[#057a41]/50 transition-all duration-300 group-hover:w-14 group-hover:bg-[#057a41]" />
                   <p className="font-medium text-neutral-800">{item}</p>
                 </div>
               ))}
@@ -684,7 +702,7 @@ export default function NorteaReactSite() {
                 href={whatsappLink}
                 target="_blank"
                 rel="noreferrer"
-                className="group inline-flex items-center gap-2 rounded-full bg-neutral-900 px-6 py-3.5 text-sm font-semibold text-white shadow-[0_4px_16px_rgba(0,0,0,0.18)] transition-all hover:-translate-y-0.5 hover:bg-neutral-800"
+                className="group inline-flex items-center gap-2 rounded-full bg-neutral-900 px-6 py-3.5 text-sm font-semibold text-white shadow-[0_4px_16px_rgba(0,0,0,0.18)] transition-all hover:-translate-y-0.5 hover:bg-neutral-800 hover:shadow-[0_6px_24px_rgba(5,122,65,0.14)]"
               >
                 Quero organizar meu financeiro
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -696,7 +714,7 @@ export default function NorteaReactSite() {
         {/* ── PROCESSO ── */}
         <section id="processo" className="relative overflow-hidden bg-[#0d0d0f]">
           <div className="pointer-events-none absolute inset-0 opacity-[0.025]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "28px 28px" }} />
-          <div className="relative z-10 mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+          <div className="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
             <SectionTitle
               eyebrow="Processo"
               title="Como a Nortea estrutura sua empresa"
@@ -722,12 +740,12 @@ export default function NorteaReactSite() {
                   }`}
                 >
                   <div className="flex items-center gap-4">
-                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/8 font-bold text-lg text-white shadow-[0_2px_12px_rgba(0,0,0,0.30)] transition-all duration-300 group-hover:shadow-[0_4px_22px_rgba(255,255,255,0.10)] ring-1 ring-white/10">
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#057a41]/20 font-bold text-lg text-[#057a41] shadow-[0_2px_12px_rgba(0,0,0,0.30)] transition-all duration-300 group-hover:bg-[#057a41]/35 group-hover:shadow-[0_4px_22px_rgba(5,122,65,0.30)] ring-1 ring-[#057a41]/40">
                       {etapa.step}
                     </div>
                     <h3 className="text-xl font-bold text-white">{etapa.title}</h3>
                   </div>
-                  <p className={`mt-5 leading-8 ${isBlue ? "text-white/70" : "text-white/60"}`}>{etapa.text}</p>
+                  <p className={`mt-5 leading-7 ${isBlue ? "text-white/70" : "text-white/65"}`}>{etapa.text}</p>
                 </div>
                 );
               })}
@@ -738,7 +756,7 @@ export default function NorteaReactSite() {
                 href={whatsappLink}
                 target="_blank"
                 rel="noreferrer"
-                className="group inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-6 py-3.5 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-white/14 hover:border-white/30"
+                className="group inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-6 py-3.5 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-[#057a41]/22 hover:border-[#057a41]/55 hover:text-[#057a41]"
               >
                 Quero estruturar minha empresa
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -749,7 +767,7 @@ export default function NorteaReactSite() {
 
         {/* ── ENTREGAS ── */}
         <section className="bg-white">
-          <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+          <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
             <SectionTitle
               light
               eyebrow="O que entregamos"
@@ -757,8 +775,22 @@ export default function NorteaReactSite() {
               description="Não vendemos consultoria genérica. Cada entrega é prática e aplicada diretamente à operação da sua empresa."
             />
 
+            {/* Blocos verdes de destaque */}
+            <div className="mt-10 grid gap-4 sm:grid-cols-3">
+              {[
+                { n: "6", label: "Entregas estruturadas" },
+                { n: "3", label: "Pilares do negócio" },
+                { n: "100%", label: "Aplicado à sua operação" },
+              ].map((s) => (
+                <div key={s.label} className="rounded-[24px] bg-[#057a41] p-6">
+                  <p className="text-3xl font-bold text-white">{s.n}</p>
+                  <p className="mt-1.5 text-sm font-medium text-white/75">{s.label}</p>
+                </div>
+              ))}
+            </div>
+
             <motion.div
-              className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-3"
+              className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-3"
               initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.15 }}
@@ -769,13 +801,13 @@ export default function NorteaReactSite() {
                 return (
                   <div
                     key={item.title}
-                    className="group relative rounded-[32px] border border-neutral-200 bg-[#f8f8f8] p-7 transition-all duration-300 hover:-translate-y-2 hover:border-neutral-300 hover:bg-white hover:shadow-[0_24px_64px_rgba(0,0,0,0.07)]"
+                    className="group relative rounded-[32px] border border-neutral-200 bg-[#f8f8f8] p-7 transition-all duration-300 hover:-translate-y-2 hover:border-[#057a41]/30 hover:bg-white hover:shadow-[0_24px_64px_rgba(0,0,0,0.07)]"
                   >
                     <div className="flex items-center justify-between">
-                      <div className="rounded-2xl bg-neutral-900 p-3.5 text-white transition-all duration-300 group-hover:bg-neutral-800">
+                      <div className="rounded-2xl bg-[#057a41] p-3.5 text-white transition-all duration-300 group-hover:bg-[#068a4b]">
                         <Icon className="h-6 w-6" />
                       </div>
-                      <ChevronRight className="h-5 w-5 text-neutral-300 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-neutral-500" />
+                      <ChevronRight className="h-5 w-5 text-neutral-300 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-[#057a41]" />
                     </div>
                     <h3 className="mt-6 text-lg font-bold text-neutral-900">{item.title}</h3>
                     <p className="mt-2 text-sm leading-6 text-neutral-500">Estrutura prática aplicada diretamente à operação da empresa.</p>
@@ -789,7 +821,7 @@ export default function NorteaReactSite() {
                 href={whatsappLink}
                 target="_blank"
                 rel="noreferrer"
-                className="group inline-flex items-center gap-2 rounded-full bg-neutral-900 px-6 py-3.5 text-sm font-semibold text-white shadow-[0_4px_16px_rgba(0,0,0,0.18)] transition-all hover:-translate-y-0.5 hover:bg-neutral-800"
+                className="group inline-flex items-center gap-2 rounded-full bg-neutral-900 px-6 py-3.5 text-sm font-semibold text-white shadow-[0_4px_16px_rgba(0,0,0,0.18)] transition-all hover:-translate-y-0.5 hover:bg-neutral-800 hover:shadow-[0_6px_24px_rgba(5,122,65,0.14)]"
               >
                 Conversar com um especialista
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -801,7 +833,7 @@ export default function NorteaReactSite() {
         {/* ── FUNDADORES ── */}
         <section id="fundadores" className="relative overflow-hidden bg-[#0d0d0f]">
           <div className="pointer-events-none absolute inset-0 opacity-[0.02]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "28px 28px" }} />
-          <div className="relative z-10 mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+          <div className="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
             <SectionTitle
               eyebrow="Fundadores"
               title="Quem está por trás da Nortea"
@@ -849,10 +881,10 @@ export default function NorteaReactSite() {
                     />
                   </div>
                   <div className="p-8">
-                    <p className="text-sm font-semibold uppercase tracking-[0.2em] text-white/45">Cofundador</p>
+                    <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#057a41]/70">Cofundador</p>
                     <h3 className="mt-2 text-2xl font-bold text-white">{f.name}</h3>
                     {f.bio.map((p, i) => (
-                      <p key={i} className={`${i === 0 ? "mt-5" : "mt-4"} leading-8 text-white/55`}>{p}</p>
+                      <p key={i} className={`${i === 0 ? "mt-5" : "mt-4"} leading-7 text-white/65`}>{p}</p>
                     ))}
                   </div>
                 </motion.div>
@@ -864,7 +896,7 @@ export default function NorteaReactSite() {
                 href={whatsappLink}
                 target="_blank"
                 rel="noreferrer"
-                className="group inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-6 py-3.5 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-white/14 hover:border-white/30"
+                className="group inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-6 py-3.5 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-[#057a41]/22 hover:border-[#057a41]/55 hover:text-[#057a41]"
               >
                 Falar com a Nortea
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -874,33 +906,31 @@ export default function NorteaReactSite() {
         </section>
 
         {/* ── CTA FINAL ── */}
-        <section className="bg-[#09090b] py-14 sm:py-20 lg:py-24">
+        <section className="bg-[#09090b] py-16 sm:py-20 lg:py-28">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="relative overflow-hidden rounded-[40px] border border-white/10 bg-[#111113] px-10 py-16 text-center shadow-[0_32px_100px_rgba(0,0,0,0.55)] sm:px-16">
               <div className="pointer-events-none absolute inset-0 opacity-[0.025]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "32px 32px" }} />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-80 rounded-b-[40px] bg-gradient-to-t from-[#057a41]/20 to-transparent" />
               <div className="relative">
-                <p className="text-sm font-semibold uppercase tracking-[0.22em] text-white/35">Primeiro passo</p>
+                <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#057a41]/65">Primeiro passo</p>
                 <h2 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-5xl">
                   Pronto para estruturar<br className="hidden sm:block" /> sua empresa?
                 </h2>
                 <p className="mt-5 mx-auto max-w-xl text-lg leading-8 text-white/50">
                   Conversa inicial gratuita. Entendemos sua situação e mostramos como a Nortea pode ajudar.
                 </p>
-                <div className="mt-9 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+                <div className="mt-9 flex flex-col items-center gap-5 sm:flex-row sm:justify-center">
                   <a
                     href={whatsappLink}
-                    className="group inline-flex items-center gap-2.5 rounded-full bg-white px-8 py-4 font-semibold text-[#09090b] shadow-[0_8px_36px_rgba(255,255,255,0.12)] transition-all hover:scale-[1.03] hover:shadow-[0_12px_48px_rgba(255,255,255,0.18)]"
+                    className="group inline-flex items-center gap-2.5 rounded-full bg-[#057a41] px-8 py-4 font-semibold text-white shadow-[0_8px_36px_rgba(5,122,65,0.30)] transition-all hover:scale-[1.03] hover:bg-[#068a4b] hover:shadow-[0_12px_48px_rgba(5,122,65,0.42)]"
                   >
                     <MessageCircle className="h-4 w-4" />
                     Falar com a Nortea
                   </a>
-                  <a
-                    href={whatsappLink}
-                    className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/6 px-8 py-4 font-semibold text-white/80 transition-all hover:border-white/30 hover:bg-white/10 hover:text-white"
-                  >
-                    Conversar com um especialista
-                    <ArrowRight className="h-4 w-4" />
-                  </a>
+                  <span className="flex items-center gap-2 text-sm text-white/40">
+                    <CheckCircle2 className="h-4 w-4 shrink-0 text-[#057a41]" />
+                    Conversa inicial gratuita
+                  </span>
                 </div>
               </div>
             </div>
