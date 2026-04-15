@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useRef, useState } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
@@ -67,28 +67,26 @@ function LogoMark() {
   );
 }
 
-function MetricCard({ label, value, tone = "default" }: { label: string; value: string; tone?: "default" | "green" | "blue" }) {
+const MetricCard = memo(function MetricCard({ label, value, tone = "default" }: { label: string; value: string; tone?: "default" | "green" | "blue" }) {
   return (
     <div
-      className={`rounded-[28px] border p-5 transition-all duration-300 hover:-translate-y-1 ${
+      className={`rounded-[28px] border p-5 transition-transform duration-300 hover:-translate-y-1 ${
         tone === "green"
-          ? "border-[#057a41]/40 bg-[#057a41]/14 hover:shadow-[0_12px_36px_rgba(5,122,65,0.28)]"
-          : tone === "blue"
-          ? "border-white/8 bg-[#1a1a1d] shadow-[0_8px_28px_rgba(0,0,0,0.30)] hover:shadow-[0_14px_40px_rgba(0,0,0,0.40)]"
-          : "border-white/8 bg-[#1a1a1d] shadow-[0_4px_20px_rgba(0,0,0,0.25)] hover:shadow-[0_14px_40px_rgba(0,0,0,0.35)]"
+          ? "border-[#057a41]/40 bg-[#057a41]/14 shadow-[0_8px_28px_rgba(5,122,65,0.15)]"
+          : "border-white/8 bg-[#1a1a1d] shadow-[0_4px_20px_rgba(0,0,0,0.25)]"
       }`}
     >
       <p className="text-sm text-white/40">{label}</p>
       <p className="mt-2 text-2xl font-bold text-white">{value}</p>
     </div>
   );
-}
+});
 
-function ExecutivePreview() {
+const ExecutivePreview = memo(function ExecutivePreview() {
   const [started, setStarted] = useState(false);
   const shouldReduceMotion = useReducedMotion();
-  // No mobile, atrasa menos para não bloquear o render principal
-  const delay = shouldReduceMotion ? 0 : 900;
+  // Aguarda o paint inicial antes de iniciar as animações de número
+  const delay = shouldReduceMotion ? 0 : 1000;
   useEffect(() => {
     const t = setTimeout(() => setStarted(true), delay);
     return () => clearTimeout(t);
@@ -201,11 +199,12 @@ function ExecutivePreview() {
       </div>
     </motion.div>
   );
-}
+});
 
-function DashboardDemo() {
+const DashboardDemo = memo(function DashboardDemo() {
   const ref = useRef<HTMLDivElement | null>(null);
-  const inView = useInView(ref, { once: true, amount: 0.35 });
+  // Dispara quando 20% da seção está visível (antes de estar totalmente na tela)
+  const inView = useInView(ref, { once: true, amount: 0.2 });
 
   const faturamento = useCountUp(128450, 1600, inView, "R$ ");
   const despesas = useCountUp(48200, 1500, inView, "R$ ");
@@ -266,7 +265,7 @@ function DashboardDemo() {
       </div>
     </motion.div>
   );
-}
+});
 
 export default function NorteaReactSite() {
   const [headerVisible, setHeaderVisible] = useState(true);
@@ -557,7 +556,7 @@ export default function NorteaReactSite() {
               ].map((item) => (
                 <div
                   key={item.text}
-                  className="group rounded-[28px] border border-neutral-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-neutral-300 hover:shadow-[0_16px_48px_rgba(0,0,0,0.07)]"
+                  className="group rounded-[28px] border border-neutral-200 bg-white p-6 transition-transform duration-300 hover:-translate-y-1.5"
                 >
                   <div className="inline-flex rounded-2xl bg-neutral-100 p-2.5">
                     <CheckCircle2 className="h-5 w-5 text-[#057a41]" />
@@ -607,10 +606,10 @@ export default function NorteaReactSite() {
                 return (
                   <div
                     key={item.title}
-                    className={`group relative rounded-[32px] border p-8 transition-all duration-300 hover:-translate-y-2 ${
+                    className={`group relative rounded-[32px] border p-8 transition-transform duration-300 hover:-translate-y-2 ${
                       isFirst
-                        ? "border-white/15 bg-white/6 shadow-[0_6px_32px_rgba(0,0,0,0.30)] hover:border-white/25 hover:shadow-[0_24px_64px_rgba(0,0,0,0.45)]"
-                        : "border-white/8 bg-[#111113] shadow-[0_6px_32px_rgba(0,0,0,0.25)] hover:border-white/16 hover:shadow-[0_24px_64px_rgba(0,0,0,0.40)]"
+                        ? "border-white/15 bg-white/6 shadow-[0_6px_32px_rgba(0,0,0,0.30)]"
+                        : "border-white/8 bg-[#111113] shadow-[0_6px_32px_rgba(0,0,0,0.25)]"
                     }`}
                   >
                     <div className="relative">
@@ -689,7 +688,7 @@ export default function NorteaReactSite() {
               {beneficios.map((item) => (
                 <div
                   key={item}
-                  className="group rounded-[28px] border border-neutral-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#057a41]/30 hover:shadow-[0_14px_40px_rgba(0,0,0,0.06)]"
+                  className="group rounded-[28px] border border-neutral-200 bg-white p-6 transition-transform duration-300 hover:-translate-y-1"
                 >
                   <div className="mb-3 h-1 w-8 rounded-full bg-[#057a41]/50 transition-all duration-300 group-hover:w-14 group-hover:bg-[#057a41]" />
                   <p className="font-medium text-neutral-800">{item}</p>
@@ -733,10 +732,10 @@ export default function NorteaReactSite() {
                 return (
                 <div
                   key={etapa.step}
-                  className={`group rounded-[32px] border p-8 transition-all duration-300 hover:-translate-y-1.5 ${
+                  className={`group rounded-[32px] border p-8 transition-transform duration-300 hover:-translate-y-1.5 ${
                     isBlue
-                      ? "border-white/8 bg-[#111113] shadow-[0_8px_32px_rgba(0,0,0,0.35)] hover:border-white/16 hover:shadow-[0_20px_56px_rgba(0,0,0,0.50)]"
-                      : "border-white/10 bg-white/6 backdrop-blur-sm shadow-[0_6px_32px_rgba(0,0,0,0.25)] hover:border-white/20 hover:shadow-[0_20px_56px_rgba(0,0,0,0.40)]"
+                      ? "border-white/8 bg-[#111113] shadow-[0_8px_32px_rgba(0,0,0,0.35)]"
+                      : "border-white/10 bg-white/6 backdrop-blur-sm shadow-[0_6px_32px_rgba(0,0,0,0.25)]"
                   }`}
                 >
                   <div className="flex items-center gap-4">
@@ -801,7 +800,7 @@ export default function NorteaReactSite() {
                 return (
                   <div
                     key={item.title}
-                    className="group relative rounded-[32px] border border-neutral-200 bg-[#f8f8f8] p-7 transition-all duration-300 hover:-translate-y-2 hover:border-[#057a41]/30 hover:bg-white hover:shadow-[0_24px_64px_rgba(0,0,0,0.07)]"
+                    className="group relative rounded-[32px] border border-neutral-200 bg-[#f8f8f8] p-7 transition-transform duration-300 hover:-translate-y-2"
                   >
                     <div className="flex items-center justify-between">
                       <div className="rounded-2xl bg-[#057a41] p-3.5 text-white transition-all duration-300 group-hover:bg-[#068a4b]">
@@ -869,7 +868,7 @@ export default function NorteaReactSite() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.15 }}
                   transition={{ duration: 0.5 }}
-                  className="group overflow-hidden rounded-[32px] border border-white/10 bg-[#111113] shadow-[0_8px_40px_rgba(0,0,0,0.40)] transition-all duration-300 hover:-translate-y-1.5 hover:border-white/20 hover:shadow-[0_24px_64px_rgba(0,0,0,0.55)]"
+                  className="group overflow-hidden rounded-[32px] border border-white/10 bg-[#111113] shadow-[0_8px_40px_rgba(0,0,0,0.40)] transition-transform duration-300 hover:-translate-y-1.5"
                 >
                   <div className="overflow-hidden">
                     <img

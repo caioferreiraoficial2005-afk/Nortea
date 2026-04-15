@@ -22,3 +22,18 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* Força GPU layer no header animado */
+header {
+  transform: translateZ(0);
+}
+
+/* Evita repaint fora da área visível em seções longas */
+main > section {
+  contain: layout style;
+}
+
+/* Imagens dos fundadores: evita layout shift durante carregamento */
+img[loading="lazy"] {
+  content-visibility: auto;
+}
