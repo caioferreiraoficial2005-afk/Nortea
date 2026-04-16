@@ -185,7 +185,7 @@ export default function NorteaReactSite() {
     {
       icon: Target,
       title: "Estrutura Digital",
-      text: "Site, páginas de conversão e presença digital que fazem o cliente tomar uma ação — não só visitar e ir embora.",
+      text: "Site, páginas de conversão e presença digital que fazem o cliente tomar uma ação, não só visitar e ir embora.",
     },
     {
       icon: Workflow,
@@ -195,13 +195,13 @@ export default function NorteaReactSite() {
     {
       icon: CircleDollarSign,
       title: "Financeiro e Gestão",
-      text: "Você passa a saber o que entra, o que sai e o que sobra — e toma decisões com dados, não com achismo.",
+      text: "Você passa a saber o que entra, o que sai e o que sobra. Sem achismo, sem surpresa.",
     },
   ];
 
   const beneficios = [
     "Saber exatamente o que entra, o que sai e o que sobra",
-    "Tomar decisões com dados — não mais no achismo",
+    "Tomar decisões com dados, não mais no achismo",
     "Visualizar o fluxo de caixa todo mês, sem surpresas",
     "Acompanhamento próximo com visão estratégica do negócio",
   ];
@@ -215,7 +215,7 @@ export default function NorteaReactSite() {
     {
       step: "02",
       title: "Diagnóstico e plano",
-      text: "Transformamos o que identificamos em um plano concreto — com prioridades claras e ação definida nos 3 pilares: digital, operação e financeiro.",
+      text: "Transformamos o que identificamos em um plano concreto, com prioridades claras e ação definida nos 3 pilares: digital, operação e financeiro.",
     },
     {
       step: "03",
@@ -225,7 +225,7 @@ export default function NorteaReactSite() {
     {
       step: "04",
       title: "Acompanhamento",
-      text: "Monitoramos os resultados, ajustamos o que for necessário e garantimos que o crescimento seja contínuo — não um pico isolado.",
+      text: "Monitoramos os resultados, ajustamos o que for necessário e garantimos que o crescimento seja contínuo, não um pico isolado.",
     },
   ];
 
@@ -323,8 +323,8 @@ export default function NorteaReactSite() {
             <SectionTitle
               light
               eyebrow="Reconhece isso?"
-              title={<>Você trabalha duro. O problema nunca foi esforço — é estrutura.</>}
-              description="Você trabalha o dia todo, responde WhatsApp, paga as contas — mas no final do mês não sabe quanto realmente sobrou."
+              title={<>Você trabalha duro. O problema nunca foi esforço: é estrutura.</>}
+              description="Você trabalha o dia todo, responde WhatsApp, paga as contas, mas no final do mês não sabe quanto realmente sobrou."
             />
             <motion.div
               className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4"
@@ -357,7 +357,7 @@ export default function NorteaReactSite() {
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/60">A solução</p>
                   <h3 className="mt-2 max-w-lg text-xl font-bold leading-snug text-white sm:text-2xl">
-                    A Nortea resolve exatamente isso — para você voltar a ter controle da sua empresa.
+                    A Nortea resolve exatamente isso, para você voltar a ter controle da sua empresa.
                   </h3>
                 </div>
                 <a
@@ -381,7 +381,7 @@ export default function NorteaReactSite() {
             <SectionTitle
               eyebrow="Como atuamos"
               title={<>3 pilares para estruturar<br className="hidden sm:block" /> sua empresa de vez</>}
-              description="A Nortea atua nos 3 pontos que mais travam o crescimento das pequenas empresas: digital, atendimento e financeiro — de forma integrada, não isolada."
+              description="A Nortea atua nos 3 pontos que mais travam o crescimento das pequenas empresas: digital, atendimento e financeiro. De forma integrada, não isolada."
             />
 
             <motion.div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.15 }} transition={{ duration: 0.5 }}>
@@ -434,7 +434,7 @@ export default function NorteaReactSite() {
               light
               eyebrow="Controle financeiro"
               title="Seus números organizados, suas decisões mais claras."
-              description="Pela primeira vez, você vai saber exatamente quanto sua empresa lucra — todo mês, sem achismo e sem surpresa no final."
+              description="Pela primeira vez, você vai saber exatamente quanto sua empresa lucra, todo mês, sem achismo e sem surpresa no final."
             />
 
             <div className="mt-14">
@@ -447,7 +447,7 @@ export default function NorteaReactSite() {
                 <div className="flex flex-col gap-1">
                   <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/60">Por que isso importa</p>
                   <h3 className="mt-1 text-xl font-bold text-white sm:text-2xl">Menos achismo. Mais resultado.</h3>
-                  <p className="mt-1 max-w-md text-sm leading-6 text-white/75">Empresas que conhecem seus números crescem com consistência — não por sorte.</p>
+                  <p className="mt-1 max-w-md text-sm leading-6 text-white/75">Empresas que conhecem seus números crescem com consistência, não por sorte.</p>
                 </div>
                 <div className="flex gap-6 shrink-0">
                   <div className="text-center">
@@ -502,7 +502,7 @@ export default function NorteaReactSite() {
             <SectionTitle
               eyebrow="Como funciona"
               title="Como a Nortea estrutura sua empresa"
-              description="Trabalhamos com etapas claras, do diagnóstico à execução. Nada genérico — tudo adaptado à realidade do seu negócio."
+              description="Trabalhamos com etapas claras, do diagnóstico à execução. Nada genérico, tudo adaptado à realidade do seu negócio."
             />
 
             <motion.div
@@ -555,8 +555,8 @@ export default function NorteaReactSite() {
             <SectionTitle
               light
               eyebrow="O que você recebe"
-              title="Entregáveis concretos — não consultoria genérica"
-              description="Cada entrega é um sistema funcionando na sua empresa — não um documento. Tudo aplicado à sua operação real."
+              title="Entregáveis concretos, sem consultoria genérica"
+              description="Cada entrega é um sistema funcionando na sua empresa, não um documento. Tudo aplicado à sua operação real."
             />
 
             {/* Blocos verdes de destaque */}
@@ -594,7 +594,7 @@ export default function NorteaReactSite() {
                       <ChevronRight className="h-5 w-5 text-neutral-300 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-[#057a41]" />
                     </div>
                     <h3 className="mt-6 text-lg font-bold text-neutral-900">{item.title}</h3>
-                    <p className="mt-2 text-sm leading-6 text-neutral-500">Implementado e funcionando na sua empresa — não só planejado no papel.</p>
+                    <p className="mt-2 text-sm leading-6 text-neutral-500">Implementado e funcionando na sua empresa, não só planejado no papel.</p>
                   </div>
                 );
               })}
@@ -621,7 +621,7 @@ export default function NorteaReactSite() {
             <SectionTitle
               eyebrow="Fundadores"
               title="Quem está por trás da Nortea"
-              description="Um programador e um contador — com experiências complementares para estruturar sua empresa do digital ao financeiro, de verdade."
+              description="Um programador e um contador, com experiências complementares para estruturar sua empresa do digital ao financeiro, de verdade."
             />
 
             <div className="mt-14 grid gap-8 lg:grid-cols-2">
@@ -631,9 +631,9 @@ export default function NorteaReactSite() {
                   alt: "Caio Ferreira de Freitas",
                   name: "Caio Ferreira de Freitas",
                   bio: [
-                    "Programador especializado em automação e sistemas que organizam a operação — eliminando trabalho repetitivo e decisões no achismo.",
+                    "Programador especializado em automação e sistemas que organizam a operação, eliminando trabalho repetitivo e decisões no achismo.",
                     "Constrói dashboards, fluxos de atendimento e automações que tiram pequenas empresas do improviso e colocam tudo em ordem.",
-                    "Na Nortea, cuida da estrutura tecnológica e operacional — para que sua empresa funcione com clareza, mesmo quando você não está olhando.",
+                    "Na Nortea, cuida da estrutura tecnológica e operacional para que sua empresa funcione com clareza, mesmo quando você não está olhando.",
                   ],
                 },
                 {
@@ -641,9 +641,9 @@ export default function NorteaReactSite() {
                   alt: "Bernardo Gabryhel",
                   name: "Bernardo Gabryhel",
                   bio: [
-                    "Contador com foco em micro e pequenos empreendedores — ajuda donos de negócio a entenderem seus números de verdade, não só no papel.",
-                    "Atua nas rotinas contábeis com atualização constante na legislação — para você não precisar se preocupar com o que não sabe.",
-                    "Na Nortea, cuida da estrutura financeira e contábil para que você saiba quanto sua empresa realmente lucra — e cresça com segurança.",
+                    "Contador com foco em micro e pequenos empreendedores, ajuda donos de negócio a entenderem seus números de verdade, não só no papel.",
+                    "Atua nas rotinas contábeis com atualização constante na legislação, para você não precisar se preocupar com o que não sabe.",
+                    "Na Nortea, cuida da estrutura financeira e contábil para que você saiba quanto sua empresa realmente lucra e cresça com segurança.",
                   ],
                 },
               ].map((f) => (
@@ -701,7 +701,7 @@ export default function NorteaReactSite() {
                   Chega de crescer<br className="hidden sm:block" /> sem saber o que sobra.
                 </h2>
                 <p className="mt-5 mx-auto max-w-xl text-lg leading-8 text-white/50">
-                  Conversa inicial gratuita — sem enrolação. Em 30 minutos você entende o que trava sua empresa e o que fazer.
+                  Conversa inicial gratuita. Sem enrolação. Em 30 minutos você entende o que trava sua empresa e o que fazer.
                 </p>
                 <div className="mt-9 flex flex-col items-center gap-5 sm:flex-row sm:justify-center">
                   <a

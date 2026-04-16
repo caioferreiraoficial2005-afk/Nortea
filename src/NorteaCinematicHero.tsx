@@ -308,10 +308,10 @@ export default function NorteaCinematicHero({
       {/* Hero taglines */}
       <div className="nch-hero-text absolute z-10 flex flex-col items-center justify-center text-center w-screen px-4 will-change-transform">
         <h1 className="nch-text-track nch-gsap-reveal nch-text-3d text-5xl md:text-7xl lg:text-[6rem] font-bold tracking-tight mb-2">
-          Sua empresa fatura.
+          Sem estrutura,
         </h1>
         <h1 className="nch-text-days nch-gsap-reveal nch-text-silver text-5xl md:text-7xl lg:text-[6rem] font-extrabold tracking-tighter">
-          Mas quanto sobra?
+          você perde clientes todo dia.
         </h1>
       </div>
 
@@ -321,7 +321,7 @@ export default function NorteaCinematicHero({
           Chega de decidir<br className="hidden sm:block" /> no achismo.
         </h2>
         <p className="text-white/55 text-lg md:text-xl mb-12 max-w-xl mx-auto font-light leading-relaxed">
-          Conversa inicial gratuita — sem enrolação. Você sai sabendo o que trava sua empresa e o que fazer.
+          Conversa inicial gratuita. Sem enrolação. Você sai sabendo o que trava sua empresa e o que fazer.
         </p>
         <div className="flex flex-col sm:flex-row gap-5">
           <a href={whatsappLink} target="_blank" rel="noreferrer"
@@ -352,8 +352,24 @@ export default function NorteaCinematicHero({
 
             {/* RIGHT (desktop) / TOP (mobile): brand name */}
             <div className="nch-card-right nch-gsap-reveal order-1 lg:order-3 flex justify-center lg:justify-end z-20 w-full">
-              <h2 className="text-6xl md:text-[6rem] lg:text-[8rem] font-black uppercase tracking-tighter nch-text-card-silver">
-                Nortea
+              <h2 className="text-6xl md:text-[6rem] lg:text-[8rem] font-black uppercase tracking-tighter nch-text-card-silver inline-flex items-baseline gap-0">
+                {/* N com seta verde, igual à logo */}
+                <svg
+                  viewBox="0 0 60 80"
+                  aria-label="N"
+                  fill="currentColor"
+                  style={{ display: "inline-block", height: "0.88em", width: "auto", verticalAlign: "baseline", flexShrink: 0 }}
+                >
+                  {/* Barra esquerda */}
+                  <rect x="0" y="0" width="13" height="80" />
+                  {/* Diagonal de baixo-esquerda para cima-direita (direção de seta) */}
+                  <polygon points="13,80 26,80 47,0 34,0" />
+                  {/* Barra direita */}
+                  <rect x="47" y="0" width="13" height="80" />
+                  {/* Ponta da seta verde no canto superior direito */}
+                  <polygon points="34,0 60,0 60,24" fill="#057a41" />
+                </svg>
+                ortea
               </h2>
             </div>
 

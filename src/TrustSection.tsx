@@ -65,7 +65,7 @@ export default function TrustSection() {
             </span>
           </div>
           <p className="text-white/35 text-sm max-w-md">
-            Atendemos empresas que já vendem, mas ainda perdem dinheiro e clientes por falta de organização — independente do setor.
+            Atendemos empresas que já vendem, mas ainda perdem dinheiro e clientes por falta de organização, independente do setor.
           </p>
         </div>
 
