@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight, MessageCircle } from "lucide-react";
+import { ArrowRight, ArrowUpRight, MessageCircle } from "lucide-react";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -352,24 +352,9 @@ export default function NorteaCinematicHero({
 
             {/* RIGHT (desktop) / TOP (mobile): brand name */}
             <div className="nch-card-right nch-gsap-reveal order-1 lg:order-3 flex justify-center lg:justify-end z-20 w-full">
-              <h2 className="text-6xl md:text-[6rem] lg:text-[8rem] font-black uppercase tracking-tighter nch-text-card-silver inline-flex items-baseline gap-0">
-                {/* N com seta verde, igual à logo */}
-                <svg
-                  viewBox="0 0 60 80"
-                  aria-label="N"
-                  fill="currentColor"
-                  style={{ display: "inline-block", height: "0.88em", width: "auto", verticalAlign: "baseline", flexShrink: 0 }}
-                >
-                  {/* Barra esquerda */}
-                  <rect x="0" y="0" width="13" height="80" />
-                  {/* Diagonal de baixo-esquerda para cima-direita (direção de seta) */}
-                  <polygon points="13,80 26,80 47,0 34,0" />
-                  {/* Barra direita */}
-                  <rect x="47" y="0" width="13" height="80" />
-                  {/* Ponta da seta verde no canto superior direito */}
-                  <polygon points="34,0 60,0 60,24" fill="#057a41" />
-                </svg>
-                ortea
+              <h2 className="text-6xl md:text-[6rem] lg:text-[8rem] font-black uppercase tracking-tighter nch-text-card-silver flex items-center gap-3 lg:gap-4">
+                Nortea
+                <ArrowUpRight className="text-[#057a41] shrink-0" style={{ width: "0.65em", height: "0.65em", strokeWidth: 2.5 }} />
               </h2>
             </div>
 
