@@ -185,57 +185,57 @@ export default function NorteaReactSite() {
     {
       icon: Target,
       title: "Estrutura Digital",
-      text: "Criação ou melhoria de site, páginas de conversão e presença digital profissional que transmite autoridade e gera resultado.",
+      text: "Site, páginas de conversão e presença digital que fazem o cliente tomar uma ação — não só visitar e ir embora.",
     },
     {
       icon: Workflow,
       title: "Automação e Operação",
-      text: "Organização do WhatsApp, fluxo de atendimento e automações operacionais e comerciais para eliminar o improviso.",
+      text: "Organização do WhatsApp, funil de atendimento e automações que garantem que nenhum cliente seja ignorado.",
     },
     {
       icon: CircleDollarSign,
       title: "Financeiro e Gestão",
-      text: "Dashboard financeiro, organização dos números, leitura de indicadores e acompanhamento mensal com visão de BPO financeiro.",
+      text: "Você passa a saber o que entra, o que sai e o que sobra — e toma decisões com dados, não com achismo.",
     },
   ];
 
   const beneficios = [
     "Saber exatamente o que entra, o que sai e o que sobra",
-    "Tomar decisões com dados, não com achismo",
-    "Visualizar o fluxo de caixa em tempo real",
-    "Acompanhamento mensal com visão estratégica",
+    "Tomar decisões com dados — não mais no achismo",
+    "Visualizar o fluxo de caixa todo mês, sem surpresas",
+    "Acompanhamento próximo com visão estratégica do negócio",
   ];
 
   const etapas = [
     {
       step: "01",
       title: "Conversa inicial",
-      text: "Entendemos como a empresa opera hoje: atendimento, estrutura digital e financeiro. Identificamos os pontos que travam o crescimento.",
+      text: "Em uma conversa direta e sem enrolação, entendemos como sua empresa opera hoje: atendimento, digital e financeiro. Apontamos exatamente o que está travando.",
     },
     {
       step: "02",
       title: "Diagnóstico e plano",
-      text: "Transformamos o que identificamos em um plano concreto, com prioridades e estrutura de ação nos 3 pilares: digital, operação e financeiro.",
+      text: "Transformamos o que identificamos em um plano concreto — com prioridades claras e ação definida nos 3 pilares: digital, operação e financeiro.",
     },
     {
       step: "03",
       title: "Estruturação",
-      text: "Colocamos em prática: organizamos atendimento, site, automações e financeiro para a empresa sair do improviso e operar com clareza.",
+      text: "Colocamos em prática: organizamos atendimento, site, automações e financeiro para sua empresa parar de operar no improviso.",
     },
     {
       step: "04",
       title: "Acompanhamento",
-      text: "Monitoramos os resultados, ajustamos o que for necessário e garantimos que a evolução seja contínua e mensurável.",
+      text: "Monitoramos os resultados, ajustamos o que for necessário e garantimos que o crescimento seja contínuo — não um pico isolado.",
     },
   ];
 
   const entregas = [
-    { title: "Dashboard financeiro personalizado", icon: BarChart3 },
-    { title: "Organização do fluxo de caixa", icon: LineChart },
-    { title: "Página de conversão profissional", icon: TrendingUp },
-    { title: "Fluxo de atendimento no WhatsApp", icon: Settings2 },
-    { title: "Automações operacionais e comerciais", icon: BriefcaseBusiness },
-    { title: "Acompanhamento mensal (BPO financeiro)", icon: ShieldCheck },
+    { title: "Dashboard financeiro que você realmente entende", icon: BarChart3 },
+    { title: "Fluxo de caixa organizado, sem surpresas no mês", icon: LineChart },
+    { title: "Página de conversão que traz clientes de verdade", icon: TrendingUp },
+    { title: "Atendimento no WhatsApp com processo definido", icon: Settings2 },
+    { title: "Automações que eliminam o trabalho repetitivo", icon: BriefcaseBusiness },
+    { title: "Acompanhamento mensal próximo (BPO financeiro)", icon: ShieldCheck },
   ];
 
   return (
@@ -323,8 +323,8 @@ export default function NorteaReactSite() {
             <SectionTitle
               light
               eyebrow="Reconhece isso?"
-              title={<>O problema não é falta de esforço. É falta de estrutura.</>}
-              description="Muitas empresas vendem e trabalham duro — mas continuam perdendo clientes no WhatsApp, sem controle financeiro, crescendo no improviso."
+              title={<>Você trabalha duro. O problema nunca foi esforço — é estrutura.</>}
+              description="Você trabalha o dia todo, responde WhatsApp, paga as contas — mas no final do mês não sabe quanto realmente sobrou."
             />
             <motion.div
               className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4"
@@ -334,10 +334,10 @@ export default function NorteaReactSite() {
               transition={{ duration: 0.4 }}
             >
               {[
-                { text: "Clientes perdidos no WhatsApp por falta de processo" },
-                { text: "Sem controle financeiro: não sabe o que sobra no mês" },
-                { text: "Presença digital fraca que não converte" },
-                { text: "Crescimento no improviso, sem operação estruturada" },
+                { text: "Clientes somem no WhatsApp porque a resposta demora" },
+                { text: "Você não sabe quanto realmente sobra no final do mês" },
+                { text: "Presença digital que não traz nenhum cliente novo" },
+                { text: "Crescendo, mas cada vez mais no improviso" },
               ].map((item) => (
                 <div
                   key={item.text}
@@ -357,7 +357,7 @@ export default function NorteaReactSite() {
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/60">A solução</p>
                   <h3 className="mt-2 max-w-lg text-xl font-bold leading-snug text-white sm:text-2xl">
-                    A Nortea estrutura exatamente esses pontos — do atendimento ao financeiro.
+                    A Nortea resolve exatamente isso — para você voltar a ter controle da sua empresa.
                   </h3>
                 </div>
                 <a
@@ -366,7 +366,7 @@ export default function NorteaReactSite() {
                   rel="noreferrer"
                   className="group inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-bold text-[#057a41] transition-all hover:scale-[1.03] hover:shadow-[0_8px_28px_rgba(0,0,0,0.18)]"
                 >
-                  Quero entender como
+                  Quero resolver isso
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </a>
               </div>
@@ -381,7 +381,7 @@ export default function NorteaReactSite() {
             <SectionTitle
               eyebrow="Como atuamos"
               title={<>3 pilares para estruturar<br className="hidden sm:block" /> sua empresa de vez</>}
-              description="A Nortea não age de forma isolada. Integramos estrutura digital, automação operacional e gestão financeira para transformar empresas que operam no improviso em negócios organizados."
+              description="A Nortea atua nos 3 pontos que mais travam o crescimento das pequenas empresas: digital, atendimento e financeiro — de forma integrada, não isolada."
             />
 
             <motion.div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.15 }} transition={{ duration: 0.5 }}>
@@ -420,7 +420,7 @@ export default function NorteaReactSite() {
                 rel="noreferrer"
                 className="group inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-6 py-3.5 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-[#057a41]/22 hover:border-[#057a41]/55 hover:text-[#057a41]"
               >
-                Conversar com um especialista
+                Quero organizar minha empresa
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </a>
             </div>
@@ -432,9 +432,9 @@ export default function NorteaReactSite() {
           <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
             <SectionTitle
               light
-              eyebrow="Gestão financeira"
+              eyebrow="Controle financeiro"
               title="Seus números organizados, suas decisões mais claras."
-              description="A Nortea estrutura o financeiro da sua empresa: organização do fluxo de caixa, leitura de indicadores e acompanhamento mensal próximo."
+              description="Pela primeira vez, você vai saber exatamente quanto sua empresa lucra — todo mês, sem achismo e sem surpresa no final."
             />
 
             <div className="mt-14">
@@ -500,7 +500,7 @@ export default function NorteaReactSite() {
           <div className="pointer-events-none absolute inset-0 opacity-[0.025]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "28px 28px" }} />
           <div className="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
             <SectionTitle
-              eyebrow="Processo"
+              eyebrow="Como funciona"
               title="Como a Nortea estrutura sua empresa"
               description="Trabalhamos com etapas claras, do diagnóstico à execução. Nada genérico — tudo adaptado à realidade do seu negócio."
             />
@@ -554,16 +554,16 @@ export default function NorteaReactSite() {
           <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
             <SectionTitle
               light
-              eyebrow="O que entregamos"
-              title="Estruturas concretas para cada pilar do negócio"
-              description="Não vendemos consultoria genérica. Cada entrega é prática e aplicada diretamente à operação da sua empresa."
+              eyebrow="O que você recebe"
+              title="Entregáveis concretos — não consultoria genérica"
+              description="Cada entrega é um sistema funcionando na sua empresa — não um documento. Tudo aplicado à sua operação real."
             />
 
             {/* Blocos verdes de destaque */}
             <div className="mt-10 grid gap-4 sm:grid-cols-3">
               {[
-                { n: "6", label: "Entregas estruturadas" },
-                { n: "3", label: "Pilares do negócio" },
+                { n: "6", label: "Entregas concretas" },
+                { n: "3", label: "Pilares estruturados" },
                 { n: "100%", label: "Aplicado à sua operação" },
               ].map((s) => (
                 <div key={s.label} className="rounded-[24px] bg-[#057a41] p-6">
@@ -594,7 +594,7 @@ export default function NorteaReactSite() {
                       <ChevronRight className="h-5 w-5 text-neutral-300 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-[#057a41]" />
                     </div>
                     <h3 className="mt-6 text-lg font-bold text-neutral-900">{item.title}</h3>
-                    <p className="mt-2 text-sm leading-6 text-neutral-500">Estrutura prática aplicada diretamente à operação da empresa.</p>
+                    <p className="mt-2 text-sm leading-6 text-neutral-500">Implementado e funcionando na sua empresa — não só planejado no papel.</p>
                   </div>
                 );
               })}
@@ -607,7 +607,7 @@ export default function NorteaReactSite() {
                 rel="noreferrer"
                 className="group inline-flex items-center gap-2 rounded-full bg-neutral-900 px-6 py-3.5 text-sm font-semibold text-white shadow-[0_4px_16px_rgba(0,0,0,0.18)] transition-all hover:-translate-y-0.5 hover:bg-neutral-800 hover:shadow-[0_6px_24px_rgba(5,122,65,0.14)]"
               >
-                Conversar com um especialista
+                Quero essas entregas
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </a>
             </div>
@@ -621,7 +621,7 @@ export default function NorteaReactSite() {
             <SectionTitle
               eyebrow="Fundadores"
               title="Quem está por trás da Nortea"
-              description="Dois profissionais com formações complementares — tecnologia e contabilidade — unidos para estruturar empresas de forma completa: digital, operacional e financeira."
+              description="Um programador e um contador — com experiências complementares para estruturar sua empresa do digital ao financeiro, de verdade."
             />
 
             <div className="mt-14 grid gap-8 lg:grid-cols-2">
@@ -631,9 +631,9 @@ export default function NorteaReactSite() {
                   alt: "Caio Ferreira de Freitas",
                   name: "Caio Ferreira de Freitas",
                   bio: [
-                    "Programador com foco no desenvolvimento de soluções digitais, automação de processos e criação de sistemas voltados para gestão empresarial.",
-                    "Atua na construção de dashboards, estruturas operacionais e automações que ajudam empresas a saírem da desorganização e passarem a operar com mais clareza, controle e eficiência.",
-                    "Na Nortea, é responsável pela estrutura tecnológica e operacional, conectando gestão, automação e crescimento de forma prática e estratégica.",
+                    "Programador especializado em automação e sistemas que organizam a operação — eliminando trabalho repetitivo e decisões no achismo.",
+                    "Constrói dashboards, fluxos de atendimento e automações que tiram pequenas empresas do improviso e colocam tudo em ordem.",
+                    "Na Nortea, cuida da estrutura tecnológica e operacional — para que sua empresa funcione com clareza, mesmo quando você não está olhando.",
                   ],
                 },
                 {
@@ -641,9 +641,9 @@ export default function NorteaReactSite() {
                   alt: "Bernardo Gabryhel",
                   name: "Bernardo Gabryhel",
                   bio: [
-                    "Atua na área contábil com foco em micro e pequenos empreendedores, oferecendo suporte prático e estratégico para a gestão e regularização de negócios.",
-                    "Possui experiência em rotinas contábeis e administrativas, com constante atualização nas mudanças da legislação, garantindo segurança e clareza nas decisões financeiras dos clientes.",
-                    "Na Nortea, é responsável pela estrutura financeira e contábil, ajudando empresas a organizarem seus números, reduzirem riscos e tomarem decisões com mais controle e confiança.",
+                    "Contador com foco em micro e pequenos empreendedores — ajuda donos de negócio a entenderem seus números de verdade, não só no papel.",
+                    "Atua nas rotinas contábeis com atualização constante na legislação — para você não precisar se preocupar com o que não sabe.",
+                    "Na Nortea, cuida da estrutura financeira e contábil para que você saiba quanto sua empresa realmente lucra — e cresça com segurança.",
                   ],
                 },
               ].map((f) => (
@@ -698,10 +698,10 @@ export default function NorteaReactSite() {
               <div className="relative">
                 <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#057a41]/65">Primeiro passo</p>
                 <h2 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-5xl">
-                  Pronto para estruturar<br className="hidden sm:block" /> sua empresa?
+                  Chega de crescer<br className="hidden sm:block" /> sem saber o que sobra.
                 </h2>
                 <p className="mt-5 mx-auto max-w-xl text-lg leading-8 text-white/50">
-                  Conversa inicial gratuita. Entendemos sua situação e mostramos como a Nortea pode ajudar.
+                  Conversa inicial gratuita — sem enrolação. Em 30 minutos você entende o que trava sua empresa e o que fazer.
                 </p>
                 <div className="mt-9 flex flex-col items-center gap-5 sm:flex-row sm:justify-center">
                   <a

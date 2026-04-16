@@ -155,7 +155,7 @@ ${form.mensagem}`;
             <span className="text-white/60">Nortea</span>
           </h2>
           <p className="mt-4 text-base leading-7 text-white/50 sm:text-lg">
-            Preencha abaixo e entenda como estruturar sua empresa com clareza, controle e consistência.
+            Preencha abaixo. Em uma conversa rápida, mostramos o que trava sua empresa e o que fazer para organizar.
           </p>
         </div>
 

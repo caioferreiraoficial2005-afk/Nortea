@@ -308,30 +308,30 @@ export default function NorteaCinematicHero({
       {/* Hero taglines */}
       <div className="nch-hero-text absolute z-10 flex flex-col items-center justify-center text-center w-screen px-4 will-change-transform">
         <h1 className="nch-text-track nch-gsap-reveal nch-text-3d text-5xl md:text-7xl lg:text-[6rem] font-bold tracking-tight mb-2">
-          Estruture sua empresa,
+          Sua empresa fatura.
         </h1>
         <h1 className="nch-text-days nch-gsap-reveal nch-text-silver text-5xl md:text-7xl lg:text-[6rem] font-extrabold tracking-tighter">
-          opere com clareza.
+          Mas quanto sobra?
         </h1>
       </div>
 
       {/* CTA final */}
       <div className="nch-cta-wrapper absolute z-10 flex flex-col items-center justify-center text-center w-screen px-4 nch-gsap-reveal pointer-events-auto will-change-transform">
         <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight nch-text-silver">
-          Pronto para estruturar<br className="hidden sm:block" /> sua empresa?
+          Chega de decidir<br className="hidden sm:block" /> no achismo.
         </h2>
         <p className="text-white/55 text-lg md:text-xl mb-12 max-w-xl mx-auto font-light leading-relaxed">
-          Conversa inicial gratuita. Entendemos sua operação e mostramos como a Nortea pode ajudar.
+          Conversa inicial gratuita — sem enrolação. Você sai sabendo o que trava sua empresa e o que fazer.
         </p>
         <div className="flex flex-col sm:flex-row gap-5">
           <a href={whatsappLink} target="_blank" rel="noreferrer"
             className="nch-btn-primary flex items-center justify-center gap-3 px-8 py-4 rounded-[1.25rem]">
             <MessageCircle className="w-5 h-5" />
-            <span className="font-semibold text-lg">Falar com a Nortea</span>
+            <span className="font-semibold text-lg">Quero organizar minha empresa</span>
           </a>
           <a href="#servicos"
             className="nch-btn-outline flex items-center justify-center gap-3 px-8 py-4 rounded-[1.25rem] group">
-            <span className="font-semibold text-lg">Ver como atuamos</span>
+            <span className="font-semibold text-lg">Como a Nortea funciona</span>
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
           </a>
         </div>
