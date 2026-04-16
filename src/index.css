@@ -6,6 +6,13 @@ html {
   scroll-behavior: smooth;
 }
 
+/* GSAP pin conflita com smooth scroll no iOS — desabilitar no mobile */
+@media (max-width: 767px) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 /* Verde estratégico — assinatura tecnológica da marca */
 .text-green {
   color: #057a41;

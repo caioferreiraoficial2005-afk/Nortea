@@ -114,6 +114,16 @@ const INJECTED_STYLES = `
       inset 0 -1px 1px rgba(0,0,0,0.5);
   }
 
+  /* Mobile: remove efeitos caros que causam jank */
+  @media (max-width: 767px) {
+    .nch-film-grain { display: none; }
+    .nch-floating-badge {
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      background: rgba(8, 20, 12, 0.92);
+    }
+  }
+
   .nch-btn-primary {
     background: linear-gradient(180deg, #057a41 0%, #046035 100%);
     color: #FFFFFF;
@@ -210,70 +220,105 @@ export default function NorteaCinematicHero({
         .to(".nch-text-track", { duration: 1.8, autoAlpha: 1, y: 0, scale: 1, filter: "blur(0px)", rotationX: 0, ease: "expo.out" })
         .to(".nch-text-days", { duration: 1.4, clipPath: "inset(0 0% 0 0)", ease: "power4.inOut" }, "-=1.0");
 
-      // Scroll timeline — end reduced for faster overall pace
+      // Mobile: reduz distância do pin e usa scrub mais rápido para scroll fluido
+      const pinEnd = isMobile ? "+=2600" : "+=5500";
+      const scrubSpeed = isMobile ? 0.6 : 1;
+
+      // Mobile: skip filter:blur() nas animações (caro no GPU mobile)
+      const heroBlurOut = isMobile
+        ? { opacity: 0.15, ease: "power2.inOut", duration: 2 }
+        : { scale: 1.15, filter: "blur(20px)", opacity: 0.2, ease: "power2.inOut", duration: 2 };
+
       const scrollTl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: "+=5500",
+          end: pinEnd,
           pin: true,
-          scrub: 1,
+          scrub: scrubSpeed,
           anticipatePin: 1,
-          onEnter: () => onCinematicStateChange?.(true),
-          onLeave: () => onCinematicStateChange?.(false),
-          onEnterBack: () => onCinematicStateChange?.(true),
-          onLeaveBack: () => onCinematicStateChange?.(false),
+          onEnter: () => {
+            document.body.style.overscrollBehavior = "none";
+            onCinematicStateChange?.(true);
+          },
+          onLeave: () => {
+            document.body.style.overscrollBehavior = "";
+            onCinematicStateChange?.(false);
+          },
+          onEnterBack: () => {
+            document.body.style.overscrollBehavior = "none";
+            onCinematicStateChange?.(true);
+          },
+          onLeaveBack: () => {
+            document.body.style.overscrollBehavior = "";
+            onCinematicStateChange?.(false);
+          },
         },
       });
 
       scrollTl
-        // Phase 1: card rises while hero text blurs out
-        .to([".nch-hero-text", ".nch-bg-grid"], { scale: 1.15, filter: "blur(20px)", opacity: 0.2, ease: "power2.inOut", duration: 2 }, 0)
+        // Phase 1: card rises while hero text fades out
+        .to([".nch-hero-text", ".nch-bg-grid"], heroBlurOut, 0)
         .to(".nch-main-card", { y: 0, ease: "power3.inOut", duration: 2 }, 0)
         // Phase 2: card expands to full screen
         .to(".nch-main-card", { width: "100%", height: "100%", borderRadius: "0px", ease: "power3.inOut", duration: 1.5 })
-        // Phase 3: phone appears with 3D flip
+        // Phase 3: phone appears (mobile: sem rotação pesada, só fade/slide)
         .fromTo(".nch-mockup-wrapper",
-          { y: 300, z: -500, rotationX: 50, rotationY: -30, autoAlpha: 0, scale: 0.6 },
-          { y: 0, z: 0, rotationX: 0, rotationY: 0, autoAlpha: 1, scale: 1, ease: "expo.out", duration: 2.5 }, "-=0.8"
+          isMobile
+            ? { y: 200, autoAlpha: 0, scale: 0.7 }
+            : { y: 300, z: -500, rotationX: 50, rotationY: -30, autoAlpha: 0, scale: 0.6 },
+          isMobile
+            ? { y: 0, autoAlpha: 1, scale: 1, ease: "expo.out", duration: 2 }
+            : { y: 0, z: 0, rotationX: 0, rotationY: 0, autoAlpha: 1, scale: 1, ease: "expo.out", duration: 2.5 },
+          "-=0.8"
         )
-        // Phase 4: phone widgets, ring, counter and badges animate in together
-        .fromTo(".nch-phone-widget", { y: 40, autoAlpha: 0, scale: 0.95 }, { y: 0, autoAlpha: 1, scale: 1, stagger: 0.12, ease: "back.out(1.2)", duration: 1.5 }, "-=1.5")
-        .to(".nch-progress-ring", { strokeDashoffset: 94, duration: 2, ease: "power3.inOut" }, "-=1.2")
-        .to(".nch-counter-val", { innerHTML: 128, snap: { innerHTML: 1 }, duration: 2, ease: "expo.out" }, "-=2.0")
-        .fromTo(".nch-badge", { y: 100, autoAlpha: 0, scale: 0.7, rotationZ: -10 }, { y: 0, autoAlpha: 1, scale: 1, rotationZ: 0, ease: "back.out(1.5)", duration: 1.5, stagger: 0.2 }, "-=2.0")
-        .fromTo(".nch-card-left", { x: -50, autoAlpha: 0 }, { x: 0, autoAlpha: 1, ease: "power4.out", duration: 1.5 }, "-=1.5")
-        .fromTo(".nch-card-right", { x: 50, autoAlpha: 0, scale: 0.8 }, { x: 0, autoAlpha: 1, scale: 1, ease: "expo.out", duration: 1.5 }, "<")
-        // Short settle pause — user can scroll away right after counter reaches 128
+        // Phase 4: widgets, ring, counter, badges, card text
+        .fromTo(".nch-phone-widget",
+          { y: 30, autoAlpha: 0, scale: 0.95 },
+          { y: 0, autoAlpha: 1, scale: 1, stagger: isMobile ? 0 : 0.12, ease: "back.out(1.2)", duration: 1.2 },
+          "-=1.2"
+        )
+        .to(".nch-progress-ring", { strokeDashoffset: 94, duration: 1.8, ease: "power3.inOut" }, "-=1.0")
+        .to(".nch-counter-val", { innerHTML: 128, snap: { innerHTML: 1 }, duration: 1.8, ease: "expo.out" }, "-=1.8")
+        .fromTo(".nch-badge",
+          { y: 60, autoAlpha: 0, scale: 0.8 },
+          { y: 0, autoAlpha: 1, scale: 1, ease: "back.out(1.2)", duration: 1.2, stagger: isMobile ? 0 : 0.2 },
+          "-=1.5"
+        )
+        .fromTo(".nch-card-left", { x: -40, autoAlpha: 0 }, { x: 0, autoAlpha: 1, ease: "power4.out", duration: 1.2 }, "-=1.2")
+        .fromTo(".nch-card-right", { x: 40, autoAlpha: 0, scale: 0.85 }, { x: 0, autoAlpha: 1, scale: 1, ease: "expo.out", duration: 1.2 }, "<")
+        // Settle pause
         .to({}, { duration: 0.5 })
         // Phase 5: transition to CTA
         .set(".nch-hero-text", { autoAlpha: 0 })
         .set(".nch-cta-wrapper", { autoAlpha: 1 })
-        .to({}, { duration: 0.6 })
+        .to({}, { duration: 0.5 })
         .to([".nch-mockup-wrapper", ".nch-badge", ".nch-card-left", ".nch-card-right"], {
-          scale: 0.9, y: -40, z: -200, autoAlpha: 0, ease: "power3.in", duration: 1.2, stagger: 0.05,
+          scale: 0.9, y: -40, autoAlpha: 0, ease: "power3.in", duration: 1.0, stagger: 0.04,
         })
         .to(".nch-main-card", {
           width: isMobile ? "92vw" : "85vw",
           height: isMobile ? "92vh" : "85vh",
           borderRadius: isMobile ? "32px" : "40px",
           ease: "expo.inOut",
-          duration: 1.8,
+          duration: 1.5,
         }, "pullback")
-        .to(".nch-cta-wrapper", { scale: 1, filter: "blur(0px)", ease: "expo.inOut", duration: 1.8 }, "pullback")
+        .to(".nch-cta-wrapper", { scale: 1, filter: "blur(0px)", ease: "expo.inOut", duration: 1.5 }, "pullback")
         // Phase 6: card exits viewport
-        .to(".nch-main-card", { y: -window.innerHeight - 300, ease: "power3.in", duration: 1.5 });
+        .to(".nch-main-card", { y: -window.innerHeight - 200, ease: "power3.in", duration: 1.2 });
 
     }, containerRef);
 
     return () => ctx.revert();
   }, [onCinematicStateChange]);
 
+  const isMobileDevice = typeof window !== "undefined" && window.innerWidth < 768;
+
   return (
     <div
       ref={containerRef}
       className="relative w-screen h-screen overflow-hidden flex items-center justify-center bg-black text-white antialiased"
-      style={{ perspective: "1500px" }}
+      style={isMobileDevice ? undefined : { perspective: "1500px" }}
     >
       <style dangerouslySetInnerHTML={{ __html: INJECTED_STYLES }} />
       <div className="nch-film-grain" aria-hidden="true" />
@@ -318,7 +363,7 @@ export default function NorteaCinematicHero({
       </div>
 
       {/* Main card (foreground) */}
-      <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none" style={{ perspective: "1500px" }}>
+      <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none" style={isMobileDevice ? undefined : { perspective: "1500px" }}>
         <div
           ref={mainCardRef}
           className="nch-main-card nch-card nch-gsap-reveal relative overflow-hidden flex items-center justify-center pointer-events-auto w-[92vw] md:w-[85vw] h-[92vh] md:h-[85vh] rounded-[32px] md:rounded-[40px]"
