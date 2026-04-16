@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import TrustSection from "./TrustSection";
 import HeroBg from "./HeroBg";
+import NorteaCinematicHero from "./NorteaCinematicHero";
 
 function useCountUp(end: number, duration = 1400, startWhen = true, prefix = "", suffix = "") {
   const [value, setValue] = useState(0);
@@ -79,125 +80,6 @@ const MetricCard = memo(function MetricCard({ label, value, tone = "default" }: 
       <p className="text-sm text-white/40">{label}</p>
       <p className="mt-2 text-2xl font-bold text-white">{value}</p>
     </div>
-  );
-});
-
-const ExecutivePreview = memo(function ExecutivePreview() {
-  const [started, setStarted] = useState(false);
-  const shouldReduceMotion = useReducedMotion();
-  // Aguarda o paint inicial antes de iniciar as animações de número
-  const delay = shouldReduceMotion ? 0 : 1000;
-  useEffect(() => {
-    const t = setTimeout(() => setStarted(true), delay);
-    return () => clearTimeout(t);
-  }, [delay]);
-  const faturamento = useCountUp(128450, 1400, started, "R$ ");
-  const meta = useCountUp(74, 1400, started);
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 32, scale: 0.97 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-      className="relative mx-auto w-full max-w-[580px]"
-    >
-      {/* Glow halos */}
-
-      {/* Outer premium frame */}
-      <div className="relative rounded-[40px] border border-white/12 bg-[#141416] p-[1.5px] shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_40px_130px_rgba(0,0,0,0.70)]">
-        <div className="rounded-[39px] bg-[#141416] p-4">
-          <div className="rounded-[33px] bg-[#1a1a1d] p-5">
-
-            {/* Header row */}
-            <div className="flex items-center justify-between gap-3">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/40">Visão estratégica</p>
-                <h3 className="mt-1.5 text-[1.4rem] font-bold text-white">Controle com clareza</h3>
-              </div>
-              <div className="flex items-center gap-1.5 rounded-full border border-[#057a41]/55 bg-[#057a41]/22 px-3 py-1.5 text-xs font-medium text-[#057a41] backdrop-blur-sm">
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#057a41] opacity-60" />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#057a41]" />
-                </span>
-                Nortea Dashboard
-              </div>
-            </div>
-
-            {/* Top metrics */}
-            <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              <div className="rounded-3xl border border-white/8 bg-[#111113] p-5">
-                <p className="text-sm text-white/40">Faturamento projetado</p>
-                <p className="mt-2 text-3xl font-bold text-white">{faturamento}</p>
-                <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-white/8">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: "74%" }}
-                    transition={{ duration: 1.4, delay: 0.9, ease: "easeOut" }}
-                    className="h-full rounded-full bg-gradient-to-r from-[#057a41] to-[#046035]"
-                  />
-                </div>
-                <p className="mt-2.5 text-xs text-white/30">{meta}% da meta mensal atingida</p>
-              </div>
-
-              <div className="rounded-3xl border border-white/8 bg-[#111113] p-5">
-                <p className="text-sm text-white/40">Fluxo operacional</p>
-                <p className="mt-1.5 text-2xl font-bold text-white">Organizado</p>
-                <div className="mt-4 grid grid-cols-3 gap-2">
-                  {[
-                    { v: 72, label: "Efic." },
-                    { v: 88, label: "Ctrl." },
-                    { v: 64, label: "Cresc." },
-                  ].map((item, i) => (
-                    <div key={i} className="rounded-2xl bg-white/6 p-2.5 text-center ring-1 ring-white/8">
-                      <p className="text-base font-bold text-white">{item.v}%</p>
-                      <p className="text-[10px] uppercase tracking-wide text-white/40">{item.label}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Bottom area */}
-            <div className="mt-3 grid gap-3 lg:grid-cols-[1.2fr_0.8fr]">
-              <div className="rounded-3xl border border-white/8 bg-[#111113] p-5">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-xs text-white/30">Acompanhamento mensal</p>
-                    <p className="text-base font-semibold text-white">Indicadores centrais</p>
-                  </div>
-                  <div className="rounded-full border border-white/10 bg-white/6 px-2.5 py-1 text-xs font-semibold text-white/50">Ao vivo</div>
-                </div>
-                <div className="mt-5 flex h-28 items-end gap-2">
-                  {[34, 56, 49, 63, 58, 82, 74].map((h, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ height: 0, opacity: 0.3 }}
-                      animate={{ height: `${h}%`, opacity: 1 }}
-                      transition={{ duration: 0.8, delay: 0.7 + i * 0.07, ease: "easeOut" }}
-                      className={`w-full rounded-t-xl ${i >= 5 ? "bg-[#057a41]/75" : "bg-white/12"}`}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              <div className="grid gap-3">
-                <div className="rounded-3xl border border-white/8 bg-[#111113] p-4">
-                  <p className="text-xs text-white/30">Pontos de atenção</p>
-                  <p className="mt-1.5 text-xl font-bold text-white">03 pontos</p>
-                  <p className="mt-1 text-xs leading-5 text-white/30">Atenção imediata necessária.</p>
-                </div>
-                <div className="rounded-3xl border border-white/10 bg-white/5 p-4">
-                  <p className="text-xs text-white/40">Decisão com dados</p>
-                  <p className="mt-1.5 text-xl font-bold text-white">Mais controle</p>
-                  <p className="mt-1 text-xs leading-5 text-white/40">Menos achismo, mais resultado.</p>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </motion.div>
   );
 });
 
@@ -269,6 +151,7 @@ const DashboardDemo = memo(function DashboardDemo() {
 
 export default function NorteaReactSite() {
   const [headerVisible, setHeaderVisible] = useState(true);
+  const [cinematicActive, setCinematicActive] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const shouldReduceMotion = useReducedMotion();
 
@@ -358,8 +241,8 @@ export default function NorteaReactSite() {
   return (
     <div className="min-h-screen bg-[#09090b] text-white antialiased">
 
-      {/* ── HEADER ── */}
-      <header className={`sticky top-0 z-40 bg-black transition-transform duration-300 ease-in-out will-change-transform ${headerVisible ? "translate-y-0" : "-translate-y-full"}`}>
+      {/* ── HEADER — oculto durante o cinematic hero, aparece depois ── */}
+      <header className={`sticky top-0 z-40 bg-black transition-transform duration-300 ease-in-out will-change-transform ${!cinematicActive && headerVisible ? "translate-y-0" : "-translate-y-full"}`}>
         <div className="border-b border-white/8">
           <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-6 lg:px-8">
             <LogoMark />
@@ -420,117 +303,19 @@ export default function NorteaReactSite() {
 
       <main>
 
-        {/* ══ DARK ZONE: fundo único compartilhado ══ */}
-        <div className="relative overflow-hidden bg-[#02070e]">
-          {/* Hero background — arte SVG inspirada na logo */}
-          <HeroBg />
-          {/* Overlay: protege o texto à esquerda, deixa arte respirar à direita */}
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#02070e]/92 via-[#02070e]/50 to-[#02070e]/15" />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#02070e]/65 via-transparent to-[#02070e]/18" />
-
-        {/* ── HERO ── */}
-        <section className="relative overflow-hidden">
-
-          <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 sm:py-24 lg:grid-cols-2 lg:gap-14 lg:px-8 lg:py-32">
-
-            {/* LEFT — text block */}
-            <motion.div
-              initial={shouldReduceMotion ? false : { opacity: 0, x: -24 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="relative z-10"
-            >
-              {/* Badge */}
-              <div className="mb-7 inline-flex items-center gap-2.5 rounded-full border border-[#057a41]/50 bg-[#057a41]/20 px-4 py-2 text-sm text-white/85 backdrop-blur-md">
-                <span className="relative flex h-2 w-2 shrink-0">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#057a41] opacity-70" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[#057a41]" />
-                </span>
-                <span className="font-medium">Estruturação empresarial com tecnologia e gestão</span>
-              </div>
-
-              {/* H1 */}
-              <h1 className="max-w-[580px] text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-[3.4rem]">
-                Empresas que <span className="text-[#057a41]">vendem,</span>{" "}
-                <span className="text-white/55">mas operam no improviso,</span>{" "}
-                <br className="hidden sm:block" />
-                <span className="text-white">não crescem</span>{" "}
-                <span className="text-white/55">com consistência.</span>
-              </h1>
-
-              {/* Subtitle */}
-              <p className="mt-7 max-w-[500px] text-lg leading-8 text-white/60">
-                A Nortea organiza seu{" "}
-                <span className="font-semibold text-white/90">atendimento</span>,{" "}
-                sua{" "}
-                <span className="font-semibold text-white/90">estrutura digital</span>{" "}
-                e seu{" "}
-                <span className="font-semibold text-white/90">financeiro</span>{" "}
-                para transformar sua empresa em uma operação profissional.
-              </p>
-
-              {/* CTAs */}
-              <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
-                <a
-                  href={whatsappLink}
-                  className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-[#057a41] px-7 py-4 font-semibold text-white shadow-[0_8px_36px_rgba(5,122,65,0.30)] transition-all hover:scale-[1.03] hover:bg-[#068a4b] hover:shadow-[0_12px_48px_rgba(5,122,65,0.42)]"
-                >
-                  Falar com a Nortea
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                </a>
-                <a
-                  href="#servicos"
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/25 bg-white/8 px-7 py-4 font-semibold text-white/80 backdrop-blur-sm transition-all hover:border-[#057a41]/40 hover:bg-white/12 hover:text-white"
-                >
-                  Ver como atuamos
-                </a>
-              </div>
-
-              {/* Trust row */}
-              <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-white/55">
-                {["Atendimento organizado", "Estrutura digital", "Controle financeiro"].map((t) => (
-                  <span key={t} className="flex items-center gap-1.5">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#057a41]" />
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* RIGHT — dashboard */}
-            <div className="relative z-10">
-              {/* Floating micro-stats */}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.7, delay: 1.3 }}
-                className="absolute -left-10 top-10 z-20 hidden xl:block"
-              >
-                <div className="rounded-2xl border border-white/12 bg-[#141416]/95 px-4 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.55)] backdrop-blur-sm">
-                  <p className="text-[10px] font-semibold uppercase tracking-wider text-white/35">Empresas atendidas</p>
-                  <p className="mt-0.5 text-xl font-bold text-[#057a41]">60+</p>
-                </div>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.7, delay: 1.5 }}
-                className="absolute -right-6 bottom-24 z-20 hidden xl:block"
-              >
-                <div className="rounded-2xl border border-white/12 bg-[#141416]/95 px-4 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.55)] backdrop-blur-sm">
-                  <p className="text-[10px] font-semibold uppercase tracking-wider text-white/35">Satisfação</p>
-                  <p className="mt-0.5 text-xl font-bold text-[#057a41]">94%</p>
-                </div>
-              </motion.div>
-              <ExecutivePreview />
-            </div>
-          </div>
-        </section>
+        {/* ── CINEMATIC HERO (scroll experience) ── */}
+        <NorteaCinematicHero
+          whatsappLink={whatsappLink}
+          onCinematicStateChange={setCinematicActive}
+        />
 
         {/* ── TRUST / SEGMENTOS ── */}
-        <TrustSection />
-
-        </div>{/* fim dark zone */}
+        <div className="relative overflow-hidden bg-[#02070e]">
+          <HeroBg />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#02070e]/92 via-[#02070e]/50 to-[#02070e]/15" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#02070e]/65 via-transparent to-[#02070e]/18" />
+          <TrustSection />
+        </div>
 
         {/* ── PROBLEMA ── */}
         <section className="bg-[#f5f5f5]">
