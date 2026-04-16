@@ -351,7 +351,7 @@ export default function NorteaCinematicHero({
           <div className="relative w-full h-full max-w-7xl mx-auto px-4 lg:px-12 flex flex-col justify-evenly lg:grid lg:grid-cols-3 items-center lg:gap-8 z-10 py-6 lg:py-0">
 
             {/* RIGHT (desktop) / TOP (mobile): brand name */}
-            <div className="nch-card-right nch-gsap-reveal order-1 lg:order-3 flex justify-center lg:justify-end lg:pl-10 z-20 w-full">
+            <div className="nch-card-right nch-gsap-reveal order-1 lg:order-3 flex justify-center lg:justify-end lg:pl-24 z-20 w-full">
               <h2 className="text-6xl md:text-[6rem] lg:text-[8rem] font-black uppercase tracking-tighter nch-text-card-silver flex items-center gap-3 lg:gap-5">
                 Nortea
                 <TrendingUp className="text-[#057a41] shrink-0" style={{ width: "0.6em", height: "0.6em", strokeWidth: 2 }} />
