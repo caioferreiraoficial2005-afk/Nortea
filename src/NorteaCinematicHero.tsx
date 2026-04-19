@@ -351,8 +351,8 @@ export default function NorteaCinematicHero({
           <div className="relative w-full h-full max-w-7xl mx-auto px-4 lg:px-12 flex flex-col justify-evenly lg:grid lg:grid-cols-3 items-center lg:gap-8 z-10 py-6 lg:py-0">
 
             {/* RIGHT (desktop) / TOP (mobile): brand name */}
-            <div className="nch-card-right nch-gsap-reveal order-1 lg:order-3 flex justify-center lg:justify-end lg:pl-24 z-20 w-full">
-              <h2 className="text-6xl md:text-[6rem] lg:text-[8rem] font-black uppercase tracking-tighter nch-text-card-silver flex items-center gap-3 lg:gap-5">
+            <div className="nch-card-right nch-gsap-reveal order-1 lg:order-3 flex justify-center lg:justify-center z-20 w-full">
+              <h2 className="text-6xl md:text-[6rem] lg:text-[4.5rem] font-black uppercase tracking-tighter nch-text-card-silver flex items-center gap-3 lg:gap-4 pl-10 lg:pl-0">
                 Nortea
                 <TrendingUp className="text-[#057a41] shrink-0" style={{ width: "0.6em", height: "0.6em", strokeWidth: 2 }} />
               </h2>
@@ -617,31 +617,31 @@ export default function NorteaCinematicHero({
             </div>
 
             {/* LEFT (desktop) / BOTTOM (mobile): 3 swappable text blocks */}
-            <div className="order-3 lg:order-1 relative z-20 w-full px-4 lg:px-0 h-24 lg:h-full">
+            <div className="order-3 lg:order-1 relative z-20 w-full px-4 lg:px-0 h-auto min-h-[7rem] lg:h-full">
 
               <div className="nch-card-left-1 nch-gsap-reveal absolute inset-0 flex flex-col justify-center text-center lg:text-left">
-                <h3 className="text-white text-xl md:text-3xl lg:text-4xl font-bold mb-0 lg:mb-4 tracking-tight">
+                <h3 className="text-white text-xl md:text-3xl lg:text-4xl font-bold mb-1 lg:mb-4 tracking-tight">
                   Site e loja virtual profissional.
                 </h3>
-                <p className="hidden lg:block text-white/55 text-base lg:text-lg font-normal leading-relaxed">
+                <p className="text-white/55 text-xs lg:text-lg font-normal leading-relaxed">
                   A <span className="text-white font-semibold">Nortea</span> cria sua presença digital: páginas de conversão, loja virtual e estrutura para vender online com autoridade.
                 </p>
               </div>
 
               <div className="nch-card-left-2 nch-gsap-reveal absolute inset-0 flex flex-col justify-center text-center lg:text-left">
-                <h3 className="text-white text-xl md:text-3xl lg:text-4xl font-bold mb-0 lg:mb-4 tracking-tight">
+                <h3 className="text-white text-xl md:text-3xl lg:text-4xl font-bold mb-1 lg:mb-4 tracking-tight">
                   Atendimento automatizado no WhatsApp.
                 </h3>
-                <p className="hidden lg:block text-white/55 text-base lg:text-lg font-normal leading-relaxed">
+                <p className="text-white/55 text-xs lg:text-lg font-normal leading-relaxed">
                   Fluxo de atendimento estruturado com <span className="text-white font-semibold">automações inteligentes</span> que captam, qualificam e convertem leads 24h por dia.
                 </p>
               </div>
 
               <div className="nch-card-left-3 nch-gsap-reveal absolute inset-0 flex flex-col justify-center text-center lg:text-left">
-                <h3 className="text-white text-xl md:text-3xl lg:text-4xl font-bold mb-0 lg:mb-4 tracking-tight">
+                <h3 className="text-white text-xl md:text-3xl lg:text-4xl font-bold mb-1 lg:mb-4 tracking-tight">
                   Controle financeiro com clareza.
                 </h3>
-                <p className="hidden lg:block text-white/55 text-base lg:text-lg font-normal leading-relaxed">
+                <p className="text-white/55 text-xs lg:text-lg font-normal leading-relaxed">
                   A <span className="text-white font-semibold">Nortea</span> organiza o financeiro da sua empresa: dashboard personalizado, fluxo de caixa e acompanhamento mensal estratégico.
                 </p>
               </div>

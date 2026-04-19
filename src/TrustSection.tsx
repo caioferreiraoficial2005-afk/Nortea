@@ -43,15 +43,23 @@ export default function TrustSection() {
           from { transform: translateX(0); }
           to { transform: translateX(-50%); }
         }
+        @keyframes nortea-marquee-reverse {
+          from { transform: translateX(-50%); }
+          to { transform: translateX(0); }
+        }
         .nortea-marquee {
           animation: nortea-marquee 40s linear infinite;
+          will-change: transform;
+        }
+        .nortea-marquee-reverse {
+          animation: nortea-marquee-reverse 28s linear infinite;
           will-change: transform;
         }
         .nortea-marquee-item {
           transition: opacity 0.3s ease, transform 0.3s ease;
         }
         @media (prefers-reduced-motion: reduce) {
-          .nortea-marquee { animation: none; }
+          .nortea-marquee, .nortea-marquee-reverse { animation: none; }
         }
       `}</style>
 
@@ -167,12 +175,10 @@ export default function TrustSection() {
                 style={{
                   maskImage: "linear-gradient(to right, transparent, black 15%, black 85%, transparent)",
                   WebkitMaskImage: "linear-gradient(to right, transparent, black 15%, black 85%, transparent)",
-                  animationDirection: "reverse",
                 }}
               >
                 <div
-                  className="flex gap-10 whitespace-nowrap px-4"
-                  style={{ animation: "nortea-marquee 28s linear infinite reverse" }}
+                  className="nortea-marquee-reverse flex gap-10 whitespace-nowrap px-4"
                 >
                   {[...PERFIS, ...PERFIS, ...PERFIS].reverse().map((perfil, i) => {
                     const Icon = perfil.icon;
