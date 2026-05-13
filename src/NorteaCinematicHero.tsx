@@ -397,7 +397,7 @@ export default function NorteaCinematicHero({
                         <div className="nch-sw1 flex justify-between items-center">
                           <div>
                             <span className="text-[9px] text-neutral-500 uppercase tracking-widest font-bold">Nortea Store</span>
-                            <p className="text-sm font-bold text-white leading-tight">Loja Digital</p>
+                            <p className="text-sm font-bold text-white leading-tight">Agendamentos</p>
                           </div>
                           <div className="relative">
                             <div className="w-8 h-8 rounded-full bg-[#057a41]/15 text-[#057a41] flex items-center justify-center font-bold text-xs border border-[#057a41]/30">N</div>
@@ -409,20 +409,20 @@ export default function NorteaCinematicHero({
 
                         <div className="nch-sw1 nch-widget rounded-2xl p-3 flex items-center gap-3">
                           <div className="w-12 h-12 rounded-xl flex-shrink-0 flex items-center justify-center border border-[#057a41]/25" style={{ background: "linear-gradient(135deg, rgba(5,122,65,0.3) 0%, rgba(5,122,65,0.08) 100%)" }}>
-                            <span className="text-lg" aria-hidden="true">🛍️</span>
+                            <span className="text-lg" aria-hidden="true">📅</span>
                           </div>
                           <div className="flex-1 min-w-0">
                             <p className="text-[9px] text-neutral-500 uppercase tracking-wider">Produto em destaque</p>
-                            <p className="text-xs font-bold text-white leading-tight">Pacote Profissional</p>
-                            <p className="text-sm font-extrabold text-[#057a41]">R$ 497,00</p>
+                            <p className="text-xs font-bold text-white leading-tight">Consulta gratuita — 30 min</p>
+                            <p className="text-sm font-extrabold text-[#057a41]">Grátis</p>
                           </div>
                         </div>
 
                         <div className="nch-sw1 grid grid-cols-3 gap-1.5">
                           {[
-                            { label: "Visitantes", value: "1.2k" },
-                            { label: "Conversão", value: "4.8%" },
-                            { label: "Pedidos", value: "57" },
+                            { label: "Agendamentos", value: "47" },
+                            { label: "Taxa conclusão", value: "98%" },
+                            { label: "Avaliação", value: "5.0" },
                           ].map((s) => (
                             <div key={s.label} className="nch-widget rounded-xl p-2 text-center">
                               <p className="text-xs font-bold text-white">{s.value}</p>
@@ -621,28 +621,28 @@ export default function NorteaCinematicHero({
 
               <div className="nch-card-left-1 nch-gsap-reveal absolute inset-0 flex flex-col justify-center text-center lg:text-left">
                 <h3 className="text-white text-xl md:text-3xl lg:text-4xl font-bold mb-1 lg:mb-4 tracking-tight">
-                  Site e loja virtual profissional.
+                  Sua loja online vendendo enquanto você trabalha.
                 </h3>
                 <p className="text-white/55 text-xs lg:text-lg font-normal leading-relaxed">
-                  A <span className="text-white font-semibold">Nortea</span> cria sua presença digital: páginas de conversão, loja virtual e estrutura para vender online com autoridade.
+                  A <span className="text-white font-semibold">Nortea</span> cria sua presença digital: site profissional, loja virtual e páginas que convertem visitante em cliente.
                 </p>
               </div>
 
               <div className="nch-card-left-2 nch-gsap-reveal absolute inset-0 flex flex-col justify-center text-center lg:text-left">
                 <h3 className="text-white text-xl md:text-3xl lg:text-4xl font-bold mb-1 lg:mb-4 tracking-tight">
-                  Atendimento automatizado no WhatsApp.
+                  Nenhum cliente sem resposta. Nunca mais.
                 </h3>
                 <p className="text-white/55 text-xs lg:text-lg font-normal leading-relaxed">
-                  Fluxo de atendimento estruturado com <span className="text-white font-semibold">automações inteligentes</span> que captam, qualificam e convertem leads 24h por dia.
+                  Agente de IA no WhatsApp que responde, qualifica e agenda automaticamente — <span className="text-white font-semibold">24 horas por dia, 7 dias por semana.</span>
                 </p>
               </div>
 
               <div className="nch-card-left-3 nch-gsap-reveal absolute inset-0 flex flex-col justify-center text-center lg:text-left">
                 <h3 className="text-white text-xl md:text-3xl lg:text-4xl font-bold mb-1 lg:mb-4 tracking-tight">
-                  Controle financeiro com clareza.
+                  Seus números na tela. Suas decisões mais claras.
                 </h3>
                 <p className="text-white/55 text-xs lg:text-lg font-normal leading-relaxed">
-                  A <span className="text-white font-semibold">Nortea</span> organiza o financeiro da sua empresa: dashboard personalizado, fluxo de caixa e acompanhamento mensal estratégico.
+                  Dashboard financeiro + assessoria mensal do <span className="text-white font-semibold">Bernardo.</span> Você passa a saber exatamente quanto sobra todo mês.
                 </p>
               </div>
 

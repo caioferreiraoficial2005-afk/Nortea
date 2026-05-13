@@ -1,18 +1,11 @@
-import { memo, useCallback, useEffect, useRef, useState } from "react";
-import { motion, useInView, useReducedMotion } from "framer-motion";
+import { useCallback, useEffect, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
-  BarChart3,
-  BriefcaseBusiness,
   CheckCircle2,
-  ChevronRight,
   CircleDollarSign,
-  LineChart,
   MessageCircle,
-  Settings2,
-  ShieldCheck,
   Target,
-  TrendingUp,
   Workflow,
 } from "lucide-react";
 import TrustSection from "./TrustSection";
@@ -20,40 +13,40 @@ import HeroBg from "./HeroBg";
 import NorteaCinematicHero from "./NorteaCinematicHero";
 import PricingSection from "./PricingSection";
 import LeadFormSection from "./LeadFormSection";
+import ServiceDemosSection from "./ServiceDemosSection";
 
-function useCountUp(end: number, duration = 1400, startWhen = true, prefix = "", suffix = "") {
-  const [value, setValue] = useState(0);
-
-  useEffect(() => {
-    if (!startWhen) return;
-    let frame = 0;
-    const start = performance.now();
-
-    const tick = (now: number) => {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setValue(Math.round(end * eased));
-      if (progress < 1) frame = requestAnimationFrame(tick);
-    };
-
-    frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
-  }, [end, duration, startWhen]);
-
-  return `${prefix}${value.toLocaleString("pt-BR")}${suffix}`;
-}
-
-
-function SectionTitle({ eyebrow, title, description, light = false }: { eyebrow: string; title: React.ReactNode; description?: string; light?: boolean }) {
+function SectionTitle({
+  eyebrow,
+  title,
+  description,
+  light = false,
+}: {
+  eyebrow: string;
+  title: React.ReactNode;
+  description?: string;
+  light?: boolean;
+}) {
   return (
-    <div className="max-w-3xl">
+    <motion.div
+      className="max-w-3xl"
+      initial={{ opacity: 0, y: 32 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+    >
       <div className="mb-4 inline-flex items-center gap-2.5">
         <span className={`h-px w-7 ${light ? "bg-neutral-400" : "bg-[#057a41]/50"}`} />
         <p className={`text-sm font-semibold uppercase tracking-[0.22em] ${light ? "text-neutral-500" : "text-[#057a41]/70"}`}>{eyebrow}</p>
       </div>
-      <h2 className={`text-3xl font-bold tracking-tight ${light ? "text-neutral-900" : "text-white"} sm:text-4xl lg:text-[2.6rem] lg:leading-[1.15]`}>{title}</h2>
-      {description ? <p className={`mt-5 max-w-2xl text-base leading-relaxed ${light ? "text-neutral-600" : "text-white/65"} sm:text-lg`}>{description}</p> : null}
-    </div>
+      <h2 className={`text-3xl font-bold tracking-tight ${light ? "text-neutral-900" : "text-white"} sm:text-4xl lg:text-[2.6rem] lg:leading-[1.15]`}>
+        {title}
+      </h2>
+      {description ? (
+        <p className={`mt-5 max-w-2xl text-base leading-relaxed ${light ? "text-neutral-600" : "text-white/65"} sm:text-lg`}>
+          {description}
+        </p>
+      ) : null}
+    </motion.div>
   );
 }
 
@@ -70,85 +63,15 @@ function LogoMark() {
   );
 }
 
-const MetricCard = memo(function MetricCard({ label, value, tone = "default" }: { label: string; value: string; tone?: "default" | "green" | "blue" }) {
-  return (
-    <div
-      className={`rounded-[28px] border p-5 transition-transform duration-300 hover:-translate-y-1 ${
-        tone === "green"
-          ? "border-[#057a41]/40 bg-[#057a41]/14 shadow-[0_8px_28px_rgba(5,122,65,0.15)]"
-          : "border-white/8 bg-[#1a1a1d] shadow-[0_4px_20px_rgba(0,0,0,0.25)]"
-      }`}
-    >
-      <p className="text-sm text-white/40">{label}</p>
-      <p className="mt-2 text-2xl font-bold text-white">{value}</p>
-    </div>
-  );
-});
-
-const DashboardDemo = memo(function DashboardDemo() {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const inView = useInView(ref, { once: true, amount: 0.2 });
-
-  const faturamento = useCountUp(128450, 1600, inView, "R$ ");
-  const despesas = useCountUp(48200, 1500, inView, "R$ ");
-  const margem = useCountUp(62, 1300, inView, "", "%");
-  const leads = useCountUp(187, 1200, inView);
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.7 }}
-      className="relative overflow-hidden rounded-[36px] border border-white/10 bg-[#111113] p-6 shadow-[0_20px_80px_rgba(0,0,0,0.45)]"
-    >
-      <div className="pointer-events-none absolute right-0 top-0 h-56 w-56 rounded-full bg-[#057a41]/14 blur-3xl" />
-      <div className="pointer-events-none absolute left-0 bottom-0 h-40 w-40 rounded-full bg-white/3 blur-3xl" />
-      <div className="grid gap-5 xl:grid-cols-[1.2fr_0.8fr]">
-        <div className="grid gap-4 sm:grid-cols-2">
-          <MetricCard label="Faturamento do mês" value={faturamento} tone="green" />
-          <MetricCard label="Despesas operacionais" value={despesas} tone="blue" />
-          <MetricCard label="Margem estimada" value={margem} tone="green" />
-          <MetricCard label="Leads acompanhados" value={leads} tone="blue" />
-        </div>
-
-        <div className="rounded-[28px] border border-white/8 bg-[#1a1a1d] p-5">
-          <div className="flex items-center justify-between gap-3">
-            <div>
-              <p className="text-sm text-white/40">Resumo executivo</p>
-              <p className="text-lg font-semibold text-white">Visão da operação</p>
-            </div>
-            <div className="rounded-full border border-white/10 bg-white/8 px-3 py-1 text-xs font-medium text-white/50">Demonstrativo</div>
-          </div>
-
-          <div className="mt-6 space-y-4">
-            {[
-              ["Fluxo de caixa", "Saudável", "86%", "text-[#057a41]", "from-[#057a41]/75 to-[#057a41]/30"],
-              ["Processos críticos", "Controlados", "72%", "text-white/70", "from-white/40 to-white/20"],
-              ["Oportunidades", "Mapeadas", "64%", "text-white/60", "from-white/30 to-white/10"],
-            ].map(([label, text, width, textColor, barColor]) => (
-              <div key={label} className="rounded-2xl border border-white/6 bg-white/4 p-4">
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-white/40">{label}</span>
-                  <span className={`font-semibold ${textColor}`}>{text}</span>
-                </div>
-                <div className="mt-3 h-2 overflow-hidden rounded-full bg-white/8">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={inView ? { width } : {}}
-                    transition={{ duration: 0.8 }}
-                    className={`h-full rounded-full bg-gradient-to-r ${barColor}`}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-});
+// Stagger container + card variants
+const staggerContainer = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } },
+};
+const cardVariant = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
+};
 
 export default function NorteaReactSite() {
   const [headerVisible, setHeaderVisible] = useState(true);
@@ -200,13 +123,6 @@ export default function NorteaReactSite() {
     },
   ];
 
-  const beneficios = [
-    "Saber exatamente o que entra, o que sai e o que sobra",
-    "Tomar decisões com dados, não mais no achismo",
-    "Visualizar o fluxo de caixa todo mês, sem surpresas",
-    "Acompanhamento próximo com visão estratégica do negócio",
-  ];
-
   const etapas = [
     {
       step: "01",
@@ -230,20 +146,11 @@ export default function NorteaReactSite() {
     },
   ];
 
-  const entregas = [
-    { title: "Dashboard financeiro que você realmente entende", icon: BarChart3 },
-    { title: "Fluxo de caixa organizado, sem surpresas no mês", icon: LineChart },
-    { title: "Página de conversão que traz clientes de verdade", icon: TrendingUp },
-    { title: "Atendimento no WhatsApp com processo definido", icon: Settings2 },
-    { title: "Automações que eliminam o trabalho repetitivo", icon: BriefcaseBusiness },
-    { title: "Acompanhamento mensal próximo (BPO financeiro)", icon: ShieldCheck },
-  ];
-
   return (
-    <div className="min-h-screen bg-[#09090b] text-white antialiased">
+    <div className="min-h-screen bg-[#080b09] text-white antialiased">
 
       {/* ── HEADER ── */}
-      <header className={`sticky top-0 z-40 bg-black transition-transform duration-300 ease-in-out will-change-transform ${!cinematicActive && headerVisible ? "translate-y-0" : "-translate-y-full"}`}>
+      <header className={`sticky top-0 z-40 bg-[#080b09] transition-transform duration-300 ease-in-out will-change-transform ${!cinematicActive && headerVisible ? "translate-y-0" : "-translate-y-full"}`}>
         <div className="border-b border-white/8">
           <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-6 lg:px-8">
             <LogoMark />
@@ -276,7 +183,7 @@ export default function NorteaReactSite() {
           </div>
         </div>
         {mobileMenuOpen && (
-          <div className="border-b border-white/8 bg-black px-4 pb-4 lg:hidden">
+          <div className="border-b border-white/8 bg-[#080b09] px-4 pb-4 lg:hidden">
             <nav className="flex flex-col gap-1 pt-2">
               {[["#servicos", "Serviços"], ["#planos", "Planos"], ["#processo", "Processo"], ["#fundadores", "Fundadores"]].map(([href, label]) => (
                 <a
@@ -303,14 +210,25 @@ export default function NorteaReactSite() {
 
       <main>
 
-        {/* ── 1. CINEMATIC HERO ── */}
+        {/* ── 1. CINEMATIC HERO ── bg: #080b09 */}
         <NorteaCinematicHero
           whatsappLink={whatsappLink}
           onCinematicStateChange={setCinematicActive}
         />
 
-        {/* ── 2. PROBLEMA ── */}
-        <section className="bg-[#f5f5f5]">
+        {/* ── 2. TRUST SECTION ── bg: #080b09 (colada ao hero, sem separador) */}
+        <div className="relative overflow-hidden bg-[#080b09]">
+          <HeroBg />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#080b09]/92 via-[#080b09]/50 to-[#080b09]/15" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#080b09]/65 via-transparent to-[#080b09]/18" />
+          <TrustSection />
+        </div>
+
+        {/* Separador dark → claro */}
+        <div className="h-16 bg-gradient-to-b from-[#080b09] to-[#f4f6f3]" />
+
+        {/* ── 3. PROBLEMA ── bg: #f4f6f3 */}
+        <section className="bg-[#f4f6f3]">
           <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
             <SectionTitle
               light
@@ -320,10 +238,10 @@ export default function NorteaReactSite() {
             />
             <motion.div
               className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4"
-              initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              variants={staggerContainer}
+              initial={shouldReduceMotion ? false : "hidden"}
+              whileInView="visible"
               viewport={{ once: true, amount: 0.15 }}
-              transition={{ duration: 0.4 }}
             >
               {[
                 { text: "Você demora pra responder no WhatsApp e o cliente some — vai pro concorrente." },
@@ -331,15 +249,17 @@ export default function NorteaReactSite() {
                 { text: "Seu Instagram e site existem, mas não trazem nenhum cliente novo." },
                 { text: "Quanto mais cresce, mais caótico fica. Você virou escravo do próprio negócio." },
               ].map((item) => (
-                <div
+                <motion.div
                   key={item.text}
-                  className="group rounded-[28px] border border-neutral-200 bg-white p-6 transition-transform duration-300 hover:-translate-y-1.5"
+                  variants={cardVariant}
+                  whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                  className="group rounded-[28px] border border-neutral-200 bg-white p-6"
                 >
                   <div className="inline-flex rounded-2xl bg-neutral-100 p-2.5">
                     <CheckCircle2 className="h-5 w-5 text-[#057a41]" />
                   </div>
                   <p className="mt-4 font-semibold text-neutral-800">{item.text}</p>
-                </div>
+                </motion.div>
               ))}
             </motion.div>
 
@@ -365,8 +285,11 @@ export default function NorteaReactSite() {
           </div>
         </section>
 
-        {/* ── 3. SERVIÇOS — 3 PILARES ── */}
-        <section id="servicos" className="relative bg-[#0d0d0f]">
+        {/* Separador claro → dark */}
+        <div className="h-16 bg-gradient-to-b from-[#f4f6f3] to-[#080b09]" />
+
+        {/* ── 4. SERVIÇOS — 3 PILARES ── bg: #080b09 */}
+        <section id="servicos" className="relative bg-[#080b09]">
           <div className="pointer-events-none absolute inset-0 opacity-[0.025]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "28px 28px" }} />
           <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
             <SectionTitle
@@ -375,17 +298,25 @@ export default function NorteaReactSite() {
               description="A Nortea atua nos 3 pontos que mais travam o crescimento das pequenas empresas: digital, atendimento e financeiro. De forma integrada, não isolada."
             />
 
-            <motion.div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.15 }} transition={{ duration: 0.5 }}>
+            <motion.div
+              className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+              variants={staggerContainer}
+              initial={shouldReduceMotion ? false : "hidden"}
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.15 }}
+            >
               {pilares.map((item, idx) => {
                 const Icon = item.icon;
                 const isFirst = idx === 0;
                 return (
-                  <div
+                  <motion.div
                     key={item.title}
-                    className={`group relative rounded-[32px] border p-8 transition-transform duration-300 hover:-translate-y-2 ${
+                    variants={cardVariant}
+                    whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                    className={`group relative rounded-[32px] border p-8 ${
                       isFirst
                         ? "border-white/15 bg-white/6 shadow-[0_6px_32px_rgba(0,0,0,0.30)]"
-                        : "border-white/8 bg-[#111113] shadow-[0_6px_32px_rgba(0,0,0,0.25)]"
+                        : "border-white/8 bg-[#111a13] shadow-[0_6px_32px_rgba(0,0,0,0.25)]"
                     }`}
                   >
                     <div className="relative">
@@ -399,12 +330,11 @@ export default function NorteaReactSite() {
                       <h3 className="mt-6 text-xl font-bold text-white">{item.title}</h3>
                       <p className="mt-3 leading-7 text-white/65">{item.text}</p>
                     </div>
-                  </div>
+                  </motion.div>
                 );
               })}
             </motion.div>
 
-            {/* Conexão entre pilares */}
             <div className="mt-10">
               <div className="h-px w-full bg-white/10" />
               <p className="py-6 text-sm text-center text-white/50 max-w-3xl mx-auto leading-7">
@@ -427,8 +357,14 @@ export default function NorteaReactSite() {
           </div>
         </section>
 
-        {/* ── 4. PROCESSO ── */}
-        <section id="processo" className="relative overflow-hidden bg-[#f5f5f5]">
+        {/* ── 5. DEMOS DOS SERVIÇOS ── bg: #0e1410 (sem separador brusco, mesma família dark) */}
+        <ServiceDemosSection />
+
+        {/* Separador dark → claro */}
+        <div className="h-16 bg-gradient-to-b from-[#0e1410] to-[#f4f6f3]" />
+
+        {/* ── 6. PROCESSO ── bg: #f4f6f3 */}
+        <section id="processo" className="relative overflow-hidden bg-[#f4f6f3]">
           <div className="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
             <SectionTitle
               light
@@ -437,35 +373,61 @@ export default function NorteaReactSite() {
               description="Trabalhamos com etapas claras, do diagnóstico à execução. Nada genérico, tudo adaptado à realidade do seu negócio."
             />
 
-            <motion.div
-              className="mt-10 grid gap-5 lg:grid-cols-2"
-              initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.15 }}
-              transition={{ duration: 0.45 }}
-            >
-              {etapas.map((etapa, idx) => {
-                const isAlt = idx % 2 === 1;
-                return (
-                <div
-                  key={etapa.step}
-                  className={`group rounded-[32px] border p-8 transition-transform duration-300 hover:-translate-y-1.5 ${
-                    isAlt
-                      ? "border-neutral-200 bg-white shadow-[0_8px_32px_rgba(0,0,0,0.08)]"
-                      : "border-neutral-200 bg-[#f0f0f0] shadow-[0_6px_32px_rgba(0,0,0,0.06)]"
-                  }`}
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#057a41]/15 font-bold text-lg text-[#057a41] shadow-[0_2px_12px_rgba(0,0,0,0.10)] transition-all duration-300 group-hover:bg-[#057a41]/25 group-hover:shadow-[0_4px_22px_rgba(5,122,65,0.20)] ring-1 ring-[#057a41]/30">
+            {/* Desktop: horizontal timeline — Mobile: vertical stack */}
+            <div className="mt-14">
+              {/* Desktop */}
+              <div className="hidden lg:grid lg:grid-cols-4 lg:gap-0">
+                {etapas.map((etapa, idx) => (
+                  <motion.div
+                    key={etapa.step}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.5, delay: idx * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                    whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                    className="group relative px-5 first:pl-0 last:pr-0"
+                  >
+                    {/* Horizontal connector line */}
+                    {idx < etapas.length - 1 && (
+                      <div className="absolute top-6 left-[calc(50%+24px)] right-0 h-px border-t border-[#057a41]/30" />
+                    )}
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#057a41]/40 bg-[#057a41]/15 font-bold text-[#057a41] shadow-[0_2px_12px_rgba(0,0,0,0.10)] transition-all duration-300 group-hover:bg-[#057a41]/25 group-hover:shadow-[0_4px_22px_rgba(5,122,65,0.20)]">
                       {etapa.step}
                     </div>
-                    <h3 className="text-xl font-bold text-neutral-900">{etapa.title}</h3>
-                  </div>
-                  <p className="mt-5 leading-7 text-neutral-600">{etapa.text}</p>
-                </div>
-                );
-              })}
-            </motion.div>
+                    <h3 className="mt-4 text-lg font-bold text-neutral-900">{etapa.title}</h3>
+                    <p className="mt-3 text-sm leading-6 text-neutral-600">{etapa.text}</p>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Mobile: vertical */}
+              <div className="flex flex-col gap-0 lg:hidden">
+                {etapas.map((etapa, idx) => (
+                  <motion.div
+                    key={etapa.step}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.45, delay: idx * 0.1 }}
+                    className="group flex gap-5 pb-8 last:pb-0"
+                  >
+                    {/* Vertical line + number */}
+                    <div className="flex flex-col items-center">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#057a41]/40 bg-[#057a41]/15 font-bold text-[#057a41]">
+                        {etapa.step}
+                      </div>
+                      {idx < etapas.length - 1 && (
+                        <div className="mt-2 flex-1 border-l border-[#057a41]/30" />
+                      )}
+                    </div>
+                    <div className="pb-2 pt-2">
+                      <h3 className="text-lg font-bold text-neutral-900">{etapa.title}</h3>
+                      <p className="mt-2 text-sm leading-6 text-neutral-600">{etapa.text}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
 
             <div className="mt-10">
               <a
@@ -481,142 +443,14 @@ export default function NorteaReactSite() {
           </div>
         </section>
 
-        {/* ── 5. PLANOS ── */}
+        {/* Separador claro → dark */}
+        <div className="h-16 bg-gradient-to-b from-[#f4f6f3] to-[#080b09]" />
+
+        {/* ── 7. PLANOS ── bg: #080b09 (PricingSection já usa #080b09) */}
         <PricingSection />
 
-        {/* ── 6. FINANCEIRO ── */}
-        <section className="bg-[#0d0d0f]">
-          <div className="pointer-events-none absolute inset-0 opacity-[0.025]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "28px 28px" }} />
-          <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
-            <SectionTitle
-              eyebrow="Controle financeiro"
-              title="Seus números organizados, suas decisões mais claras."
-              description="Pela primeira vez, você vai saber exatamente quanto sua empresa lucra, todo mês, sem achismo e sem surpresa no final."
-            />
-
-            <div className="mt-14">
-              <DashboardDemo />
-            </div>
-
-            <div className="mt-10 overflow-hidden rounded-[28px] bg-[#057a41] px-8 py-8 sm:px-10">
-              <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-                <div className="flex flex-col gap-1">
-                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/60">Por que isso importa</p>
-                  <h3 className="mt-1 text-xl font-bold text-white sm:text-2xl">Menos achismo. Mais resultado.</h3>
-                  <p className="mt-1 max-w-md text-sm leading-6 text-white/75">Empresas que conhecem seus números crescem com consistência, não por sorte.</p>
-                </div>
-                <div className="flex gap-6 shrink-0">
-                  <div className="text-center">
-                    <p className="text-3xl font-bold text-white">30 min</p>
-                    <p className="mt-0.5 text-xs font-medium text-white/65">Diagnóstico</p>
-                  </div>
-                  <div className="w-px bg-white/20" />
-                  <div className="text-center">
-                    <p className="text-3xl font-bold text-white">Ativo</p>
-                    <p className="mt-0.5 text-xs font-medium text-white/65">Suporte</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <motion.div
-              className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4"
-              initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.15 }}
-              transition={{ duration: 0.4 }}
-            >
-              {beneficios.map((item) => (
-                <div
-                  key={item}
-                  className="group rounded-[28px] border border-white/8 bg-[#111113] p-6 transition-transform duration-300 hover:-translate-y-1"
-                >
-                  <div className="mb-3 h-1 w-8 rounded-full bg-[#057a41]/50 transition-all duration-300 group-hover:w-14 group-hover:bg-[#057a41]" />
-                  <p className="font-medium text-white/70">{item}</p>
-                </div>
-              ))}
-            </motion.div>
-
-            <div className="mt-10">
-              <a
-                href={whatsappLink}
-                target="_blank"
-                rel="noreferrer"
-                className="group inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-6 py-3.5 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-[#057a41]/22 hover:border-[#057a41]/55 hover:text-[#057a41]"
-              >
-                Quero organizar meu financeiro
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* ── 7. ENTREGAS ── */}
-        <section className="bg-white">
-          <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
-            <SectionTitle
-              light
-              eyebrow="O que você recebe"
-              title="Entregáveis concretos, sem consultoria genérica"
-              description="Cada entrega é um sistema funcionando na sua empresa, não um documento. Tudo aplicado à sua operação real."
-            />
-
-            <div className="mt-10 grid gap-4 sm:grid-cols-3">
-              {[
-                { n: "6", label: "Entregas concretas" },
-                { n: "3", label: "Pilares estruturados" },
-                { n: "100%", label: "Aplicado à sua operação" },
-              ].map((s) => (
-                <div key={s.label} className="rounded-[24px] bg-[#057a41] p-6">
-                  <p className="text-3xl font-bold text-white">{s.n}</p>
-                  <p className="mt-1.5 text-sm font-medium text-white/75">{s.label}</p>
-                </div>
-              ))}
-            </div>
-
-            <motion.div
-              className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-3"
-              initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.15 }}
-              transition={{ duration: 0.4 }}
-            >
-              {entregas.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <div
-                    key={item.title}
-                    className="group relative rounded-[32px] border border-neutral-200 bg-[#f8f8f8] p-7 transition-transform duration-300 hover:-translate-y-2"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="rounded-2xl bg-[#057a41] p-3.5 text-white transition-all duration-300 group-hover:bg-[#068a4b]">
-                        <Icon className="h-6 w-6" />
-                      </div>
-                      <ChevronRight className="h-5 w-5 text-neutral-300 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-[#057a41]" />
-                    </div>
-                    <h3 className="mt-6 text-lg font-bold text-neutral-900">{item.title}</h3>
-                    <p className="mt-2 text-sm leading-6 text-neutral-500">Implementado e funcionando na sua empresa, não só planejado no papel.</p>
-                  </div>
-                );
-              })}
-            </motion.div>
-
-            <div className="mt-10">
-              <a
-                href={whatsappLink}
-                target="_blank"
-                rel="noreferrer"
-                className="group inline-flex items-center gap-2 rounded-full bg-neutral-900 px-6 py-3.5 text-sm font-semibold text-white shadow-[0_4px_16px_rgba(0,0,0,0.18)] transition-all hover:-translate-y-0.5 hover:bg-neutral-800 hover:shadow-[0_6px_24px_rgba(5,122,65,0.14)]"
-              >
-                Quero essas entregas
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* ── 8. FUNDADORES ── */}
-        <section id="fundadores" className="relative overflow-hidden bg-[#0d0d0f]">
+        {/* ── 8. FUNDADORES ── bg: #0e1410 */}
+        <section id="fundadores" className="relative overflow-hidden bg-[#0e1410]">
           <div className="pointer-events-none absolute inset-0 opacity-[0.02]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "28px 28px" }} />
           <div className="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
             <SectionTitle
@@ -628,7 +462,13 @@ export default function NorteaReactSite() {
               Um programador e um contador. Tecnologia e finanças sob o mesmo teto — para você não precisar contratar duas empresas diferentes.
             </p>
 
-            <div className="grid gap-8 lg:grid-cols-2">
+            <motion.div
+              className="grid gap-8 lg:grid-cols-2"
+              variants={staggerContainer}
+              initial={shouldReduceMotion ? false : "hidden"}
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+            >
               {[
                 {
                   src: "/images/fundadores/caio.jpeg",
@@ -653,11 +493,9 @@ export default function NorteaReactSite() {
               ].map((f) => (
                 <motion.div
                   key={f.name}
-                  initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.15 }}
-                  transition={{ duration: 0.5 }}
-                  className="group overflow-hidden rounded-[32px] border border-white/10 bg-[#111113] shadow-[0_8px_40px_rgba(0,0,0,0.40)] transition-transform duration-300 hover:-translate-y-1.5"
+                  variants={cardVariant}
+                  whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                  className="group overflow-hidden rounded-[32px] border border-white/10 bg-[#111a13] shadow-[0_8px_40px_rgba(0,0,0,0.40)]"
                 >
                   <div className="overflow-hidden">
                     <img
@@ -677,7 +515,7 @@ export default function NorteaReactSite() {
                   </div>
                 </motion.div>
               ))}
-            </div>
+            </motion.div>
 
             <div className="mt-10">
               <a
@@ -693,24 +531,22 @@ export default function NorteaReactSite() {
           </div>
         </section>
 
-        {/* ── 9. TRUST / SEGMENTOS ── */}
-        <div className="relative overflow-hidden bg-[#02070e]">
-          <HeroBg />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#02070e]/92 via-[#02070e]/50 to-[#02070e]/15" />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#02070e]/65 via-transparent to-[#02070e]/18" />
-          <TrustSection />
-        </div>
-
-        {/* ── 10. FORMULÁRIO DE CONTATO ── */}
+        {/* ── 9. FORMULÁRIO DE CONTATO ── bg: #080b09 */}
         <LeadFormSection />
 
-        {/* ── 11. CTA FINAL ── */}
-        <section className="bg-[#09090b] py-16 sm:py-20 lg:py-28">
+        {/* ── 10. CTA FINAL ── bg: #080b09 */}
+        <section className="bg-[#080b09] py-16 sm:py-20 lg:py-28">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="relative overflow-hidden rounded-[40px] border border-white/10 bg-[#111113] px-10 py-16 text-center shadow-[0_32px_100px_rgba(0,0,0,0.55)] sm:px-16">
+            <div className="relative overflow-hidden rounded-[40px] border border-white/10 bg-[#111a13] px-10 py-16 text-center shadow-[0_32px_100px_rgba(0,0,0,0.55)] sm:px-16">
               <div className="pointer-events-none absolute inset-0 opacity-[0.025]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "32px 32px" }} />
               <div className="pointer-events-none absolute inset-x-0 bottom-0 h-80 rounded-b-[40px] bg-gradient-to-t from-[#057a41]/20 to-transparent" />
-              <div className="relative">
+              <motion.div
+                className="relative"
+                initial={{ opacity: 0, y: 32 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              >
                 <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#057a41]/65">Primeiro passo</p>
                 <h2 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-5xl">
                   Chega de crescer<br className="hidden sm:block" /> sem saber o que sobra.
@@ -721,7 +557,7 @@ export default function NorteaReactSite() {
                 <div className="mt-9 flex flex-col items-center gap-5 sm:flex-row sm:justify-center">
                   <a
                     href={whatsappLink}
-                    className="group inline-flex items-center gap-2.5 rounded-full bg-[#057a41] px-8 py-4 font-semibold text-white shadow-[0_8px_36px_rgba(5,122,65,0.30)] transition-all hover:scale-[1.03] hover:bg-[#068a4b] hover:shadow-[0_12px_48px_rgba(5,122,65,0.42)]"
+                    className="group inline-flex items-center gap-2.5 rounded-full bg-[#057a41] px-8 py-4 font-semibold text-white shadow-[0_8px_36px_rgba(5,122,65,0.30)] transition-all hover:scale-[1.03] hover:bg-[#06a355] hover:shadow-[0_12px_48px_rgba(5,122,65,0.42)]"
                   >
                     <MessageCircle className="h-4 w-4" />
                     Falar com a Nortea
@@ -731,7 +567,7 @@ export default function NorteaReactSite() {
                     Conversa inicial gratuita
                   </span>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </section>
@@ -740,3 +576,4 @@ export default function NorteaReactSite() {
     </div>
   );
 }
+

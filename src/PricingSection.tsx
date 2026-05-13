@@ -49,17 +49,17 @@ const plans = [
 
 export default function PricingSection() {
   return (
-    <section id="planos" className="bg-[#f5f5f5]">
+    <section id="planos" className="bg-[#080b09]">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
         <div className="max-w-3xl mb-12">
           <div className="mb-4 inline-flex items-center gap-2.5">
-            <span className="h-px w-7 bg-neutral-400" />
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-neutral-500">Planos</p>
+            <span className="h-px w-7 bg-[#057a41]/50" />
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#057a41]/70">Planos</p>
           </div>
-          <h2 className="text-3xl font-bold tracking-tight text-neutral-900 sm:text-4xl lg:text-[2.6rem] lg:leading-[1.15]">
+          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-[2.6rem] lg:leading-[1.15]">
             Escolha como a Nortea vai estruturar sua empresa
           </h2>
-          <p className="mt-5 max-w-2xl text-base leading-relaxed text-neutral-600 sm:text-lg">
+          <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg">
             Todos os planos incluem setup completo e acompanhamento mensal. Sem contrato longo — você fica porque funciona.
           </p>
         </div>
@@ -70,8 +70,8 @@ export default function PricingSection() {
               key={plan.name}
               className={`relative rounded-[32px] border p-8 flex flex-col ${
                 plan.highlighted
-                  ? "border-[#057a41] bg-[#111113] shadow-[0_20px_60px_rgba(5,122,65,0.18)]"
-                  : "border-white/10 bg-[#111113]"
+                  ? "border-[#057a41] bg-[#111113] shadow-[0_0_0_1px_rgba(5,122,65,0.3),0_20px_60px_rgba(5,122,65,0.15)]"
+                  : "border-white/8 bg-[#111113]"
               }`}
             >
               {plan.badge && (
@@ -112,7 +112,7 @@ export default function PricingSection() {
           ))}
         </div>
 
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-sm text-neutral-500">
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-sm text-white/40">
           <span className="flex items-center gap-2">
             <CheckCircle2 className="h-4 w-4 text-[#057a41]" />
             Sem fidelidade obrigatória
