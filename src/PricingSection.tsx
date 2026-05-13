@@ -60,7 +60,7 @@ export default function PricingSection() {
             Escolha como a Nortea vai estruturar sua empresa
           </h2>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg">
-            Todos os planos incluem setup completo e acompanhamento mensal. Sem contrato longo — você fica porque funciona.
+            Todos os planos incluem setup completo e acompanhamento mensal. Sem contrato longo, você fica porque funciona.
           </p>
         </div>
 
@@ -68,7 +68,7 @@ export default function PricingSection() {
         <div className="mb-8 rounded-2xl border border-white/8 bg-white/4 px-6 py-4 flex flex-col sm:flex-row sm:items-center gap-3">
           <div className="flex items-center gap-2 text-white/60 text-sm">
             <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#057a41]/20 text-[#057a41] font-bold text-xs flex-shrink-0">1</span>
-            <span>Você paga o <strong className="text-white">investimento inicial</strong> — a gente estrutura tudo do zero.</span>
+            <span>Você paga o <strong className="text-white">investimento inicial</strong> e a gente estrutura tudo do zero.</span>
           </div>
           <span className="hidden sm:block text-white/20">→</span>
           <div className="flex items-center gap-2 text-white/60 text-sm">

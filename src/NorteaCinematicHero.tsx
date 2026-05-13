@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, MessageCircle, TrendingUp } from "lucide-react";
-import HeroBg from "./HeroBg";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -197,7 +196,7 @@ export default function NorteaCinematicHero({
       gsap.set([".nch-mockup-wrapper", ".nch-badge", ".nch-card-right",
                 ".nch-card-left-1", ".nch-card-left-2", ".nch-card-left-3"], { autoAlpha: 0 });
       gsap.set(".nch-cta-wrapper", { autoAlpha: 0, scale: 0.8, filter: "blur(30px)" });
-      gsap.set(".nch-hero-graph", { autoAlpha: 0 });
+      gsap.set(".nch-bg-overlay", { opacity: 1 });
       // Phone screens: screen 1 visible in position, 2+3 below
       gsap.set([".nch-screen-2", ".nch-screen-3"], { autoAlpha: 0, y: "30%" });
       // All screen items start invisible (animated in per-screen)
@@ -287,7 +286,7 @@ export default function NorteaCinematicHero({
           ease: "expo.inOut", duration: 1.2,
         }, "pullback")
         .to(".nch-cta-wrapper", { scale: 1, filter: "blur(0px)", ease: "expo.inOut", duration: 1.2 }, "pullback")
-        .to(".nch-hero-graph", { autoAlpha: 1, ease: "power2.inOut", duration: 1.2 }, "pullback")
+        .to(".nch-bg-overlay", { opacity: 0, ease: "power2.inOut", duration: 1.2 }, "pullback")
         // ── Phase 6: card exits ──
         .to(".nch-main-card", { y: -window.innerHeight - 200, ease: "power3.in", duration: 1 });
 
@@ -301,19 +300,14 @@ export default function NorteaCinematicHero({
   return (
     <div
       ref={containerRef}
-      className="relative w-screen h-screen overflow-hidden flex items-center justify-center bg-[#080b09] text-white antialiased"
+      className="relative w-screen h-screen overflow-hidden flex items-center justify-center text-white antialiased"
       style={isMobileDevice ? undefined : { perspective: "1500px" }}
     >
       <style dangerouslySetInnerHTML={{ __html: INJECTED_STYLES }} />
+      {/* Overlay escuro que some durante a fase CTA, revelando o fundo compartilhado com TrustSection */}
+      <div className="nch-bg-overlay absolute inset-0 z-0 bg-[#080b09]" />
       <div className="nch-film-grain" aria-hidden="true" />
       <div className="nch-bg-grid absolute inset-0 z-0 pointer-events-none opacity-60" aria-hidden="true" />
-
-      {/* Graph background — hidden initially, fades in during CTA phase */}
-      <div className="nch-hero-graph absolute inset-0 z-0 pointer-events-none">
-        <HeroBg prefix="hero" />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#080b09]/92 via-[#080b09]/50 to-[#080b09]/15" />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#080b09]/65 via-transparent to-[#080b09]/18" />
-      </div>
 
       {/* Hero taglines */}
       <div className="nch-hero-text absolute z-10 flex flex-col items-center justify-center text-center w-screen px-4 will-change-transform">
@@ -643,7 +637,7 @@ export default function NorteaCinematicHero({
                   Nenhum cliente sem resposta. Nunca mais.
                 </h3>
                 <p className="text-white/55 text-xs lg:text-lg font-normal leading-relaxed">
-                  Agente de IA no WhatsApp que responde, qualifica e agenda automaticamente — <span className="text-white font-semibold">24 horas por dia, 7 dias por semana.</span>
+                  Agente de IA no WhatsApp que responde, qualifica e agenda automaticamente, <span className="text-white font-semibold">24 horas por dia, 7 dias por semana.</span>
                 </p>
               </div>
 

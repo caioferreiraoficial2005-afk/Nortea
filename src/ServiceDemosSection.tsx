@@ -80,7 +80,7 @@ function WhatsAppDemoVisual() {
           <p className="text-sm font-semibold text-white">MeuNegócio</p>
           <div className="flex items-center gap-1.5 text-[11px] text-green-200">
             <span className="h-1.5 w-1.5 rounded-full bg-green-300" />
-            🤖 Agente IA ativo — respondendo agora
+            🤖 Agente IA ativo, respondendo agora
           </div>
         </div>
       </div>
@@ -287,7 +287,7 @@ export default function ServiceDemosSection() {
             BadgeIcon={Globe}
             title="Um site que trabalha por você enquanto você atende"
             paragraphs={[
-              "Sua loja virtual fica no ar 24h por dia, recebendo visitas, apresentando seus serviços e convertendo em contatos e vendas — mesmo quando você está ocupado.",
+              "Sua loja virtual fica no ar 24h por dia, recebendo visitas, apresentando seus serviços e convertendo em contatos e vendas, mesmo quando você está ocupado.",
               "A Nortea configura tudo: página de conversão, catálogo de produtos ou serviços, integração com WhatsApp e identidade visual profissional.",
             ]}
             bullets={[
@@ -307,7 +307,7 @@ export default function ServiceDemosSection() {
           BadgeIcon={MessageCircle}
           title="Seu WhatsApp respondendo clientes enquanto você dorme"
           paragraphs={[
-            "O agente de IA da Nortea assume o primeiro contato: apresenta seus serviços, responde dúvidas frequentes, coleta o contato do lead e encaminha para agendamento — tudo automaticamente.",
+            "O agente de IA da Nortea assume o primeiro contato: apresenta seus serviços, responde dúvidas frequentes, coleta o contato do lead e encaminha para agendamento, tudo automaticamente.",
             "Você acorda com clientes qualificados esperando por você, sem ter feito nada.",
           ]}
           bullets={[
@@ -327,7 +327,7 @@ export default function ServiceDemosSection() {
           BadgeIcon={BarChart3}
           title="Saiba exatamente quanto sobra, todo mês"
           paragraphs={[
-            "A Nortea monta seu dashboard financeiro personalizado e o Bernardo acompanha os números com você todo mês — para você parar de decidir no achismo.",
+            "A Nortea monta seu dashboard financeiro personalizado e o Bernardo acompanha os números com você todo mês, para você parar de decidir no achismo.",
             "Fluxo de caixa, margem de lucro, despesas e receitas em uma tela simples que qualquer dono de negócio entende.",
           ]}
           bullets={[

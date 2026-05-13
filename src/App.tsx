@@ -86,7 +86,7 @@ export default function NorteaReactSite() {
     {
       icon: Target,
       title: "Site e loja que realmente vendem",
-      text: "Não é um site bonito pra ficar parado. É uma máquina de conversão que trabalha por você 24h — mesmo quando você está atendendo outro cliente.",
+      text: "Não é um site bonito pra ficar parado. É uma máquina de conversão que trabalha por você 24h, mesmo quando você está atendendo outro cliente.",
     },
     {
       icon: Workflow,
@@ -187,18 +187,21 @@ export default function NorteaReactSite() {
 
       <main>
 
-        {/* ── 1. CINEMATIC HERO ── bg: #080b09 */}
-        <NorteaCinematicHero
-          whatsappLink={whatsappLink}
-          onCinematicStateChange={setCinematicActive}
-        />
-
-        {/* ── 2. TRUST SECTION ── bg: #080b09 (colada ao hero, sem separador) */}
-        <div className="relative overflow-hidden bg-[#080b09]">
-          <HeroBg />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#080b09]/92 via-[#080b09]/50 to-[#080b09]/15" />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#080b09]/65 via-transparent to-[#080b09]/18" />
-          <TrustSection />
+        {/* ── 1 + 2. HERO + TRUST — único fundo de gráfico contínuo ── */}
+        <div className="relative bg-[#080b09]">
+          {/* Um único HeroBg cobre hero + TrustSection, formando um plano de fundo só */}
+          <div className="absolute inset-0 pointer-events-none">
+            <HeroBg prefix="shared" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#080b09]/92 via-[#080b09]/50 to-[#080b09]/15" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#080b09]/65 via-transparent to-[#080b09]/18" />
+          </div>
+          <NorteaCinematicHero
+            whatsappLink={whatsappLink}
+            onCinematicStateChange={setCinematicActive}
+          />
+          <div className="relative overflow-hidden">
+            <TrustSection />
+          </div>
         </div>
 
         {/* Separador dark → claro */}
@@ -221,7 +224,7 @@ export default function NorteaReactSite() {
               viewport={{ once: true, amount: 0.15 }}
             >
               {[
-                { text: "Você demora pra responder no WhatsApp e o cliente some — vai pro concorrente." },
+                { text: "Você demora pra responder no WhatsApp e o cliente some, vai pro concorrente." },
                 { text: "No final do mês você não sabe se teve lucro ou prejuízo. Só sente que trabalhou muito." },
                 { text: "Seu Instagram e site existem, mas não trazem nenhum cliente novo." },
                 { text: "Quanto mais cresce, mais caótico fica. Você virou escravo do próprio negócio." },
@@ -433,7 +436,7 @@ export default function NorteaReactSite() {
             />
 
             <p className="text-white/60 text-lg text-center mt-6 mb-10 max-w-2xl mx-auto leading-relaxed">
-              Um programador e um contador. Tecnologia e finanças sob o mesmo teto — para você não precisar contratar duas empresas diferentes.
+              Um programador e um contador. Tecnologia e finanças sob o mesmo teto, para você não precisar contratar duas empresas diferentes.
             </p>
 
             <motion.div
