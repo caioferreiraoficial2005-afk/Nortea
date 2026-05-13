@@ -318,10 +318,10 @@ export default function NorteaCinematicHero({
       {/* CTA final */}
       <div className="nch-cta-wrapper absolute z-10 flex flex-col items-center justify-center text-center w-screen px-4 nch-gsap-reveal pointer-events-auto will-change-transform">
         <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight nch-text-silver">
-          Chega de decidir<br className="hidden sm:block" /> no achismo.
+          Sua empresa organizada.<br className="hidden sm:block" /> Suas vendas crescendo.
         </h2>
         <p className="text-white/55 text-lg md:text-xl mb-12 max-w-xl mx-auto font-light leading-relaxed">
-          Conversa inicial gratuita. Sem enrolação. Você sai sabendo o que trava sua empresa e o que fazer.
+          Conversa inicial gratuita e sem compromisso. Em 30 minutos você entende o que trava sua empresa e o que fazer diferente.
         </p>
         <div className="flex flex-col sm:flex-row gap-5">
           <a href={whatsappLink} target="_blank" rel="noreferrer"
@@ -608,8 +608,8 @@ export default function NorteaCinematicHero({
                     <span className="text-base lg:text-lg" aria-hidden="true">✅</span>
                   </div>
                   <div>
-                    <p className="text-white text-xs lg:text-sm font-bold tracking-tight">60+ empresas atendidas</p>
-                    <p className="text-white/45 text-[10px] lg:text-xs font-medium">Resultados comprovados</p>
+                    <p className="text-white text-xs lg:text-sm font-bold tracking-tight">3 pilares integrados</p>
+                    <p className="text-white/45 text-[10px] lg:text-xs font-medium">Digital, operação e financeiro</p>
                   </div>
                 </div>
 

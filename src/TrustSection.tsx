@@ -1,43 +1,30 @@
 import {
-  MessageCircle,
-  BarChart3,
-  Globe,
-  Zap,
-  TrendingDown,
-  Building2,
-  ShoppingCart,
+  Scissors,
+  Sparkles,
+  User,
+  Heart,
+  Shield,
+  Activity,
+  ShoppingBag,
   Wrench,
-  TrendingUp,
   CheckCircle2,
+  Gift,
 } from "lucide-react";
 
-// Perfis de empresa que a Nortea atende
 const PERFIS = [
-  { name: "Vende pelo WhatsApp", icon: MessageCircle },
-  { name: "Sem controle financeiro", icon: BarChart3 },
-  { name: "Presença digital fraca", icon: Globe },
-  { name: "Operação desorganizada", icon: Zap },
-  { name: "Crescimento sem estrutura", icon: TrendingDown },
-  { name: "Negócio físico + digital", icon: Building2 },
-  { name: "Comércio e serviços", icon: ShoppingCart },
-  { name: "Quer profissionalizar", icon: Wrench },
+  { name: "Salão de beleza", icon: Scissors },
+  { name: "Clínica de estética", icon: Sparkles },
+  { name: "Barbearia", icon: User },
+  { name: "Pet shop", icon: Heart },
+  { name: "Clínica odontológica", icon: Shield },
+  { name: "Personal trainer", icon: Activity },
+  { name: "Loja de roupas", icon: ShoppingBag },
+  { name: "Prestador de serviço", icon: Wrench },
 ];
-
-function StatItem({ value, label }: { value: string; label: string }) {
-  return (
-    <div className="flex flex-col items-center justify-center transition-transform hover:-translate-y-1 cursor-default">
-      <span className="text-xl font-bold text-white sm:text-2xl">{value}</span>
-      <span className="text-[10px] uppercase tracking-wider text-white/40 font-medium sm:text-xs">
-        {label}
-      </span>
-    </div>
-  );
-}
 
 export default function TrustSection() {
   return (
     <section className="relative bg-transparent overflow-hidden">
-      {/* Scoped animations */}
       <style>{`
         @keyframes nortea-marquee {
           from { transform: translateX(0); }
@@ -64,7 +51,6 @@ export default function TrustSection() {
       `}</style>
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
-        {/* Eyebrow */}
         <div className="mb-12 flex flex-col items-center text-center gap-3">
           <div className="inline-flex items-center gap-2 rounded-full border border-[#057a41]/50 bg-[#057a41]/18 px-4 py-1.5 backdrop-blur-md">
             <span className="h-1.5 w-1.5 rounded-full bg-[#057a41]" />
@@ -73,47 +59,47 @@ export default function TrustSection() {
             </span>
           </div>
           <p className="text-white/35 text-sm max-w-md">
-            Atendemos empresas que já vendem, mas ainda perdem dinheiro e clientes por falta de organização, independente do setor.
+            Atendemos pequenos negócios que já vendem, mas perdem dinheiro e clientes por falta de estrutura.
           </p>
         </div>
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
 
-          {/* ── COLUNA ESQUERDA: Stats card ── */}
+          {/* ── COLUNA ESQUERDA: Diagnóstico card ── */}
           <div className="lg:col-span-4">
             <div className="relative overflow-hidden rounded-[28px] border border-white/10 bg-white/5 p-7 backdrop-blur-sm shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
               <div className="relative z-10">
                 {/* Métrica principal */}
                 <div className="flex items-center gap-4 mb-7">
                   <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#057a41]/12 ring-1 ring-[#057a41]/25">
-                    <TrendingUp className="h-6 w-6 text-[#057a41]" />
+                    <Gift className="h-6 w-6 text-[#057a41]" />
                   </div>
                   <div>
-                    <div className="text-3xl font-bold tracking-tight text-[#057a41]">60+</div>
-                    <div className="text-sm text-white/40">Empresas estruturadas</div>
+                    <div className="text-lg font-bold tracking-tight text-white leading-tight">Diagnóstico gratuito</div>
+                    <div className="text-sm text-white/40">Sem compromisso</div>
                   </div>
                 </div>
 
-                {/* Barra de satisfação */}
-                <div className="space-y-3 mb-7">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-white/40">Satisfação dos clientes</span>
-                    <span className="text-white font-semibold">94%</span>
-                  </div>
-                  <div className="h-2 w-full overflow-hidden rounded-full bg-white/10">
-                    <div className="h-full w-[94%] rounded-full bg-gradient-to-r from-[#057a41] to-[#046035]" />
-                  </div>
+                {/* Descrição */}
+                <div className="mb-7">
+                  <p className="text-sm text-white/55 leading-6">
+                    Em 30 minutos entendemos sua operação, identificamos os gargalos e mostramos o que fazer de diferente.
+                  </p>
                 </div>
 
                 <div className="h-px w-full bg-white/10 mb-6" />
 
                 {/* Mini stats */}
                 <div className="grid grid-cols-3 gap-4 text-center">
-                  <StatItem value="1 ano" label="Atuação" />
+                  <div className="flex flex-col items-center justify-center transition-transform hover:-translate-y-1 cursor-default">
+                    <span className="text-xl font-bold text-white sm:text-2xl">30 min</span>
+                    <span className="text-[10px] uppercase tracking-wider text-white/40 font-medium sm:text-xs">Conversa</span>
+                  </div>
                   <div className="w-px bg-white/10" />
-                  <StatItem value="100%" label="Dedicação" />
-                  <div className="w-px bg-white/10" />
-                  <StatItem value="Ativo" label="Suporte" />
+                  <div className="flex flex-col items-center justify-center transition-transform hover:-translate-y-1 cursor-default">
+                    <span className="text-xl font-bold text-white sm:text-2xl">Ativo</span>
+                    <span className="text-[10px] uppercase tracking-wider text-white/40 font-medium sm:text-xs">Suporte</span>
+                  </div>
                 </div>
 
                 {/* Tags */}
@@ -138,7 +124,7 @@ export default function TrustSection() {
           <div className="lg:col-span-8 flex flex-col justify-center">
             <div className="relative overflow-hidden rounded-[28px] border border-white/10 bg-white/5 py-8 backdrop-blur-sm shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
               <h3 className="mb-6 px-8 text-sm font-medium text-white/35 uppercase tracking-widest">
-                Perfis de empresa que atendemos
+                Segmentos que atendemos
               </h3>
 
               {/* Linha 1 — da esquerda para direita */}
@@ -177,9 +163,7 @@ export default function TrustSection() {
                   WebkitMaskImage: "linear-gradient(to right, transparent, black 15%, black 85%, transparent)",
                 }}
               >
-                <div
-                  className="nortea-marquee-reverse flex gap-10 whitespace-nowrap px-4"
-                >
+                <div className="nortea-marquee-reverse flex gap-10 whitespace-nowrap px-4">
                   {[...PERFIS, ...PERFIS, ...PERFIS].reverse().map((perfil, i) => {
                     const Icon = perfil.icon;
                     return (
@@ -202,7 +186,7 @@ export default function TrustSection() {
               {/* Rodapé do card */}
               <div className="mt-6 px-8">
                 <p className="text-xs text-white/25 leading-5">
-                  WhatsApp · Financeiro · Digital · Operação · Atendimento · Gestão · Crescimento · Estrutura
+                  Beleza · Saúde · Pets · Fitness · Odonto · Moda · Serviços · Comércio
                 </p>
               </div>
             </div>

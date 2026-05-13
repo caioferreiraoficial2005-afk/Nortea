@@ -18,6 +18,8 @@ import {
 import TrustSection from "./TrustSection";
 import HeroBg from "./HeroBg";
 import NorteaCinematicHero from "./NorteaCinematicHero";
+import PricingSection from "./PricingSection";
+import LeadFormSection from "./LeadFormSection";
 
 function useCountUp(end: number, duration = 1400, startWhen = true, prefix = "", suffix = "") {
   const [value, setValue] = useState(0);
@@ -85,7 +87,6 @@ const MetricCard = memo(function MetricCard({ label, value, tone = "default" }: 
 
 const DashboardDemo = memo(function DashboardDemo() {
   const ref = useRef<HTMLDivElement | null>(null);
-  // Dispara quando 20% da seção está visível (antes de estar totalmente na tela)
   const inView = useInView(ref, { once: true, amount: 0.2 });
 
   const faturamento = useCountUp(128450, 1600, inView, "R$ ");
@@ -184,18 +185,18 @@ export default function NorteaReactSite() {
   const pilares = [
     {
       icon: Target,
-      title: "Estrutura Digital",
-      text: "Site, páginas de conversão e presença digital que fazem o cliente tomar uma ação, não só visitar e ir embora.",
+      title: "Site e loja que realmente vendem",
+      text: "Não é um site bonito pra ficar parado. É uma máquina de conversão que trabalha por você 24h — mesmo quando você está atendendo outro cliente.",
     },
     {
       icon: Workflow,
-      title: "Automação e Operação",
-      text: "Organização do WhatsApp, funil de atendimento e automações que garantem que nenhum cliente seja ignorado.",
+      title: "Nenhum cliente ignorado, nunca",
+      text: "Agente de IA no WhatsApp que responde na hora, qualifica o lead e agenda. Você acorda com clientes novos sem ter feito nada.",
     },
     {
       icon: CircleDollarSign,
-      title: "Financeiro e Gestão",
-      text: "Você passa a saber o que entra, o que sai e o que sobra. Sem achismo, sem surpresa.",
+      title: "Saiba exatamente quanto sobra",
+      text: "Dashboard + assessoria mensal do Bernardo. Você passa a tomar decisões com dados reais, não com intuição. E para de ter surpresa no final do mês.",
     },
   ];
 
@@ -241,13 +242,14 @@ export default function NorteaReactSite() {
   return (
     <div className="min-h-screen bg-[#09090b] text-white antialiased">
 
-      {/* ── HEADER — oculto durante o cinematic hero, aparece depois ── */}
+      {/* ── HEADER ── */}
       <header className={`sticky top-0 z-40 bg-black transition-transform duration-300 ease-in-out will-change-transform ${!cinematicActive && headerVisible ? "translate-y-0" : "-translate-y-full"}`}>
         <div className="border-b border-white/8">
           <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-6 lg:px-8">
             <LogoMark />
             <nav className="hidden items-center gap-8 text-sm font-medium text-white/55 lg:flex">
               <a href="#servicos" className="transition-colors hover:text-[#057a41]">Serviços</a>
+              <a href="#planos" className="transition-colors hover:text-[#057a41]">Planos</a>
               <a href="#processo" className="transition-colors hover:text-[#057a41]">Processo</a>
               <a href="#fundadores" className="transition-colors hover:text-[#057a41]">Fundadores</a>
             </nav>
@@ -259,7 +261,6 @@ export default function NorteaReactSite() {
                 <MessageCircle className="h-4 w-4" />
                 Falar com a Nortea
               </a>
-              {/* Hamburger — mobile only */}
               <button
                 onClick={() => setMobileMenuOpen((o) => !o)}
                 className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white lg:hidden"
@@ -274,11 +275,10 @@ export default function NorteaReactSite() {
             </div>
           </div>
         </div>
-        {/* Mobile nav drawer */}
         {mobileMenuOpen && (
           <div className="border-b border-white/8 bg-black px-4 pb-4 lg:hidden">
             <nav className="flex flex-col gap-1 pt-2">
-              {[["#servicos", "Serviços"], ["#processo", "Processo"], ["#fundadores", "Fundadores"]].map(([href, label]) => (
+              {[["#servicos", "Serviços"], ["#planos", "Planos"], ["#processo", "Processo"], ["#fundadores", "Fundadores"]].map(([href, label]) => (
                 <a
                   key={href}
                   href={href}
@@ -303,21 +303,13 @@ export default function NorteaReactSite() {
 
       <main>
 
-        {/* ── CINEMATIC HERO (scroll experience) ── */}
+        {/* ── 1. CINEMATIC HERO ── */}
         <NorteaCinematicHero
           whatsappLink={whatsappLink}
           onCinematicStateChange={setCinematicActive}
         />
 
-        {/* ── TRUST / SEGMENTOS ── */}
-        <div className="relative overflow-hidden bg-[#02070e]">
-          <HeroBg />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#02070e]/92 via-[#02070e]/50 to-[#02070e]/15" />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#02070e]/65 via-transparent to-[#02070e]/18" />
-          <TrustSection />
-        </div>
-
-        {/* ── PROBLEMA ── */}
+        {/* ── 2. PROBLEMA ── */}
         <section className="bg-[#f5f5f5]">
           <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
             <SectionTitle
@@ -334,10 +326,10 @@ export default function NorteaReactSite() {
               transition={{ duration: 0.4 }}
             >
               {[
-                { text: "Clientes somem no WhatsApp porque a resposta demora" },
-                { text: "Você não sabe quanto realmente sobra no final do mês" },
-                { text: "Presença digital que não traz nenhum cliente novo" },
-                { text: "Crescendo, mas cada vez mais no improviso" },
+                { text: "Você demora pra responder no WhatsApp e o cliente some — vai pro concorrente." },
+                { text: "No final do mês você não sabe se teve lucro ou prejuízo. Só sente que trabalhou muito." },
+                { text: "Seu Instagram e site existem, mas não trazem nenhum cliente novo." },
+                { text: "Quanto mais cresce, mais caótico fica. Você virou escravo do próprio negócio." },
               ].map((item) => (
                 <div
                   key={item.text}
@@ -351,13 +343,12 @@ export default function NorteaReactSite() {
               ))}
             </motion.div>
 
-            {/* Callout verde — A solução */}
             <div className="mt-6 overflow-hidden rounded-[28px] bg-[#057a41] px-8 py-8 sm:px-10">
               <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/60">A solução</p>
                   <h3 className="mt-2 max-w-lg text-xl font-bold leading-snug text-white sm:text-2xl">
-                    A Nortea resolve exatamente isso, para você voltar a ter controle da sua empresa.
+                    A Nortea resolve os 3 pontos que mais travam pequenos negócios.
                   </h3>
                 </div>
                 <a
@@ -366,7 +357,7 @@ export default function NorteaReactSite() {
                   rel="noreferrer"
                   className="group inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-bold text-[#057a41] transition-all hover:scale-[1.03] hover:shadow-[0_8px_28px_rgba(0,0,0,0.18)]"
                 >
-                  Quero resolver isso
+                  Quero uma conversa gratuita
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </a>
               </div>
@@ -374,7 +365,7 @@ export default function NorteaReactSite() {
           </div>
         </section>
 
-        {/* ── SERVIÇOS ── */}
+        {/* ── 3. SERVIÇOS — 3 PILARES ── */}
         <section id="servicos" className="relative bg-[#0d0d0f]">
           <div className="pointer-events-none absolute inset-0 opacity-[0.025]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "28px 28px" }} />
           <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
@@ -413,6 +404,15 @@ export default function NorteaReactSite() {
               })}
             </motion.div>
 
+            {/* Conexão entre pilares */}
+            <div className="mt-10">
+              <div className="h-px w-full bg-white/10" />
+              <p className="py-6 text-sm text-center text-white/50 max-w-3xl mx-auto leading-7">
+                Os 3 pilares funcionam juntos: o site e o WhatsApp trazem mais clientes → as vendas alimentam o controle financeiro → a assessoria orienta o próximo passo. Um sistema completo, não 3 serviços separados.
+              </p>
+              <div className="h-px w-full bg-white/10" />
+            </div>
+
             <div className="mt-10">
               <a
                 href={whatsappLink}
@@ -427,11 +427,68 @@ export default function NorteaReactSite() {
           </div>
         </section>
 
-        {/* ── FINANCEIRO ── */}
-        <section className="bg-[#f5f5f5]">
-          <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
+        {/* ── 4. PROCESSO ── */}
+        <section id="processo" className="relative overflow-hidden bg-[#f5f5f5]">
+          <div className="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
             <SectionTitle
               light
+              eyebrow="Como funciona"
+              title="Como a Nortea estrutura sua empresa"
+              description="Trabalhamos com etapas claras, do diagnóstico à execução. Nada genérico, tudo adaptado à realidade do seu negócio."
+            />
+
+            <motion.div
+              className="mt-10 grid gap-5 lg:grid-cols-2"
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.45 }}
+            >
+              {etapas.map((etapa, idx) => {
+                const isAlt = idx % 2 === 1;
+                return (
+                <div
+                  key={etapa.step}
+                  className={`group rounded-[32px] border p-8 transition-transform duration-300 hover:-translate-y-1.5 ${
+                    isAlt
+                      ? "border-neutral-200 bg-white shadow-[0_8px_32px_rgba(0,0,0,0.08)]"
+                      : "border-neutral-200 bg-[#f0f0f0] shadow-[0_6px_32px_rgba(0,0,0,0.06)]"
+                  }`}
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#057a41]/15 font-bold text-lg text-[#057a41] shadow-[0_2px_12px_rgba(0,0,0,0.10)] transition-all duration-300 group-hover:bg-[#057a41]/25 group-hover:shadow-[0_4px_22px_rgba(5,122,65,0.20)] ring-1 ring-[#057a41]/30">
+                      {etapa.step}
+                    </div>
+                    <h3 className="text-xl font-bold text-neutral-900">{etapa.title}</h3>
+                  </div>
+                  <p className="mt-5 leading-7 text-neutral-600">{etapa.text}</p>
+                </div>
+                );
+              })}
+            </motion.div>
+
+            <div className="mt-10">
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noreferrer"
+                className="group inline-flex items-center gap-2 rounded-full bg-neutral-900 px-6 py-3.5 text-sm font-semibold text-white shadow-[0_4px_16px_rgba(0,0,0,0.18)] transition-all hover:-translate-y-0.5 hover:bg-neutral-800"
+              >
+                Quero estruturar minha empresa
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* ── 5. PLANOS ── */}
+        <PricingSection />
+
+        {/* ── 6. FINANCEIRO ── */}
+        <section className="bg-[#0d0d0f]">
+          <div className="pointer-events-none absolute inset-0 opacity-[0.025]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "28px 28px" }} />
+          <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
+            <SectionTitle
               eyebrow="Controle financeiro"
               title="Seus números organizados, suas decisões mais claras."
               description="Pela primeira vez, você vai saber exatamente quanto sua empresa lucra, todo mês, sem achismo e sem surpresa no final."
@@ -441,7 +498,6 @@ export default function NorteaReactSite() {
               <DashboardDemo />
             </div>
 
-            {/* Bloco verde — Decisão com dados */}
             <div className="mt-10 overflow-hidden rounded-[28px] bg-[#057a41] px-8 py-8 sm:px-10">
               <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex flex-col gap-1">
@@ -451,13 +507,13 @@ export default function NorteaReactSite() {
                 </div>
                 <div className="flex gap-6 shrink-0">
                   <div className="text-center">
-                    <p className="text-3xl font-bold text-white">94%</p>
-                    <p className="mt-0.5 text-xs font-medium text-white/65">Satisfação</p>
+                    <p className="text-3xl font-bold text-white">30 min</p>
+                    <p className="mt-0.5 text-xs font-medium text-white/65">Diagnóstico</p>
                   </div>
                   <div className="w-px bg-white/20" />
                   <div className="text-center">
-                    <p className="text-3xl font-bold text-white">60+</p>
-                    <p className="mt-0.5 text-xs font-medium text-white/65">Empresas</p>
+                    <p className="text-3xl font-bold text-white">Ativo</p>
+                    <p className="mt-0.5 text-xs font-medium text-white/65">Suporte</p>
                   </div>
                 </div>
               </div>
@@ -473,10 +529,10 @@ export default function NorteaReactSite() {
               {beneficios.map((item) => (
                 <div
                   key={item}
-                  className="group rounded-[28px] border border-neutral-200 bg-white p-6 transition-transform duration-300 hover:-translate-y-1"
+                  className="group rounded-[28px] border border-white/8 bg-[#111113] p-6 transition-transform duration-300 hover:-translate-y-1"
                 >
                   <div className="mb-3 h-1 w-8 rounded-full bg-[#057a41]/50 transition-all duration-300 group-hover:w-14 group-hover:bg-[#057a41]" />
-                  <p className="font-medium text-neutral-800">{item}</p>
+                  <p className="font-medium text-white/70">{item}</p>
                 </div>
               ))}
             </motion.div>
@@ -486,7 +542,7 @@ export default function NorteaReactSite() {
                 href={whatsappLink}
                 target="_blank"
                 rel="noreferrer"
-                className="group inline-flex items-center gap-2 rounded-full bg-neutral-900 px-6 py-3.5 text-sm font-semibold text-white shadow-[0_4px_16px_rgba(0,0,0,0.18)] transition-all hover:-translate-y-0.5 hover:bg-neutral-800 hover:shadow-[0_6px_24px_rgba(5,122,65,0.14)]"
+                className="group inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-6 py-3.5 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-[#057a41]/22 hover:border-[#057a41]/55 hover:text-[#057a41]"
               >
                 Quero organizar meu financeiro
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -495,61 +551,7 @@ export default function NorteaReactSite() {
           </div>
         </section>
 
-        {/* ── PROCESSO ── */}
-        <section id="processo" className="relative overflow-hidden bg-[#0d0d0f]">
-          <div className="pointer-events-none absolute inset-0 opacity-[0.025]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "28px 28px" }} />
-          <div className="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
-            <SectionTitle
-              eyebrow="Como funciona"
-              title="Como a Nortea estrutura sua empresa"
-              description="Trabalhamos com etapas claras, do diagnóstico à execução. Nada genérico, tudo adaptado à realidade do seu negócio."
-            />
-
-            <motion.div
-              className="mt-10 grid gap-5 lg:grid-cols-2"
-              initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.15 }}
-              transition={{ duration: 0.45 }}
-            >
-              {etapas.map((etapa, idx) => {
-                const isBlue = idx % 2 === 1;
-                return (
-                <div
-                  key={etapa.step}
-                  className={`group rounded-[32px] border p-8 transition-transform duration-300 hover:-translate-y-1.5 ${
-                    isBlue
-                      ? "border-white/8 bg-[#111113] shadow-[0_8px_32px_rgba(0,0,0,0.35)]"
-                      : "border-white/10 bg-white/6 backdrop-blur-sm shadow-[0_6px_32px_rgba(0,0,0,0.25)]"
-                  }`}
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#057a41]/20 font-bold text-lg text-[#057a41] shadow-[0_2px_12px_rgba(0,0,0,0.30)] transition-all duration-300 group-hover:bg-[#057a41]/35 group-hover:shadow-[0_4px_22px_rgba(5,122,65,0.30)] ring-1 ring-[#057a41]/40">
-                      {etapa.step}
-                    </div>
-                    <h3 className="text-xl font-bold text-white">{etapa.title}</h3>
-                  </div>
-                  <p className={`mt-5 leading-7 ${isBlue ? "text-white/70" : "text-white/65"}`}>{etapa.text}</p>
-                </div>
-                );
-              })}
-            </motion.div>
-
-            <div className="mt-10">
-              <a
-                href={whatsappLink}
-                target="_blank"
-                rel="noreferrer"
-                className="group inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-6 py-3.5 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-[#057a41]/22 hover:border-[#057a41]/55 hover:text-[#057a41]"
-              >
-                Quero estruturar minha empresa
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* ── ENTREGAS ── */}
+        {/* ── 7. ENTREGAS ── */}
         <section className="bg-white">
           <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
             <SectionTitle
@@ -559,7 +561,6 @@ export default function NorteaReactSite() {
               description="Cada entrega é um sistema funcionando na sua empresa, não um documento. Tudo aplicado à sua operação real."
             />
 
-            {/* Blocos verdes de destaque */}
             <div className="mt-10 grid gap-4 sm:grid-cols-3">
               {[
                 { n: "6", label: "Entregas concretas" },
@@ -614,17 +615,20 @@ export default function NorteaReactSite() {
           </div>
         </section>
 
-        {/* ── FUNDADORES ── */}
+        {/* ── 8. FUNDADORES ── */}
         <section id="fundadores" className="relative overflow-hidden bg-[#0d0d0f]">
           <div className="pointer-events-none absolute inset-0 opacity-[0.02]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "28px 28px" }} />
           <div className="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
             <SectionTitle
               eyebrow="Fundadores"
               title="Quem está por trás da Nortea"
-              description="Um programador e um contador, com experiências complementares para estruturar sua empresa do digital ao financeiro, de verdade."
             />
 
-            <div className="mt-14 grid gap-8 lg:grid-cols-2">
+            <p className="text-white/60 text-lg text-center mt-6 mb-10 max-w-2xl mx-auto leading-relaxed">
+              Um programador e um contador. Tecnologia e finanças sob o mesmo teto — para você não precisar contratar duas empresas diferentes.
+            </p>
+
+            <div className="grid gap-8 lg:grid-cols-2">
               {[
                 {
                   src: "/images/fundadores/caio.jpeg",
@@ -689,7 +693,18 @@ export default function NorteaReactSite() {
           </div>
         </section>
 
-        {/* ── CTA FINAL ── */}
+        {/* ── 9. TRUST / SEGMENTOS ── */}
+        <div className="relative overflow-hidden bg-[#02070e]">
+          <HeroBg />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#02070e]/92 via-[#02070e]/50 to-[#02070e]/15" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#02070e]/65 via-transparent to-[#02070e]/18" />
+          <TrustSection />
+        </div>
+
+        {/* ── 10. FORMULÁRIO DE CONTATO ── */}
+        <LeadFormSection />
+
+        {/* ── 11. CTA FINAL ── */}
         <section className="bg-[#09090b] py-16 sm:py-20 lg:py-28">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="relative overflow-hidden rounded-[40px] border border-white/10 bg-[#111113] px-10 py-16 text-center shadow-[0_32px_100px_rgba(0,0,0,0.55)] sm:px-16">
