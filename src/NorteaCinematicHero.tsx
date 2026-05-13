@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, MessageCircle, TrendingUp } from "lucide-react";
+import HeroBg from "./HeroBg";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -196,6 +197,7 @@ export default function NorteaCinematicHero({
       gsap.set([".nch-mockup-wrapper", ".nch-badge", ".nch-card-right",
                 ".nch-card-left-1", ".nch-card-left-2", ".nch-card-left-3"], { autoAlpha: 0 });
       gsap.set(".nch-cta-wrapper", { autoAlpha: 0, scale: 0.8, filter: "blur(30px)" });
+      gsap.set(".nch-hero-graph", { autoAlpha: 0 });
       // Phone screens: screen 1 visible in position, 2+3 below
       gsap.set([".nch-screen-2", ".nch-screen-3"], { autoAlpha: 0, y: "30%" });
       // All screen items start invisible (animated in per-screen)
@@ -285,6 +287,7 @@ export default function NorteaCinematicHero({
           ease: "expo.inOut", duration: 1.2,
         }, "pullback")
         .to(".nch-cta-wrapper", { scale: 1, filter: "blur(0px)", ease: "expo.inOut", duration: 1.2 }, "pullback")
+        .to(".nch-hero-graph", { autoAlpha: 1, ease: "power2.inOut", duration: 1.2 }, "pullback")
         // ── Phase 6: card exits ──
         .to(".nch-main-card", { y: -window.innerHeight - 200, ease: "power3.in", duration: 1 });
 
@@ -298,12 +301,19 @@ export default function NorteaCinematicHero({
   return (
     <div
       ref={containerRef}
-      className="relative w-screen h-screen overflow-hidden flex items-center justify-center bg-black text-white antialiased"
+      className="relative w-screen h-screen overflow-hidden flex items-center justify-center bg-[#080b09] text-white antialiased"
       style={isMobileDevice ? undefined : { perspective: "1500px" }}
     >
       <style dangerouslySetInnerHTML={{ __html: INJECTED_STYLES }} />
       <div className="nch-film-grain" aria-hidden="true" />
       <div className="nch-bg-grid absolute inset-0 z-0 pointer-events-none opacity-60" aria-hidden="true" />
+
+      {/* Graph background — hidden initially, fades in during CTA phase */}
+      <div className="nch-hero-graph absolute inset-0 z-0 pointer-events-none">
+        <HeroBg prefix="hero" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#080b09]/92 via-[#080b09]/50 to-[#080b09]/15" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#080b09]/65 via-transparent to-[#080b09]/18" />
+      </div>
 
       {/* Hero taglines */}
       <div className="nch-hero-text absolute z-10 flex flex-col items-center justify-center text-center w-screen px-4 will-change-transform">
@@ -396,33 +406,33 @@ export default function NorteaCinematicHero({
                       <div className="nch-screen-1 absolute inset-0 px-4 pt-2 pb-6 flex flex-col gap-2">
                         <div className="nch-sw1 flex justify-between items-center">
                           <div>
-                            <span className="text-[9px] text-neutral-500 uppercase tracking-widest font-bold">Nortea Store</span>
-                            <p className="text-sm font-bold text-white leading-tight">Agendamentos</p>
+                            <span className="text-[9px] text-neutral-500 uppercase tracking-widest font-bold">Minha Loja</span>
+                            <p className="text-sm font-bold text-white leading-tight">Loja Virtual</p>
                           </div>
                           <div className="relative">
                             <div className="w-8 h-8 rounded-full bg-[#057a41]/15 text-[#057a41] flex items-center justify-center font-bold text-xs border border-[#057a41]/30">N</div>
                             <div className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#057a41] flex items-center justify-center">
-                              <span className="text-[7px] font-bold text-white">3</span>
+                              <span className="text-[7px] font-bold text-white">5</span>
                             </div>
                           </div>
                         </div>
 
                         <div className="nch-sw1 nch-widget rounded-2xl p-3 flex items-center gap-3">
                           <div className="w-12 h-12 rounded-xl flex-shrink-0 flex items-center justify-center border border-[#057a41]/25" style={{ background: "linear-gradient(135deg, rgba(5,122,65,0.3) 0%, rgba(5,122,65,0.08) 100%)" }}>
-                            <span className="text-lg" aria-hidden="true">📅</span>
+                            <span className="text-lg" aria-hidden="true">👕</span>
                           </div>
                           <div className="flex-1 min-w-0">
                             <p className="text-[9px] text-neutral-500 uppercase tracking-wider">Produto em destaque</p>
-                            <p className="text-xs font-bold text-white leading-tight">Consulta gratuita — 30 min</p>
-                            <p className="text-sm font-extrabold text-[#057a41]">Grátis</p>
+                            <p className="text-xs font-bold text-white leading-tight">Camiseta Premium</p>
+                            <p className="text-sm font-extrabold text-[#057a41]">R$ 89,90</p>
                           </div>
                         </div>
 
                         <div className="nch-sw1 grid grid-cols-3 gap-1.5">
                           {[
-                            { label: "Agendamentos", value: "47" },
-                            { label: "Taxa conclusão", value: "98%" },
-                            { label: "Avaliação", value: "5.0" },
+                            { label: "Pedidos hoje", value: "12" },
+                            { label: "Conversão", value: "4.7%" },
+                            { label: "Avaliação", value: "4.9" },
                           ].map((s) => (
                             <div key={s.label} className="nch-widget rounded-xl p-2 text-center">
                               <p className="text-xs font-bold text-white">{s.value}</p>

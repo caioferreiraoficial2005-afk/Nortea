@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
@@ -74,32 +74,9 @@ const cardVariant = {
 };
 
 export default function NorteaReactSite() {
-  const [headerVisible, setHeaderVisible] = useState(true);
   const [cinematicActive, setCinematicActive] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const shouldReduceMotion = useReducedMotion();
-
-  const onScroll = useCallback(() => {
-    const currentY = window.scrollY;
-    const lastY = (window as any)._lastScrollY ?? currentY;
-    if (currentY < 10) setHeaderVisible(true);
-    else if (currentY > lastY) setHeaderVisible(false);
-    else setHeaderVisible(true);
-    (window as any)._lastScrollY = currentY;
-  }, []);
-
-  useEffect(() => {
-    (window as any)._lastScrollY = window.scrollY;
-    let ticking = false;
-    const handler = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => { onScroll(); ticking = false; });
-        ticking = true;
-      }
-    };
-    window.addEventListener("scroll", handler, { passive: true });
-    return () => window.removeEventListener("scroll", handler);
-  }, [onScroll]);
 
   const whatsappNumber = "558288224653";
   const whatsappMessage = encodeURIComponent("Olá, vim pelo site da Nortea e gostaria de conversar sobre a estruturação da minha empresa.");
@@ -150,7 +127,7 @@ export default function NorteaReactSite() {
     <div className="min-h-screen bg-[#080b09] text-white antialiased">
 
       {/* ── HEADER ── */}
-      <header className={`sticky top-0 z-40 bg-[#080b09] transition-transform duration-300 ease-in-out will-change-transform ${!cinematicActive && headerVisible ? "translate-y-0" : "-translate-y-full"}`}>
+      <header className={`sticky top-0 z-40 bg-[#080b09] transition-transform duration-300 ease-in-out will-change-transform ${cinematicActive ? "-translate-y-full" : "translate-y-0"}`}>
         <div className="border-b border-white/8">
           <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-6 lg:px-8">
             <LogoMark />
@@ -359,9 +336,6 @@ export default function NorteaReactSite() {
 
         {/* ── 5. DEMOS DOS SERVIÇOS ── bg: #0e1410 (sem separador brusco, mesma família dark) */}
         <ServiceDemosSection />
-
-        {/* Separador dark → claro */}
-        <div className="h-16 bg-gradient-to-b from-[#0e1410] to-[#f4f6f3]" />
 
         {/* ── 6. PROCESSO ── bg: #f4f6f3 */}
         <section id="processo" className="relative overflow-hidden bg-[#f4f6f3]">

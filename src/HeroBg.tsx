@@ -1,6 +1,6 @@
 import { memo } from "react";
 
-const HeroBg = memo(function HeroBg() {
+const HeroBg = memo(function HeroBg({ prefix = "hbg" }: { prefix?: string }) {
   const W = 1400;
   const H = 800;
   const GREEN = "#057a41";
@@ -79,8 +79,7 @@ const HeroBg = memo(function HeroBg() {
       aria-hidden="true"
     >
       <defs>
-        {/* Glow apenas na linha principal — um único filter */}
-        <filter id="hbg-glow-main" x="-20%" y="-20%" width="140%" height="140%">
+        <filter id={`${prefix}-glow-main`} x="-20%" y="-20%" width="140%" height="140%">
           <feGaussianBlur stdDeviation="8" result="b" />
           <feMerge>
             <feMergeNode in="b" />
@@ -88,30 +87,30 @@ const HeroBg = memo(function HeroBg() {
           </feMerge>
         </filter>
 
-        <linearGradient id="hbg-area" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id={`${prefix}-area`} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%"   stopColor={GREEN} stopOpacity="0.28" />
           <stop offset="55%"  stopColor={GREEN} stopOpacity="0.08" />
           <stop offset="100%" stopColor={GREEN} stopOpacity="0" />
         </linearGradient>
 
-        <linearGradient id="hbg-bar" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id={`${prefix}-bar`} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%"   stopColor="#ffffff" stopOpacity="0.14" />
           <stop offset="100%" stopColor="#ffffff" stopOpacity="0.02" />
         </linearGradient>
 
-        <linearGradient id="hbg-bar-green" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id={`${prefix}-bar-green`} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%"   stopColor={GREEN} stopOpacity="0.85" />
           <stop offset="100%" stopColor={GREEN} stopOpacity="0.12" />
         </linearGradient>
 
-        <linearGradient id="hbg-vignette" x1="0" y1="0" x2="1" y2="0">
+        <linearGradient id={`${prefix}-vignette`} x1="0" y1="0" x2="1" y2="0">
           <stop offset="0%"   stopColor="#02070e" stopOpacity="1" />
           <stop offset="45%"  stopColor="#02070e" stopOpacity="0.6" />
           <stop offset="70%"  stopColor="#02070e" stopOpacity="0.1" />
           <stop offset="100%" stopColor="#02070e" stopOpacity="0" />
         </linearGradient>
 
-        <linearGradient id="hbg-vignette-v" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id={`${prefix}-vignette-v`} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%"   stopColor="#02070e" stopOpacity="0.5" />
           <stop offset="20%"  stopColor="#02070e" stopOpacity="0" />
           <stop offset="80%"  stopColor="#02070e" stopOpacity="0" />
@@ -148,7 +147,7 @@ const HeroBg = memo(function HeroBg() {
               y={H - barH}
               width={barW}
               height={barH}
-              fill={b.highlight ? "url(#hbg-bar-green)" : "url(#hbg-bar)"}
+              fill={b.highlight ? `url(#${prefix}-bar-green)` : `url(#${prefix}-bar)`}
               opacity={b.highlight ? 0.9 : 0.6}
               rx="2"
             />
@@ -157,7 +156,7 @@ const HeroBg = memo(function HeroBg() {
       </g>
 
       {/* 4. Área fill */}
-      <path d={areaPath} fill="url(#hbg-area)" />
+      <path d={areaPath} fill={`url(#${prefix}-area)`} />
 
       {/* 5. Linha ghost */}
       <path
@@ -176,7 +175,7 @@ const HeroBg = memo(function HeroBg() {
         stroke={GREEN}
         strokeWidth="12"
         strokeOpacity="0.30"
-        filter="url(#hbg-glow-main)"
+        filter={`url(#${prefix}-glow-main)`}
       />
 
       {/* 7. Linha principal — corpo */}
@@ -220,10 +219,10 @@ const HeroBg = memo(function HeroBg() {
 
       {/* 10. Ponto de chegada — apenas 1 animate no halo */}
       <g>
-        <circle cx={px(1)} cy={py(0.14)} r="18" fill={GREEN} opacity="0.06" filter="url(#hbg-glow-main)">
+        <circle cx={px(1)} cy={py(0.14)} r="18" fill={GREEN} opacity="0.06" filter={`url(#${prefix}-glow-main)`}>
           <animate attributeName="r" values="14;26;14" dur="3s" repeatCount="indefinite" />
         </circle>
-        <circle cx={px(1)} cy={py(0.14)} r="5" fill={GREEN} opacity="1" filter="url(#hbg-glow-main)" />
+        <circle cx={px(1)} cy={py(0.14)} r="5" fill={GREEN} opacity="1" filter={`url(#${prefix}-glow-main)`} />
       </g>
 
       {/* 11. Partículas — estáticas, sem animate, sem filter */}
@@ -239,8 +238,8 @@ const HeroBg = memo(function HeroBg() {
       ))}
 
       {/* 12. Vignettes */}
-      <rect x={0} y={0} width={W} height={H} fill="url(#hbg-vignette)" />
-      <rect x={0} y={0} width={W} height={H} fill="url(#hbg-vignette-v)" />
+      <rect x={0} y={0} width={W} height={H} fill={`url(#${prefix}-vignette)`} />
+      <rect x={0} y={0} width={W} height={H} fill={`url(#${prefix}-vignette-v)`} />
     </svg>
   );
 });

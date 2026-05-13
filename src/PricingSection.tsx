@@ -1,10 +1,10 @@
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, CreditCard, Smartphone } from "lucide-react";
 
 const plans = [
   {
     name: "Essencial",
     setup: "R$ 697",
-    monthly: "R$ 197/mês",
+    monthly: "R$ 197",
     features: [
       "Site de conversão profissional",
       "Automação básica no WhatsApp",
@@ -18,7 +18,7 @@ const plans = [
     name: "Profissional",
     badge: "Mais escolhido",
     setup: "R$ 1.297",
-    monthly: "R$ 397/mês",
+    monthly: "R$ 397",
     features: [
       "Tudo do Plano Essencial",
       "Agente de IA no WhatsApp (atendimento 24h)",
@@ -33,7 +33,7 @@ const plans = [
   {
     name: "Gestão Total",
     setup: "R$ 2.197",
-    monthly: "R$ 697/mês",
+    monthly: "R$ 697",
     features: [
       "Tudo do Plano Profissional",
       "Sistema personalizado para o negócio",
@@ -64,6 +64,19 @@ export default function PricingSection() {
           </p>
         </div>
 
+        {/* Explicação do modelo de pagamento */}
+        <div className="mb-8 rounded-2xl border border-white/8 bg-white/4 px-6 py-4 flex flex-col sm:flex-row sm:items-center gap-3">
+          <div className="flex items-center gap-2 text-white/60 text-sm">
+            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#057a41]/20 text-[#057a41] font-bold text-xs flex-shrink-0">1</span>
+            <span>Você paga o <strong className="text-white">investimento inicial</strong> — a gente estrutura tudo do zero.</span>
+          </div>
+          <span className="hidden sm:block text-white/20">→</span>
+          <div className="flex items-center gap-2 text-white/60 text-sm">
+            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#057a41]/20 text-[#057a41] font-bold text-xs flex-shrink-0">2</span>
+            <span>A partir daí, paga a <strong className="text-white">mensalidade</strong> para acompanhamento contínuo.</span>
+          </div>
+        </div>
+
         <div className="grid gap-6 lg:grid-cols-3">
           {plans.map((plan) => (
             <div
@@ -82,9 +95,36 @@ export default function PricingSection() {
 
               <div className="mb-6">
                 <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/40">{plan.name}</p>
-                <p className="mt-4 text-4xl font-bold text-white">{plan.setup}</p>
-                <p className="text-xs text-white/35 mt-0.5 uppercase tracking-wider">setup único</p>
-                <p className="mt-2 text-lg font-semibold text-[#057a41]">{plan.monthly}</p>
+
+                {/* Investimento inicial */}
+                <div className="mt-4 rounded-xl border border-white/8 bg-white/4 px-4 py-3">
+                  <p className="text-[10px] text-white/35 uppercase tracking-widest mb-1">Investimento inicial</p>
+                  <p className="text-3xl font-bold text-white leading-none">{plan.setup}</p>
+                  <p className="text-[11px] text-white/35 mt-1.5">Pagamento único para estruturação completa</p>
+                </div>
+
+                {/* Mensalidade */}
+                <div className="mt-2 rounded-xl border border-[#057a41]/25 bg-[#057a41]/8 px-4 py-3">
+                  <p className="text-[10px] text-white/35 uppercase tracking-widest mb-1">Mensalidade</p>
+                  <div className="flex items-baseline gap-1">
+                    <p className="text-2xl font-bold text-[#057a41] leading-none">{plan.monthly}</p>
+                    <span className="text-sm text-[#057a41]/70 font-medium">/mês</span>
+                  </div>
+                  <p className="text-[11px] text-white/35 mt-1.5">Acompanhamento e suporte contínuo</p>
+                </div>
+
+                {/* Formas de pagamento */}
+                <div className="mt-3 flex items-center gap-2">
+                  <span className="text-[10px] text-white/30 uppercase tracking-wider">Aceita:</span>
+                  <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-white/50 px-2 py-0.5 rounded border border-white/10 bg-white/4">
+                    <Smartphone className="w-2.5 h-2.5" />
+                    Pix
+                  </span>
+                  <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-white/50 px-2 py-0.5 rounded border border-white/10 bg-white/4">
+                    <CreditCard className="w-2.5 h-2.5" />
+                    Cartão
+                  </span>
+                </div>
               </div>
 
               <ul className="flex-1 space-y-3 mb-8">
