@@ -327,7 +327,7 @@ export default function ServiceDemosSection() {
           BadgeIcon={BarChart3}
           title="Saiba exatamente quanto sobra, todo mês"
           paragraphs={[
-            "A Nortea monta seu dashboard financeiro personalizado e o Bernardo acompanha os números com você todo mês, para você parar de decidir no achismo.",
+            "A Nortea monta seu dashboard financeiro personalizado e acompanha os números com você todo mês, para você parar de decidir no achismo.",
             "Fluxo de caixa, margem de lucro, despesas e receitas em uma tela simples que qualquer dono de negócio entende.",
           ]}
           bullets={[

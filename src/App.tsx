@@ -96,7 +96,7 @@ export default function NorteaReactSite() {
     {
       icon: CircleDollarSign,
       title: "Saiba exatamente quanto sobra",
-      text: "Dashboard + assessoria mensal do Bernardo. Você passa a tomar decisões com dados reais, não com intuição. E para de ter surpresa no final do mês.",
+      text: "Dashboard financeiro com assessoria mensal da Nortea. Você passa a tomar decisões com dados reais, não com intuição. E para de ter surpresa no final do mês.",
     },
   ];
 
@@ -187,21 +187,18 @@ export default function NorteaReactSite() {
 
       <main>
 
-        {/* ── 1 + 2. HERO + TRUST — único fundo de gráfico contínuo ── */}
-        <div className="relative bg-[#080b09]">
-          {/* Um único HeroBg cobre hero + TrustSection, formando um plano de fundo só */}
-          <div className="absolute inset-0 pointer-events-none">
-            <HeroBg prefix="shared" />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#080b09]/92 via-[#080b09]/50 to-[#080b09]/15" />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#080b09]/65 via-transparent to-[#080b09]/18" />
-          </div>
-          <NorteaCinematicHero
-            whatsappLink={whatsappLink}
-            onCinematicStateChange={setCinematicActive}
-          />
-          <div className="relative overflow-hidden">
-            <TrustSection />
-          </div>
+        {/* ── 1. CINEMATIC HERO ── */}
+        <NorteaCinematicHero
+          whatsappLink={whatsappLink}
+          onCinematicStateChange={setCinematicActive}
+        />
+
+        {/* ── 2. TRUST SECTION ── */}
+        <div className="relative overflow-hidden bg-[#080b09]">
+          <HeroBg />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#080b09]/92 via-[#080b09]/50 to-[#080b09]/15" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#080b09]/65 via-transparent to-[#080b09]/18" />
+          <TrustSection />
         </div>
 
         {/* Separador dark → claro */}
