@@ -95,7 +95,10 @@ export default function TrustSection() {
                     <span className="text-xl font-bold text-white sm:text-2xl">30 min</span>
                     <span className="text-[10px] uppercase tracking-wider text-white/40 font-medium sm:text-xs">Conversa</span>
                   </div>
-                  <div className="w-px bg-white/10" />
+                  <div className="flex flex-col items-center justify-center transition-transform hover:-translate-y-1 cursor-default">
+                    <span className="text-xl font-bold text-white sm:text-2xl">100%</span>
+                    <span className="text-[10px] uppercase tracking-wider text-white/40 font-medium sm:text-xs">Foco no cliente</span>
+                  </div>
                   <div className="flex flex-col items-center justify-center transition-transform hover:-translate-y-1 cursor-default">
                     <span className="text-xl font-bold text-white sm:text-2xl">Ativo</span>
                     <span className="text-[10px] uppercase tracking-wider text-white/40 font-medium sm:text-xs">Suporte</span>

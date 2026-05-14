@@ -32,6 +32,7 @@ const plans = [
   },
   {
     name: "Gestão Total",
+    supportLine: "Indicado para negócios acima de R$ 30k/mês",
     setup: "R$ 2.197",
     monthly: "R$ 697",
     features: [
@@ -95,6 +96,9 @@ export default function PricingSection() {
 
               <div className="mb-6">
                 <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/40">{plan.name}</p>
+                {plan.supportLine && (
+                  <p className="text-xs text-white/40 mt-1">{plan.supportLine}</p>
+                )}
 
                 {/* Investimento inicial */}
                 <div className="mt-4 rounded-xl border border-white/8 bg-white/4 px-4 py-3">

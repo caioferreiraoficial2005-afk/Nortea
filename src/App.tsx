@@ -477,7 +477,7 @@ export default function NorteaReactSite() {
                       alt={f.alt}
                       loading="lazy"
                       decoding="async"
-                      className="w-full transition-transform duration-500 group-hover:scale-[1.02]"
+                      className="w-full max-h-[340px] object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
                     />
                   </div>
                   <div className="p-8">
@@ -523,10 +523,10 @@ export default function NorteaReactSite() {
               >
                 <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#057a41]/65">Primeiro passo</p>
                 <h2 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-5xl">
-                  Chega de crescer<br className="hidden sm:block" /> sem saber o que sobra.
+                  Se você chegou até aqui,<br className="hidden sm:block" /> já sabe o que precisa mudar.
                 </h2>
                 <p className="mt-5 mx-auto max-w-xl text-lg leading-8 text-white/50">
-                  Conversa inicial gratuita. Sem enrolação. Em 30 minutos você entende o que trava sua empresa e o que fazer.
+                  O próximo passo é simples: uma conversa direta, sem enrolação, onde você entende exatamente o que trava sua empresa e o que fazer.
                 </p>
                 <div className="mt-9 flex flex-col items-center gap-5 sm:flex-row sm:justify-center">
                   <a

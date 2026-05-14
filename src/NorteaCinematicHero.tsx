@@ -615,11 +615,11 @@ export default function NorteaCinematicHero({
                 {/* Floating badge — right */}
                 <div className="nch-badge absolute flex bottom-12 lg:bottom-20 right-[-15px] lg:right-[-80px] nch-floating-badge rounded-xl lg:rounded-2xl p-3 lg:p-4 items-center gap-3 z-30">
                   <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full flex items-center justify-center border border-white/15" style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%)" }}>
-                    <span className="text-base lg:text-lg" aria-hidden="true">✅</span>
+                    <span className="text-base lg:text-lg" aria-hidden="true">🎁</span>
                   </div>
                   <div>
-                    <p className="text-white text-xs lg:text-sm font-bold tracking-tight">3 pilares integrados</p>
-                    <p className="text-white/45 text-[10px] lg:text-xs font-medium">Digital, operação e financeiro</p>
+                    <p className="text-white text-xs lg:text-sm font-bold tracking-tight">Diagnóstico gratuito</p>
+                    <p className="text-white/45 text-[10px] lg:text-xs font-medium">Conversa de 30 min · Sem compromisso</p>
                   </div>
                 </div>
 

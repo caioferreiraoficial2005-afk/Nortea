@@ -252,6 +252,7 @@ ${form.mensagem}`;
                 type="submit"
                 className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-[#09090b] px-8 py-4 text-sm font-bold text-white shadow-[0_6px_24px_rgba(0,0,0,0.35)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_36px_rgba(0,0,0,0.45)] active:translate-y-0"
               >
+                <MessageCircle className="h-4 w-4" />
                 Quero estruturar minha empresa
                 <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
               </button>
